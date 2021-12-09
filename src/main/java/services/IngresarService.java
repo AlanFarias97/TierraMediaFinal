@@ -18,6 +18,6 @@ public class IngresarService {
 //    	if (usuario.isNull() || !usuario.checkPassword(contrasenia)) {
 //    		usuario = UsuarioNull.build();
 //    		}
-//    	return usuario;
+    	return usuario;
 	}
 }
