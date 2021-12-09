@@ -23,7 +23,7 @@
 
 </head>
 
-<body>
+<body style=" background-image: linear-gradient(rgba(128, 121, 196, 0.25), rgba(99, 131, 106, 0.25)), url(assets/img/hero.jpg);">
 	<!-- Si hay algun error lo muestra aca -->
 	<c:if test="${flash != null}">
 		<div class="alert alert-danger text-center">

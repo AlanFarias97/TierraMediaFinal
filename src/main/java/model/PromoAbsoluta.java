@@ -10,6 +10,11 @@ public class PromoAbsoluta extends Promocion {
         this.descuento = monedas;
     }
 
+    public PromoAbsoluta(int id, String nombre, String tipoAtraccion,String descripcion, String imagen, Boolean activo, String tipoPromocion, List<Atraccion> atracciones, int monedas) {
+        super(id, nombre, tipoAtraccion, tipoPromocion,monedas,descripcion,imagen,activo, atracciones);
+        this.descuento = monedas;
+    }
+
     @Override
     public Integer getCosto() {
         return super.getCosto() - this.descuento;

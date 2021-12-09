@@ -3,7 +3,9 @@ package model;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -24,6 +26,9 @@ public class Usuario {
     private String imagenPerfil;
     private String hashContrasenia;
     private Boolean admin;
+    private Boolean activo;
+    
+    private Map<String, String> errores;
     
 
 
@@ -37,7 +42,7 @@ public class Usuario {
         this.atraccionesCompradas = new ArrayList<>();
     }
     
-    public Usuario(int id, String nombre, String preferencia, int monedas, double tiempo, String imagenPerfil, String hashContrasenia,Boolean admin) {
+    public Usuario(int id, String nombre, String preferencia, int monedas, double tiempo, String imagenPerfil, String hashContrasenia,Boolean activo,Boolean admin) {
         this.id = id;
         this.nombre = nombre;
         this.tipo = preferencia;
@@ -48,13 +53,14 @@ public class Usuario {
         this.imagenPerfil = imagenPerfil;
         this.hashContrasenia = hashContrasenia;
         this.admin = admin;
+        this.activo = activo;
     }
     
     public Boolean getAdmin() {
 		return admin;
 	}
     
-    public Boolean isAdmin() {
+    public Boolean esAdmin() {
 		return admin;
 	}
 
@@ -66,7 +72,31 @@ public class Usuario {
 		this.admin = admin;
 	}
 
-    public int getId() {
+    public Boolean getActivo() {
+		return activo;
+	}
+
+	public void setActivo(Boolean activo) {
+		this.activo = activo;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public void setMonedas(int monedas) {
+		this.monedas = monedas;
+	}
+
+	public void setTipoPreferido(TipoAtraccion tipoPreferido) {
+		this.tipoPreferido = tipoPreferido;
+	}
+
+	public void setTiempoDisponible(double tiempoDisponible) {
+		this.tiempoDisponible = tiempoDisponible;
+	}
+
+	public int getId() {
         return this.id;
     }
 
@@ -264,6 +294,22 @@ public class Usuario {
     
     public boolean checkPassword(String password) {
 		return Crypt.match(password, this.hashContrasenia);
+	}
+    
+    public boolean esValido() {
+		validar();
+		return errores.isEmpty();
+	}
+	
+	public void validar() {
+		errores = new HashMap<String, String>();
+
+		if (monedas <= 0) {
+			errores.put("monedas", "La cantidad de monedas debe ser positiva");
+		}
+		if (tiempoDisponible <= 0) {
+			errores.put("duration", "El tiempo disponible debe ser positivo");
+		}
 	}
 
 }

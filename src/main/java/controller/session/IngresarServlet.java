@@ -33,7 +33,13 @@ public class IngresarServlet extends HttpServlet{
     	
     	if (!usuario.isNull()) {
     		req.getSession().setAttribute("usuario", usuario);
-    		resp.sendRedirect("index.jsp");    		
+    		if(usuario.esAdmin()) {
+    			resp.sendRedirect("index-admin.jsp");   
+        		
+    		}else {
+    			resp.sendRedirect("index.jsp");   
+    		}
+    		 		
        	} else {
     		req.setAttribute("flash", "Nombre de usuario o contraseña incorrectos");
     		

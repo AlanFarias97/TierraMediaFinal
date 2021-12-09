@@ -14,7 +14,7 @@ public class IngresarService {
     	if (usuario.isNull()) {
     		usuario = UsuarioNull.build();
     		}
-    	//TODO dice que salt es null y da null pointer exception en BCrypt.hashpw
+    	//TODO con contrasenia
 //    	if (usuario.isNull() || !usuario.checkPassword(contrasenia)) {
 //    		usuario = UsuarioNull.build();
 //    		}

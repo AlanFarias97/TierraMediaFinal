@@ -22,9 +22,9 @@ import persistence.commons.MissingDataException;
 
 public class UsuarioDAOImpl implements UsuarioDAO {
 
-	public int insert(Usuario usuario) {
+	public int insertar(Usuario usuario) {
 		try {
-			String sql = "INSERT INTO usuario (nombre, tipo_preferido_id,monedas,tiempo,imagen,hash_contrasenia,activo) VALUES (?, ?,?,?,?,?,?)";
+			String sql = "INSERT INTO usuario (nombre, tipo_preferido_id,monedas,tiempo,imagen,hash_contrasenia,activo) VALUES (?,?,?,?,?,?,?)";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
@@ -112,11 +112,12 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		int monedas = resultados.getInt(4);
 		Double tiempo = resultados.getDouble(5);
 		String imagenPerfil = resultados.getString(6);
-		String hash = resultados.getString(6);
-		Boolean activo = Boolean.parseBoolean(resultados.getString(7));
+		String hash = resultados.getString(7);
+		Boolean activo = Boolean.parseBoolean(resultados.getString(8));
+		Boolean esAdmin = Boolean.parseBoolean(resultados.getString(9));
 
 		String tipoPreferido = ((AtraccionDAOImpl) atraccionDAO).obtenerTipoNombre(idTipoPreferido);
-		Usuario usuario = new Usuario(id, nombre, tipoPreferido, monedas, tiempo,imagenPerfil,hash,activo);
+		Usuario usuario = new Usuario(id, nombre, tipoPreferido, monedas, tiempo,imagenPerfil,hash,activo,esAdmin);
 		usuario.setImagenPerfil(imagenPerfil);
 		ItinerarioDAO itinerarioDAO = DAOFactory.getItinerarioDAO();
 		List<Atraccion> atraccionesCompradas = itinerarioDAO.obtenerAtraccionesCompradas(id);

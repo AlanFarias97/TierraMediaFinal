@@ -12,9 +12,7 @@ import persistence.TipoDAO;
 import persistence.commons.ConnectionProvider;
 import persistence.commons.MissingDataException;
 
-
-
-public class TipoDAOImpl implements TipoDAO{
+public class TipoDAOImpl implements TipoDAO {
 
 	@Override
 	public int actualizarTipo(Tipo tipoAtraccion) {
@@ -32,61 +30,62 @@ public class TipoDAOImpl implements TipoDAO{
 	public Tipo toTipo(Object objeto) throws SQLException {
 		ResultSet resultados = (ResultSet) objeto;
 
-        int id = resultados.getInt(1);
-        String nombre = resultados.getString(2);
-        String imagen = resultados.getString(3);
-        Boolean activo = Boolean.valueOf(resultados.getString(4));
+		int id = resultados.getInt(1);
+		String nombre = resultados.getString(2);
+		String imagen = resultados.getString(3);
+		Boolean activo = Boolean.valueOf(resultados.getString(4));
+		String descripcion = resultados.getString(5);
 
-        Tipo tipo = new Tipo(id, nombre, imagen, activo);
+		Tipo tipo = new Tipo(id, nombre, imagen, activo, descripcion);
 
-        return tipo;
+		return tipo;
 	}
 
 	@Override
 	public List<Tipo> obtenerTodos() {
 		try {
-            String query = "SELECT * FROM tipo_atraccion";
-            Connection con = ConnectionProvider.getConnection();
+			String query = "SELECT * FROM tipo_atraccion";
+			Connection con = ConnectionProvider.getConnection();
 
-            PreparedStatement ps = con.prepareStatement(query);
-            ResultSet rs = ps.executeQuery();
+			PreparedStatement ps = con.prepareStatement(query);
+			ResultSet rs = ps.executeQuery();
 
-            List<Tipo> tipos = new ArrayList<>();
+			List<Tipo> tipos = new ArrayList<>();
 
-            while (rs.next()) {
-                tipos.add(toTipo(rs));
-            }
+			while (rs.next()) {
+				tipos.add(toTipo(rs));
+			}
 
-            return tipos;
+			return tipos;
 
-        } catch (Exception e) {
-            throw new MissingDataException(e);
-        }
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
 	}
-	
+
 	public int insertar(Tipo tipoAtraccion) {
-		//TODO probar
+		// TODO probar
 		int rows = 0;
 		String sql = "INSERT INTO tipo_atraccion (nombre, imagen, activo) VALUES (?, ?, ?)";
-        Connection conn;
-        try {
-            conn = ConnectionProvider.getConnection();
-            PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setString(1, tipoAtraccion.getNombre());
-            statement.setString(2,tipoAtraccion.getImagen());
-            statement.setBoolean(3, tipoAtraccion.getActivo());
-            
-            rows = statement.executeUpdate();
+		Connection conn;
+		try {
+			conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, tipoAtraccion.getNombre());
+			statement.setString(2, tipoAtraccion.getImagen());
+			statement.setBoolean(3, tipoAtraccion.getActivo());
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return rows;
+			rows = statement.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rows;
 	}
-	
+
 	public int borrar(Tipo tipoAtraccion) {
 		try {
-			//TODO probar
+			// TODO probar
 			String sql = "UPDATE tipo_atraccion SET activo = ? WHERE id = ?";
 			Connection conn = ConnectionProvider.getConnection();
 

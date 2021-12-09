@@ -16,4 +16,6 @@ public interface UsuarioDAO {
     public List<Usuario> obtenerTodos();
     
     public Usuario buscarPorNombre(String nombre);
+    
+    public int insertar(Usuario usuario);
 }

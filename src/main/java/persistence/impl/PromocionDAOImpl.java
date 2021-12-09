@@ -59,6 +59,8 @@ public class PromocionDAOImpl implements PromocionDAO {
         int idPromo;
 
         try {
+        	//int id, String nombre, String tipoAtraccion, String tipoPromocion, int descuento,
+        	//String descripcion,String imagen, Boolean activo,List<Atraccion> atracciones
             idPromo = resultados.getInt(1);
             String nombre = resultados.getString(2);
             int idTipoAtraccion = resultados.getInt(3);
@@ -66,10 +68,12 @@ public class PromocionDAOImpl implements PromocionDAO {
             String descuento = resultados.getString(5);
             String descripcion = resultados.getString(6);
             String imagen = resultados.getString(7);
+            Boolean activo = Boolean.valueOf(resultados.getString(8));
+            
 
 
             AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
-            TipoAtraccion tipo_atraccion = TipoAtraccion.valueOf(((AtraccionDAOImpl) atraccionDAO).obtenerTipoNombre(idTipoAtraccion));
+            String tipo_atraccion = ((AtraccionDAOImpl) atraccionDAO).obtenerTipoNombre(idTipoAtraccion);
 
             String tipo_promocion = obtenerTipoNombre(idTipoPromo);
 
@@ -78,22 +82,16 @@ public class PromocionDAOImpl implements PromocionDAO {
             switch (tipo_promocion) {
                 case "AXB":
                     Atraccion atraccionGratis = atraccionDAO.obtenerPorNombre(descuento);
-
-                    promocion = new PromoAxB(idPromo, nombre, tipo_atraccion, atracciones, atraccionGratis);
-                    promocion.setDescripcion(descripcion);
-                    promocion.setImagen(imagen);
-
+                    promocion = new PromoAxB(idPromo, nombre, tipo_atraccion,"AxB", atraccionGratis.getCosto(),descripcion,imagen,activo,atracciones, atraccionGratis);
                     break;
                 case "ABSOLUTA":
-
-                    promocion = new PromoAbsoluta(idPromo, nombre, tipo_atraccion, atracciones, Integer.parseInt(descuento));
+                    promocion = new PromoAbsoluta(idPromo, nombre, tipo_atraccion, descripcion,imagen,activo,"ABSOLUTA",atracciones, Integer.parseInt(descuento));
                     promocion.setDescripcion(descripcion);
                     promocion.setImagen(imagen);
 
                     break;
                 case "PORCENTUAL":
-
-                    promocion = new PromoPorcentual(idPromo, nombre, tipo_atraccion, atracciones, Integer.parseInt(descuento));
+                    promocion = new PromoPorcentual(idPromo, nombre, tipo_atraccion,"PORCENTUAL",descripcion,imagen,activo,atracciones, Integer.parseInt(descuento));
                     promocion.setDescripcion(descripcion);
                     promocion.setImagen(imagen);
 

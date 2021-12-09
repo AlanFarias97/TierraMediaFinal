@@ -5,13 +5,23 @@ public class Tipo {
 	private int id;
 	private String imagen;
 	private Boolean activo;
+	private String descripcion;
 	
 	
-	public Tipo(int id, String nombre, String imagen, Boolean activo) {
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public Tipo(int id, String nombre, String imagen, Boolean activo, String descripcion) {
 		this.nombre = nombre;
 		this.id = id;
 		this.imagen = imagen;
 		this.activo = activo;
+		this.descripcion = descripcion;
 	}
 
 	public String getNombre() {

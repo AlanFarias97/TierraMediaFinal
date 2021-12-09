@@ -9,6 +9,14 @@ public class PromoPorcentual extends Promocion {
         super(id, nombre, tipoAtraccion, atracciones);
         this.porcentaje = porcentaje;
     }
+    
+    public PromoPorcentual(int id, String nombre, String tipoAtraccion,String tipoPromocion,String descripcion,String imagen,Boolean activo, List<Atraccion> atracciones, int porcentaje) {
+    	//idPromo, nombre, tipo_atraccion, descripcion,imagen,activo,"PORCENTUAL",atracciones, Integer.parseInt(descuento)
+    	super(id, nombre, tipoAtraccion, tipoPromocion,0,descripcion,imagen,activo, atracciones);
+        this.porcentaje = porcentaje;
+        int costo = this.getCosto();
+        super.setDescuento(costo);
+    }
 
     @Override
     public Integer getCosto() {

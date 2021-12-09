@@ -14,7 +14,8 @@ public class Atraccion implements Producto, Comparable<Atraccion> {
 
     private int id;
     private String nombre;
-    private TipoAtraccion tipo;
+    private TipoAtraccion tipoAtraccion;
+    private String tipo;
     private Integer costo;
     private Double tiempo;
     private int cupoDisponible;
@@ -26,7 +27,7 @@ public class Atraccion implements Producto, Comparable<Atraccion> {
     public Atraccion(int id, String nombre, int costo, double tiempo, int cupoDiario, String tipo) {
         this.id = id;
         this.nombre = nombre;
-        this.tipo = TipoAtraccion.valueOf(tipo.toUpperCase());
+        this.tipoAtraccion = TipoAtraccion.valueOf(tipo.toUpperCase());
         this.costo = costo;
         this.tiempo = tiempo;
         this.cupoDisponible = cupoDiario;
@@ -35,7 +36,7 @@ public class Atraccion implements Producto, Comparable<Atraccion> {
     public Atraccion(int id, String nombre, int costo, double tiempo, int cupoDiario, String tipo, String descripcion, String imagen) {
         this.id = id;
         this.nombre = nombre;
-        this.tipo = TipoAtraccion.valueOf(tipo.toUpperCase());
+        this.tipo = tipo;
         this.costo = costo;
         this.tiempo = tiempo;
         this.cupoDisponible = cupoDiario;
@@ -48,7 +49,7 @@ public class Atraccion implements Producto, Comparable<Atraccion> {
     }
 
     public TipoAtraccion getTipo() {
-        return this.tipo;
+        return this.tipoAtraccion;
     }
 
     public boolean tieneCupo() {
@@ -161,5 +162,49 @@ public class Atraccion implements Producto, Comparable<Atraccion> {
 		if (cupoDisponible <= 0) {
 			errores.put("capacity", "Debe ser positivo");
 		}
+	}
+
+	public TipoAtraccion getTipoAtraccion() {
+		return tipoAtraccion;
+	}
+
+	public void setTipoAtraccion(TipoAtraccion tipoAtraccion) {
+		this.tipoAtraccion = tipoAtraccion;
+	}
+
+	public Map<String, String> getErrores() {
+		return errores;
+	}
+
+	public void setErrores(Map<String, String> errores) {
+		this.errores = errores;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public String getImagen() {
+		return imagen;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public void setTiempo(Double tiempo) {
+		this.tiempo = tiempo;
+	}
+
+	public void setCupoDisponible(int cupoDisponible) {
+		this.cupoDisponible = cupoDisponible;
 	}
 }
