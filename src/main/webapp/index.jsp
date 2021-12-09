@@ -90,9 +90,9 @@
             <div class="row">
                 <div class="col-lg-5">
                     <div class="text-container">
-                        <h2>Tierra Media es un parque tem√°tico basado en los libros de J.R.R. Tolkien</h2>
+                        <h2>Tierra Media es un parque tem·tico basado en los libros de J.R.R. Tolkien</h2>
                         <p>Compuesto por mas de 10 atracciones meticulosamente creadas apartir de el universo Tolkien, ubicado en Nueva Zelanda, lugar donde se filmaron las afamadas peliculas .</p>
-                        <p>Podr√°s disfrutar de aquellos lugares donde siempre quisiste estar mientras le√≠as "El Hobbit" o "El Silmarillon". V√©n a conocer El Reino de Gondor, Mordor, Erebor, Rohan o su amado Abismo de Helm</p>
+                        <p>Podr·s disfrutar de aquellos lugares donde siempre quisiste estar mientras leÌas "El Hobbit" o "El Silmarillon". V√©n a conocer El Reino de Gondor, Mordor, Erebor, Rohan o su amado Abismo de Helm</p>
                     </div>
                 </div>
                 <div class="col-lg-7">
@@ -122,12 +122,12 @@
                     <img src="assets/img/reyes-gondor.jpg" class="d-block w-100" alt="...">
                 </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselAtracciones"
                 data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade"
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselAtracciones"
                 data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>

@@ -24,7 +24,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 	public int insertar(Usuario usuario) {
 		try {
-			String sql = "INSERT INTO usuario (nombre, tipo_preferido_id,monedas,tiempo,imagen,hash_contrasenia,activo) VALUES (?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO usuario (nombre, tipo_preferido_id,monedas,tiempo,imagen,hash_contrasenia,activo,esAdmin) VALUES (?,?,?,?,?,?,?,?)";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
@@ -34,6 +34,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			statement.setDouble(4,usuario.getTiempoDisponible());
 			statement.setString(5, usuario.getImagenPerfil());
 			statement.setString(6, usuario.getHashContrasenia());
+			statement.setString(7, "true");
+			statement.setString(8, String.valueOf(usuario.getAdmin()));
 			int rows = statement.executeUpdate();
 
 			return rows;

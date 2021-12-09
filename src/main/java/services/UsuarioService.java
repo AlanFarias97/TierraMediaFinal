@@ -13,7 +13,7 @@ public class UsuarioService {
 		return DAOFactory.getUsuarioDAO().obtenerTodos();
 	}
 	
-	public Usuario crear(int id, String nombre, String preferencia, int monedas, double tiempo, String imagenPerfil, String hashContrasenia,Boolean activo,Boolean admin) {
+	public Usuario crear(String nombre, String preferencia, int monedas, double tiempo, String imagenPerfil, String hashContrasenia,Boolean activo,Boolean admin) {
 		//int id, String nombre, String preferencia, int monedas, double tiempo, String imagenPerfil, String hashContrasenia,Boolean activo,Boolean admin
 
 		Usuario usuario = new Usuario(-1,nombre,preferencia, monedas, tiempo,imagenPerfil, hashContrasenia, activo, admin);

@@ -72,7 +72,7 @@
                 <p class="text-center">Altas, bajas, modificaciones y consultas</p>
                 <br>
                 <div class="mb-3 text-right">
-                    <a href="/turismo/usuarios/crear.do" class="btn btn-primary" role="button"> <i class="fas fa-user-plus"></i> Nuevo Usuario
+                    <a href="/turismo/admin-usuarios/crear" class="btn btn-primary" role="button"> <i class="fas fa-user-plus"></i> Nuevo Usuario
                     </a>
                 </div>
                 

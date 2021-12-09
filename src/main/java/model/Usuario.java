@@ -56,6 +56,19 @@ public class Usuario {
         this.activo = activo;
     }
     
+    public Map<String, String> getErrores() {
+		return errores;
+	}
+
+	public void setErrores(Map<String, String> errores) {
+		this.errores = errores;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+    
     public Boolean getAdmin() {
 		return admin;
 	}
