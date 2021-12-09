@@ -103,12 +103,7 @@
 								required>
 						</div>
 						<div class="mb-3">
-							<select class="form-select" aria-label="Default select example">
-								<option selected>Seleccioná]</option>
-								<c:foreach items="${tipos}" var="tipo" >
-								<option value="${tipo.id}"><c:out value="${tipo.nombre}"></c:out></option>
-								</c:foreach>
-							</select> <label for="tipo"
+							<label for="tipo"
 								class='col-form-label ${usuario.errores.get("tipoPreferido") != null ? "is-invalid" : "" }'>Tipo:</label>
 							<input class="form-control" type="text" id="cost" name="tipo"
 								required></input>

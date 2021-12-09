@@ -10,14 +10,14 @@ public class IngresarService {
 	public Usuario login(String nombreUsuario, String contrasenia) {
 		UsuarioDAO usuarioDAO = DAOFactory.getUsuarioDAO();
     	Usuario usuario = usuarioDAO.buscarPorNombre(nombreUsuario);
-//    	
-//    	if (usuario.isNull()) {
-//    		usuario = UsuarioNull.build();
-//    		}
-  
-    	if (usuario.isNull() || !usuario.checkPassword(contrasenia)) {
+    	
+    	if (usuario.isNull()) {
     		usuario = UsuarioNull.build();
     		}
-    	return usuario;
+//  
+//    	if (usuario.isNull() || !usuario.checkPassword(contrasenia)) {
+//    		usuario = UsuarioNull.build();
+//    		}
+//    	return usuario;
 	}
 }
