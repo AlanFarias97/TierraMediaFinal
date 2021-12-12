@@ -6,18 +6,11 @@ import java.util.List;
 public class PromoAxB extends Promocion {
 	private Atraccion atraccionGratis;
 
-	public PromoAxB(int id, String nombre, TipoAtraccion tipoAtraccion, List<Atraccion> atracciones,
-			Atraccion atraccionGratis) {
-		super(id, nombre, tipoAtraccion, atracciones);
-		this.atraccionGratis = atraccionGratis;
-		this.atraccionGratis.setCosto(0);
-	}
-
-	public PromoAxB(int id, String nombre, String tipoAtraccion, String tipoPromocion, int descuento,
+	public PromoAxB(int id, String nombre, Tipo tipoAtraccion, String tipoPromocion, int descuento,
 			String descripcion, String imagen, Boolean activo, List<Atraccion> atracciones, Atraccion atraccionGratis) {
 		super(id, nombre, tipoAtraccion, tipoPromocion,descuento,descripcion,imagen,activo, atracciones);
 		this.atraccionGratis = atraccionGratis;
-		this.atraccionGratis.setCosto(0);
+		this.atraccionGratis.setPrecio(0);
 	}
 
 	@Override

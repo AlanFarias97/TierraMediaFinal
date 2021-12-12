@@ -1,6 +1,7 @@
 package controller.usuarios;
 
 import java.io.IOException;
+import java.util.List;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.Servlet;
@@ -9,7 +10,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Tipo;
 import model.Usuario;
+import persistence.TipoDAO;
+import persistence.commons.DAOFactory;
 import services.UsuarioService;
 import utils.Crypt;
 
@@ -29,7 +33,10 @@ public class CrearUsuarioServlet extends HttpServlet implements Servlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		//poner los tipos de atracciones existentes como parametro para que elija el admin
+		TipoDAO tipoDAO = DAOFactory.getTipoDAO();
+		List<Tipo> tipos = tipoDAO.obtenerTodos();
+		req.setAttribute("tipos", tipos);
+		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/usuarios/crear.jsp");
 		dispatcher.forward(req, resp);
 	}
@@ -40,11 +47,13 @@ public class CrearUsuarioServlet extends HttpServlet implements Servlet{
 		String nombre = req.getParameter("nombre");
 		Integer monedas = Integer.parseInt(req.getParameter("monedas"));
 		Double tiempo = Double.parseDouble(req.getParameter("tiempo"));
-		String tipo = req.getParameter("tipo");
+		int tipoId = Integer.valueOf(req.getParameter("tipo"));
 		String imagenPerfil = req.getParameter("imagen");
 		String hashContrasenia = Crypt.hash(req.getParameter("contrasenia"));
 		Boolean activo = true;
 		Boolean admin = Boolean.valueOf(req.getParameter("admin"));
+		TipoDAO tipoDAO = DAOFactory.getTipoDAO();
+		Tipo tipo = tipoDAO.buscarPorId(tipoId);
 		
 		Usuario usuario = usuarioService.crear(nombre,tipo,monedas,tiempo,imagenPerfil,hashContrasenia,activo,admin);
 		if (usuario.esValido()) {

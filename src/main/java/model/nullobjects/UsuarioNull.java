@@ -9,7 +9,7 @@ public class UsuarioNull extends Usuario{
 	}
 	
 	public UsuarioNull() {
-		super(0, "", "", 0, 0.0,"","", false,false);
+		super(0, "", null, 0, 0.0,"","", false,false);
 	}
 	
 	public boolean isNull() {

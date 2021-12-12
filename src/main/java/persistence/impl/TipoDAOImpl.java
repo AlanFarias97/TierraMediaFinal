@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Tipo;
+import model.nullobjects.TipoNull;
 import persistence.TipoDAO;
 import persistence.commons.ConnectionProvider;
 import persistence.commons.MissingDataException;
@@ -64,16 +65,16 @@ public class TipoDAOImpl implements TipoDAO {
 	}
 
 	public int insertar(Tipo tipoAtraccion) {
-		// TODO probar
 		int rows = 0;
-		String sql = "INSERT INTO tipo_atraccion (nombre, imagen, activo) VALUES (?, ?, ?)";
+		String sql = "INSERT INTO tipo_atraccion (nombre, imagen, activo, descripcion) VALUES (?, ?, ?, ?)";
 		Connection conn;
 		try {
 			conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, tipoAtraccion.getNombre());
 			statement.setString(2, tipoAtraccion.getImagen());
-			statement.setBoolean(3, tipoAtraccion.getActivo());
+			statement.setString(3, "true");
+			statement.setString(4, tipoAtraccion.getDescripcion());
 
 			rows = statement.executeUpdate();
 
@@ -83,20 +84,84 @@ public class TipoDAOImpl implements TipoDAO {
 		return rows;
 	}
 
-	public int borrar(Tipo tipoAtraccion) {
+	public int eliminar(int id) {
 		try {
-			// TODO probar
-			String sql = "UPDATE tipo_atraccion SET activo = ? WHERE id = ?";
+			String sql = "UPDATE tipo_atraccion SET activo = ? WHERE tipo_atraccion_id = ?";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, "false");
+			statement.setInt(2, id);
 			int rows = statement.executeUpdate();
 
 			return rows;
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
+	}
+
+	@Override
+	public Tipo buscarPorNombre(String nombreTipo) {
+
+		try {
+			String sql = "SELECT * FROM tipo_atraccion WHERE nombre = ?";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, nombreTipo);
+			ResultSet resultados = statement.executeQuery();
+
+			Tipo tipo = TipoNull.build();
+
+			if (resultados.next()) {
+				tipo = toTipo(resultados);
+			}
+
+			return tipo;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
+
+	@Override
+	public Tipo buscarPorId(int id) {
+		try {
+			String sql = "SELECT * FROM tipo_atraccion WHERE tipo_atraccion_id = ?";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setInt(1, id);
+			ResultSet resultados = statement.executeQuery();
+
+			Tipo tipo = TipoNull.build();
+
+			if (resultados.next()) {
+				tipo = toTipo(resultados);
+			}
+
+			return tipo;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
+
+	@Override
+	public int modificar(Tipo tipo) {
+		try {
+			String sql = "UPDATE tipo_atraccion SET nombre = ?, imagen = ?, descripcion = ? WHERE tipo_atraccion_id = ?";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			
+			statement.setString(1, tipo.getNombre());
+			statement.setString(2, tipo.getImagen());
+			statement.setString(3, tipo.getDescripcion());
+			statement.setInt(4, tipo.getId());
+			
+			int rows = statement.executeUpdate();
+
+			return rows;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+		
 	}
 
 }

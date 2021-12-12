@@ -70,9 +70,9 @@
 							href="/turismo/index-admin.jsp"> <i class="fas fa-home"></i>
 								<span class="ml-2">Inicio</span>
 						</a></li>
-						<li class="nav-item"><a class="nav-link active"
-							aria-current="page" href="/turismo/admin-usuarios"> <i
-								class="fas fa-users"></i> <span class="ml-2">Usuarios</span>
+						<li class="nav-item"><a class="nav-link" aria-current="page"
+							href="/turismo/admin-usuarios"> <i class="fas fa-users"></i>
+								<span class="ml-2">Usuarios</span>
 						</a></li>
 						<li class="nav-item"><a class="nav-link"
 							href="/turismo/admin-atracciones"> <i class="fas fa-mountain"></i>
@@ -82,7 +82,7 @@
 							href="/turismo/admin-promociones"> <i class="fas fa-route"></i>
 								<span class="ml-2">Promociones</span>
 						</a></li>
-						<li class="nav-item"><a class="nav-link"
+						<li class="nav-item"><a class="nav-link active"
 							href="/turismo/admin-tipos"> <i class="fas fa-shapes"></i> <span
 								class="ml-2">Tipos</span>
 						</a></li>
@@ -92,94 +92,66 @@
 
 			<main class="col-md-9 ml-sm-auto col-lg-10 px-md-5 py-4">
 
-				<c:if test="${usuario != null && !usuario.esValido()}">
+				<c:if test="${tipo != null && !tipo.esValido()}">
 					<div class="alert alert-danger">
-						<p>Se encontraron errores al crear el usuario.</p>
+						<p>Se encontraron errores al crear el tipo.</p>
 					</div>
 				</c:if>
 
 
 
 
-				<form action="/turismo/admin-usuarios/crear" method="post">
+				<form action="/turismo/admin-tipos/modificar" method="post">
 					<div class="modal-body">
-						<h1 class="text-center">Nuevo usuario <i class="fas fa-user-plus"></i>
+						<h1 class="text-center">
+							Modificar tipo <i class="fas fa-user-edit"></i>
 						</h1>
 						<div class="row">
-							<div class="col-lg-6">
+							<div class="col-lg-4 mb-3">
+								<label for="id" class='col-form-label'>Id:</label> <input
+									class="form-control" type="number" id="id"
+									value="${modificable.id}" name="id" readonly></input>
+
+							</div>
+							<div class="col-lg-4">
 								<div class="mb-3">
 									<label for="nombre" class="col-form-label">Nombre:</label> <input
 										type="text" class="form-control" id="nombre" name="nombre"
-										required>
+										value="${modificable.nombre}" required>
 								</div>
 							</div>
-							<div class="row">
-								<div class="col-lg-4">
-									<div class="mb-3">
-										<label for="tipos" class="col-form-label">Tipo
-											preferido:</label> <select class="form-select"
-											aria-label="Default select example" name="tipo" required>
-											<option selected>...</option>
-											<c:forEach items="${tipos}" var="tipo">
-												<option value="${tipo.id}"><c:out
-														value="${tipo.nombre}"></c:out></option>
-											</c:forEach>
-										</select>
-									</div>
-								</div>
-								<div class="col-lg-4">
-									<div class="mb-3">
-										<label for="monedas"
-											class='col-form-label ${usuario.errores.get("monedas") != null ? "is-invalid" : "" }'>Monedas:</label>
-										<input class="form-control" type="number" id="monedas" min="0"
-											value="0" name="monedas" required></input>
-										<div class="invalid-feedback">
-											<c:out value='${usuario.errores.get("monedas")}'></c:out>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-4">
-									<div class="mb-3">
-										<label for="tiempo"
-											class='col-form-label ${usuario.errores.get("tiempoDisponible") != null ? "is-invalid" : "" }'>Tiempo:</label>
-										<input class="form-control" type="number" id="tiempo" min="0"
-											value="0" name="tiempo" required></input>
-										<div class="invalid-feedback">
-											<c:out value='${usuario.errores.get("tiempoDisponible")}'></c:out>
-										</div>
-									</div>
-								</div>
+						</div>
+
+						<div class="row">
+							<div class="col-lg-6 mb-3">
+								<span>Imagen cargada:</span> <img
+									src="../assets/img/${modificable.imagen}" height="100">
 							</div>
+
 							<div class="col-lg-6">
 								<div class="mb-3">
 									<label for="imagen"
-										class='col-form-label ${usuario.errores.get("imagen") != null ? "is-invalid" : "" }'>Imagen
-										de perfil:</label> <input class="form-control" type="file" id="imagen"
-										name="imagen" required></input>
+										class='col-form-label ${modificable.errores.get("imagen") != null ? "is-invalid" : "" }'>Nueva
+										imagen de perfil:</label> <input class="form-control" type="file"
+										id="imagen" name="imagen" value=""></input>
 									<div class="invalid-feedback">
-										<c:out value='${usuario.errores.get("imagen")}'></c:out>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-6">
-									<div class="mb-3">
-										<label for="contrasenia" class='col-form-label'>Contraseña:</label>
-										<input class="form-control" type="password" id="contrasenia"
-											name="contrasenia" required></input>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-6">
-									<div class="form-check mb-3">
-										<input type="checkbox" class="form-check-input" id="admin" name="admin" value="true">
-										<label class="form-check-label" for="admin">Es administrador</label>
+										<c:out value='${modificable.errores.get("imagen")}'></c:out>
 									</div>
 								</div>
 							</div>
 						</div>
+						<div class="row">
+							<div class="col-md-6">
+									<div class="mb-3">
+										<label for="descripcion" class='col-form-label'>Descripción:</label>
+										<input class="form-control" type="text" id="descripcion"
+											name="descripcion" value="${modificable.descripcion}" required></input>
+									</div>
+								</div>
+						</div>
+
 					</div>
+
 					<div class="text-center">
 						<button type="submit" class="btn btn-primary">Guardar</button>
 						<a onclick="window.history.back();" class="btn btn-secondary"

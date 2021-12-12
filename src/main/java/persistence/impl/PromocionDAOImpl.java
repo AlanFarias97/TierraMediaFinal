@@ -12,9 +12,10 @@ import model.PromoAbsoluta;
 import model.PromoAxB;
 import model.PromoPorcentual;
 import model.Promocion;
-import model.TipoAtraccion;
+import model.Tipo;
 import persistence.AtraccionDAO;
 import persistence.PromocionDAO;
+import persistence.TipoDAO;
 import persistence.commons.ConnectionProvider;
 import persistence.commons.DAOFactory;
 import persistence.commons.MissingDataException;
@@ -69,11 +70,9 @@ public class PromocionDAOImpl implements PromocionDAO {
             String descripcion = resultados.getString(6);
             String imagen = resultados.getString(7);
             Boolean activo = Boolean.valueOf(resultados.getString(8));
-            
 
-
-            AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
-            String tipo_atraccion = ((AtraccionDAOImpl) atraccionDAO).obtenerTipoNombre(idTipoAtraccion);
+            TipoDAO tipoDAO = DAOFactory.getTipoDAO();
+            Tipo tipo_atraccion = tipoDAO.buscarPorId(idTipoAtraccion);
 
             String tipo_promocion = obtenerTipoNombre(idTipoPromo);
 
@@ -81,8 +80,9 @@ public class PromocionDAOImpl implements PromocionDAO {
 
             switch (tipo_promocion) {
                 case "AXB":
+                	AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
                     Atraccion atraccionGratis = atraccionDAO.obtenerPorNombre(descuento);
-                    promocion = new PromoAxB(idPromo, nombre, tipo_atraccion,"AxB", atraccionGratis.getCosto(),descripcion,imagen,activo,atracciones, atraccionGratis);
+                    promocion = new PromoAxB(idPromo, nombre, tipo_atraccion,"AxB", atraccionGratis.getPrecio(),descripcion,imagen,activo,atracciones, atraccionGratis);
                     break;
                 case "ABSOLUTA":
                     promocion = new PromoAbsoluta(idPromo, nombre, tipo_atraccion, descripcion,imagen,activo,"ABSOLUTA",atracciones, Integer.parseInt(descuento));

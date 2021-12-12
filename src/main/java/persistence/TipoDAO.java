@@ -14,4 +14,14 @@ public interface TipoDAO {
 	 Tipo toTipo(Object objeto) throws SQLException;
 
 	 public List<Tipo> obtenerTodos();
+	 
+	 public Tipo buscarPorNombre(String nombreTipo);
+	 
+	 public Tipo buscarPorId(int id);
+
+	public abstract int insertar(Tipo tipo);
+
+	public abstract int modificar(Tipo tipo);
+
+	public abstract int eliminar(int id);
 }

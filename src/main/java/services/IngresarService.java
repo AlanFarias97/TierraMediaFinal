@@ -11,7 +11,7 @@ public class IngresarService {
 		UsuarioDAO usuarioDAO = DAOFactory.getUsuarioDAO();
     	Usuario usuario = usuarioDAO.buscarPorNombre(nombreUsuario);
     	
-    	if (usuario.isNull()) {
+    	if (usuario.isNull() || !usuario.estaActivo()) {
     		usuario = UsuarioNull.build();
     		}
 //  

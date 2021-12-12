@@ -18,4 +18,10 @@ public interface UsuarioDAO {
     public Usuario buscarPorNombre(String nombre);
     
     public int insertar(Usuario usuario);
+    
+    public int eliminar(int id);
+
+	public abstract Usuario buscarPorId(Integer id);
+	
+	public int modificar(Usuario usuario);
 }

@@ -58,13 +58,13 @@ public class GestorDeSugerencias {
         this.promociones = promociones;
     }
 
-    private List<Promocion> agregarPromocionesOrdenadas(TipoAtraccion tipo) {
+    private List<Promocion> agregarPromocionesOrdenadas(String tipo) {
         List<Promocion> sugerencias = new ArrayList<>();
         List<Promocion> otroTipo = new ArrayList<>();
 
         //Separo las promociones del tipo preferido de los otros
         for (Promocion promociones : promociones) {
-            if (promociones.getTipo().equals(tipo)) {
+            if (promociones.getTipo().getNombre().equals(tipo)) {
                 sugerencias.add(promociones);
             } else
                 otroTipo.add(promociones);
@@ -79,12 +79,12 @@ public class GestorDeSugerencias {
         return sugerencias;
     }
 
-    private List<Atraccion> agregarAtraccionesOrdenadas(TipoAtraccion tipo) {
+    private List<Atraccion> agregarAtraccionesOrdenadas(String tipo) {
         List<Atraccion> sugerencias = new ArrayList<>();
         List<Atraccion> otrasAtracciones = new ArrayList<>();
 
         for (Atraccion atraccione : atracciones) {
-            if (atraccione.getTipo().equals(tipo)) {
+            if (atraccione.getTipo().getNombre().equals(tipo)) {
                 sugerencias.add(atraccione);
             } else {
                 otrasAtracciones.add(atraccione);
@@ -108,8 +108,8 @@ public class GestorDeSugerencias {
 
     public List<Producto> generarSugerenciasPara(Usuario usuario) {
         List<Producto> sugerencias = new ArrayList<>();
-        sugerencias.addAll(agregarPromocionesOrdenadas(usuario.getTipoPreferido()));
-        sugerencias.addAll(agregarAtraccionesOrdenadas(usuario.getTipoPreferido()));
+        sugerencias.addAll(agregarPromocionesOrdenadas(usuario.getTipo().getNombre()));
+        sugerencias.addAll(agregarAtraccionesOrdenadas(usuario.getTipo().getNombre()));
         return sugerencias;
     }
 

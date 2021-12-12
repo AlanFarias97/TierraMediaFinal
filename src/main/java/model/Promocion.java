@@ -6,23 +6,15 @@ import java.util.Objects;
 public abstract class Promocion implements Producto, Comparable<Promocion> {
 	protected String nombre;
 	protected List<Atraccion> atracciones;
-	protected TipoAtraccion tipoAtraccion2;
-	protected String tipoAtraccion;
+	protected Tipo tipoAtraccion;
 	protected String tipoPromocion;
 	protected int id;
 	protected String descripcion;
 	protected String imagen;
 	protected int descuento;
 	protected Boolean activo;
-
-	public Promocion(int id, String nombre, TipoAtraccion tipoAtraccion, List<Atraccion> atracciones) {
-		this.id = id;
-		this.nombre = nombre;
-		this.tipoAtraccion2 = tipoAtraccion;
-		this.atracciones = atracciones;
-	}
 	
-	public Promocion(int id, String nombre, String tipoAtraccion, String tipoPromocion, int descuento,String descripcion,String imagen, Boolean activo,List<Atraccion> atracciones) {
+	public Promocion(int id, String nombre, Tipo tipoAtraccion, String tipoPromocion, int descuento,String descripcion,String imagen, Boolean activo,List<Atraccion> atracciones) {
 		this.id = id;
 		this.nombre = nombre;
 		this.tipoAtraccion = tipoAtraccion;
@@ -37,20 +29,15 @@ public abstract class Promocion implements Producto, Comparable<Promocion> {
 	public int getId() {
 		return this.id;
 	}
-	public TipoAtraccion getTipoAtraccion2() {
-		return tipoAtraccion2;
-	}
 
-	public void setTipoAtraccion2(TipoAtraccion tipoAtraccion2) {
-		this.tipoAtraccion2 = tipoAtraccion2;
-	}
 
-	public String getTipoAtraccion() {
-		return tipoAtraccion;
-	}
 
-	public void setTipoAtraccion(String tipoAtraccion) {
+	public void setTipo(Tipo tipoAtraccion) {
 		this.tipoAtraccion = tipoAtraccion;
+	}
+	
+	public Tipo getTipo() {
+		return tipoAtraccion;
 	}
 
 	public String getTipoPromocion() {
@@ -109,15 +96,12 @@ public abstract class Promocion implements Producto, Comparable<Promocion> {
 		return atracciones;
 	}
 
-	public TipoAtraccion getTipo() {
-		return tipoAtraccion2;
-	}
 
 	public int compareTo(Promocion otra) {
-		if (this.getCosto().compareTo(otra.getCosto()) == 0) {
+		if (this.getPrecio().compareTo(otra.getPrecio()) == 0) {
 			return -this.getTiempo().compareTo(otra.getTiempo());
 		}
-		return -this.getCosto().compareTo(otra.getCosto());
+		return -this.getPrecio().compareTo(otra.getPrecio());
 	}
 
 	public Double getTiempo() {
@@ -128,11 +112,11 @@ public abstract class Promocion implements Producto, Comparable<Promocion> {
 		return total;
 	}
 
-	public Integer getCosto() {
+	public Integer getPrecio() {
 		int total = 0;
 
 		for (int i = 0; i < this.atracciones.size(); i++) {
-			total += this.atracciones.get(i).getCosto();
+			total += this.atracciones.get(i).getPrecio();
 		}
 		return total;
 	}

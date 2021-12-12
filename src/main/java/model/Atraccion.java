@@ -14,42 +14,51 @@ public class Atraccion implements Producto, Comparable<Atraccion> {
 
     private int id;
     private String nombre;
-    private TipoAtraccion tipoAtraccion;
-    private String tipo;
-    private Integer costo;
+    private Tipo tipo;
+    private Integer precio;
     private Double tiempo;
     private int cupoDisponible;
     private String descripcion;
     private String imagen;
+    private Boolean activo;
     
-    private Map<String, String> errores;
+    public Boolean getActivo() {
+		return activo;
+	}
 
-    public Atraccion(int id, String nombre, int costo, double tiempo, int cupoDiario, String tipo) {
-        this.id = id;
-        this.nombre = nombre;
-        this.tipoAtraccion = TipoAtraccion.valueOf(tipo.toUpperCase());
-        this.costo = costo;
-        this.tiempo = tiempo;
-        this.cupoDisponible = cupoDiario;
-    }
+	public void setActivo(Boolean activo) {
+		this.activo = activo;
+	}
+
+	private Map<String, String> errores;
+
+//    public Atraccion(int id, String nombre, int costo, double tiempo, int cupoDiario, String tipo) {
+//        this.id = id;
+//        this.nombre = nombre;
+//        this.tipoAtraccion = TipoAtraccion.valueOf(tipo.toUpperCase());
+//        this.costo = costo;
+//        this.tiempo = tiempo;
+//        this.cupoDisponible = cupoDiario;
+//    }
     
-    public Atraccion(int id, String nombre, int costo, double tiempo, int cupoDiario, String tipo, String descripcion, String imagen) {
+    public Atraccion(int id, String nombre, int costo, double tiempo, int cupoDiario, Tipo tipo, String descripcion, String imagen, Boolean activo) {
         this.id = id;
         this.nombre = nombre;
         this.tipo = tipo;
-        this.costo = costo;
+        this.precio = costo;
         this.tiempo = tiempo;
         this.cupoDisponible = cupoDiario;
         this.descripcion = descripcion;
         this.imagen = imagen;
+        this.activo = activo;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public TipoAtraccion getTipo() {
-        return this.tipoAtraccion;
+    public Tipo getTipo() {
+        return this.tipo;
     }
 
     public boolean tieneCupo() {
@@ -79,12 +88,12 @@ public class Atraccion implements Producto, Comparable<Atraccion> {
         return cupoDisponible;
     }
 
-    public Integer getCosto() {
-        return this.costo;
+    public Integer getPrecio() {
+        return this.precio;
     }
 
-    public void setCosto(Integer costo) {
-        this.costo = costo;
+    public void setPrecio(Integer costo) {
+        this.precio = costo;
     }
 
     public List<Atraccion> getAtraccionesTotales() {
@@ -111,10 +120,10 @@ public class Atraccion implements Producto, Comparable<Atraccion> {
     @Override
     public int compareTo(Atraccion otra) {
         // ordenar por costo y si es el mismo ordena por tiempo
-        if (this.getCosto().compareTo(otra.getCosto()) == 0) {
+        if (this.getPrecio().compareTo(otra.getPrecio()) == 0) {
             return -this.getTiempo().compareTo(otra.getTiempo());
         }
-        return -this.getCosto().compareTo(otra.getCosto());
+        return -this.getPrecio().compareTo(otra.getPrecio());
     }
 
     @Override
@@ -145,7 +154,7 @@ public class Atraccion implements Producto, Comparable<Atraccion> {
         return Objects.hash(id, nombre);
     }
     
-    public boolean esValida() {
+    public boolean esValido() {
 		validar();
 		return errores.isEmpty();
 	}
@@ -153,7 +162,7 @@ public class Atraccion implements Producto, Comparable<Atraccion> {
 	public void validar() {
 		errores = new HashMap<String, String>();
 
-		if (costo <= 0) {
+		if (precio <= 0) {
 			errores.put("cost", "Debe ser positivo");
 		}
 		if (tiempo <= 0) {
@@ -164,13 +173,13 @@ public class Atraccion implements Producto, Comparable<Atraccion> {
 		}
 	}
 
-	public TipoAtraccion getTipoAtraccion() {
-		return tipoAtraccion;
-	}
-
-	public void setTipoAtraccion(TipoAtraccion tipoAtraccion) {
-		this.tipoAtraccion = tipoAtraccion;
-	}
+//	public TipoAtraccion getTipoAtraccion() {
+//		return tipoAtraccion;
+//	}
+//
+//	public void setTipoAtraccion(TipoAtraccion tipoAtraccion) {
+//		this.tipoAtraccion = tipoAtraccion;
+//	}
 
 	public Map<String, String> getErrores() {
 		return errores;
@@ -196,7 +205,7 @@ public class Atraccion implements Producto, Comparable<Atraccion> {
 		this.nombre = nombre;
 	}
 
-	public void setTipo(String tipo) {
+	public void setTipo(Tipo tipo) {
 		this.tipo = tipo;
 	}
 
@@ -206,5 +215,9 @@ public class Atraccion implements Producto, Comparable<Atraccion> {
 
 	public void setCupoDisponible(int cupoDisponible) {
 		this.cupoDisponible = cupoDisponible;
+	}
+
+	public boolean estaActivo() {
+		return activo;
 	}
 }

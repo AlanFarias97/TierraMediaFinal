@@ -7,8 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.Atraccion;
+import model.Tipo;
 import persistence.AtraccionDAO;
+import persistence.TipoDAO;
 import persistence.commons.ConnectionProvider;
+import persistence.commons.DAOFactory;
 import persistence.commons.MissingDataException;
 
 
@@ -105,8 +108,12 @@ public class AtraccionDAOImpl implements AtraccionDAO {
         int idTipoAtraccion = resultados.getInt(6);
         String descripcion = resultados.getString(7);
         String imagen = resultados.getString(8);
-        String nombreTipoAtraccion = obtenerTipoNombre(idTipoAtraccion).toUpperCase();
-        Atraccion atraccion = new Atraccion(id, nombre, costo, tiempo, cupo, nombreTipoAtraccion);
+        Boolean activo = Boolean.valueOf(resultados.getString(9));
+        
+        TipoDAO tipoDAO = DAOFactory.getTipoDAO();
+        Tipo tipoAtraccion = tipoDAO.buscarPorId(idTipoAtraccion);
+        //(int id, String nombre, int costo, double tiempo, int cupoDiario, Tipo tipo, String descripcion, String imagen)
+        Atraccion atraccion = new Atraccion(id, nombre, costo, tiempo, cupo, tipoAtraccion, descripcion,imagen,activo);
         atraccion.setDescripcion(descripcion);
         atraccion.setImagen(imagen);
 
@@ -132,18 +139,38 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 	@Override
 	public int insertar(Atraccion atraccion) {
 		try {
-			String sql = "INSERT INTO atraccion (nombre, precio, tiempo, cupo, tipo_atraccion_id, descripcion, imagen, activo) VALUES (?, ?, ?, ?)";
+			String sql = "INSERT INTO atraccion (nombre, precio, tiempo, cupo, tipo_atraccion_id, descripcion, imagen, activo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
-			int i = 1;
-			statement.setString(i++, atraccion.getNombre());
-			statement.setInt(i++, atraccion.getCosto());
-			statement.setDouble(i++, atraccion.getTiempo());
-			statement.setInt(i++, atraccion.getCupoDisponible());
+			statement.setString(1, atraccion.getNombre());
+			statement.setInt(2, atraccion.getPrecio());
+			statement.setDouble(3, atraccion.getTiempo());
+			statement.setInt(4, atraccion.getCupoDisponible());
+			statement.setInt(5, atraccion.getTipo().getId());
+			statement.setString(6, atraccion.getDescripcion());
+			statement.setString(7, atraccion.getImagen());
+			statement.setString(8, "true");
 			int rows = statement.executeUpdate();
 
 			return rows;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
+
+	public int eliminar(int id) {
+		try {
+		String sql = "UPDATE atraccion SET activo = ? WHERE id = ?";
+		Connection conn = ConnectionProvider.getConnection();
+		PreparedStatement statement = conn.prepareStatement(sql);
+		
+		statement.setString(1,"false");
+		statement.setDouble(2, id);
+		int rows = statement.executeUpdate();
+
+		return rows;
+		
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}

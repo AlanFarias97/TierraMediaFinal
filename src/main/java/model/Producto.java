@@ -4,13 +4,13 @@ import java.util.List;
 
 public interface Producto{
 
-    Integer getCosto();
+    Integer getPrecio();
 
     Double getTiempo();
 
     String getNombre();
 
-    TipoAtraccion getTipo();
+    Tipo getTipo();
 
     boolean tieneCupo();
 

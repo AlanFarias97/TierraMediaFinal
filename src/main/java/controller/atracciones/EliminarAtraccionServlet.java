@@ -1,4 +1,4 @@
-package controller.usuarios;
+package controller.atracciones;
 
 import java.io.IOException;
 
@@ -8,27 +8,28 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import services.UsuarioService;
+import services.AtraccionService;
 
-@WebServlet("/admin-usuarios/eliminar")
-public class EliminarUsuarioServlet extends HttpServlet implements Servlet{
-
-	private static final long serialVersionUID = -3950471947962978031L;
-	private UsuarioService usuarioService;
+@WebServlet("/admin-atracciones/eliminar")
+public class EliminarAtraccionServlet extends HttpServlet implements Servlet{
+	
+	private static final long serialVersionUID = 4722417828413660861L;
+	private AtraccionService atraccionService;
 
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		this.usuarioService = new UsuarioService();
+		this.atraccionService = new AtraccionService();
 	}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Integer id = Integer.parseInt(req.getParameter("id"));
+		int id = Integer.parseInt(req.getParameter("id"));
 
-		usuarioService.eliminar(id);
+		atraccionService.eliminar(id);
 
-		//.do
-		resp.sendRedirect("/turismo/admin-usuarios");
+		resp.sendRedirect("/turismo/admin-atracciones");
 	}
+
+	
 }

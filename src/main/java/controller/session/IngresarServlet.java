@@ -9,8 +9,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Usuario;
+import services.AtraccionService;
 import services.IngresarService;
-import utils.Crypt;
 
 @WebServlet("/ingresar")
 public class IngresarServlet extends HttpServlet{
@@ -37,6 +37,9 @@ public class IngresarServlet extends HttpServlet{
     			resp.sendRedirect("index-admin.jsp");   
         		
     		}else {
+    			AtraccionService atraccionService = new AtraccionService();
+    			req.getSession().setAttribute("atracciones", atraccionService.list());
+    			
     			resp.sendRedirect("index.jsp");   
     		}
     		 		

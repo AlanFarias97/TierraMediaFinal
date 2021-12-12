@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Map;
+
 public class Tipo {
 	private String nombre;
 	private int id;
@@ -7,6 +9,7 @@ public class Tipo {
 	private Boolean activo;
 	private String descripcion;
 	
+	private Map<String, String> errores;
 	
 	public String getDescripcion() {
 		return descripcion;
@@ -54,6 +57,19 @@ public class Tipo {
 
 	public void setActivo(Boolean activo) {
 		this.activo = activo;
+	}
+	
+	public Boolean esValido() {
+		//TODO validaciones
+		return true;
+	}
+	
+	public Map<String, String> getErrores() {
+		return errores;
+	}
+
+	public void setErrores(Map<String, String> errores) {
+		this.errores = errores;
 	}
 	
 	

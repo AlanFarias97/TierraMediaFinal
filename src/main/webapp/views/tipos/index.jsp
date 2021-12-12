@@ -71,11 +71,11 @@
                 <p class="text-center">Altas, bajas, modificaciones y consultas</p>
                 <br>
                 <div class="mb-3 text-right">
-                    <a href="/turismo/attractions/create.do" class="btn btn-primary" role="button"> <i
+                    <a href="/turismo/admin-tipos/crear" class="btn btn-primary" role="button"> <i
                             class="fas fa-plus"></i> Nuevo Tipo
                     </a>
                 </div>
-                <table class="table table-striped table-hover">
+                <table class="table table-striped table-hover shadow">
                     <thead class="table-dark">
                         <tr>
                             <th scope="col">Nombre</th>
@@ -94,13 +94,11 @@
                             <td scope="col"><c:out value="${tipo.activo}"></c:out></td>
                             <!--cambiar el href-->
                             <td style="width: 11%">
-                                <a href="/turismo/tipos/edit.do?id=${tipo.id}"
-                                    class="btn btn-warning rounded" role="button"><i class="fas fa-pen"></i></a>
-                                <!--cambiar el href-->
-                                <button data-id="${tipo.id}" class="btn btn-danger rounded" type="button" data-toggle="modal"
-                                    data-target="#exampleModal" name="button" role="button"><i
-                                        class="fas fa-trash-alt"></i></button>
-
+                                <a href="/turismo/admin-tipos/modificar?id=${tipo.id}"
+									class="btn btn-warning rounded" role="button"><i class="fas fa-pen"></i></a>
+								<a class="btn btn-danger rounded" href="/turismo/admin-tipos/eliminar?id=${tipo.id}"
+									type="button" name="button" role="button"> <i class="fas fa-trash-alt"></i></a>
+							</td>
                         </tr>
                         </c:forEach>
                     </tbody>

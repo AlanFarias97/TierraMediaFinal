@@ -1,73 +1,71 @@
-package controller.usuarios;
+package controller.atracciones;
 
 import java.io.IOException;
 import java.util.List;
 
 import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.Servlet;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Atraccion;
 import model.Tipo;
-import model.Usuario;
 import persistence.TipoDAO;
 import persistence.commons.DAOFactory;
-import services.UsuarioService;
+import services.AtraccionService;
+import utils.Crypt;
 
-@WebServlet("/admin-usuarios/modificar")
-public class ModificarUsuarioServlet extends HttpServlet {
+@WebServlet("/admin-atracciones/crear")
+public class CrearAtraccionServlet extends HttpServlet implements Servlet{
 
-	private static final long serialVersionUID = -1410527637321647037L;
-	private UsuarioService usuarioService;
+	private static final long serialVersionUID = 7942691175502179445L;
+	private AtraccionService atraccionService;
 
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		this.usuarioService = new UsuarioService();
+		this.atraccionService = new AtraccionService();
 	}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Integer id = Integer.parseInt(req.getParameter("id"));
-		Usuario usuario = DAOFactory.getUsuarioDAO().buscarPorId(id);
-		
 		TipoDAO tipoDAO = DAOFactory.getTipoDAO();
 		List<Tipo> tipos = tipoDAO.obtenerTodos();
 		req.setAttribute("tipos", tipos);
 		
-		req.setAttribute("modificable", usuario);
-		
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/usuarios/modificar.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/atracciones/crear.jsp");
 		dispatcher.forward(req, resp);
 	}
-
-
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		int id = Integer.parseInt(req.getParameter("id"));
 		String nombre = req.getParameter("nombre");
-		Integer monedas = Integer.parseInt(req.getParameter("monedas"));
+		Integer precio = Integer.parseInt(req.getParameter("precio"));
 		Double tiempo = Double.parseDouble(req.getParameter("tiempo"));
+		int cupo = Integer.valueOf(req.getParameter("cupo"));
 		int tipoId = Integer.valueOf(req.getParameter("tipo"));
-		String imagenPerfil = req.getParameter("imagen");
-		String contrasenia = req.getParameter("contrasenia");
+		String descripcion = req.getParameter("descripcion");
+		String imagen = req.getParameter("imagen");
 		Boolean activo = true;
-		Boolean admin = Boolean.valueOf(req.getParameter("admin"));
+		
 		TipoDAO tipoDAO = DAOFactory.getTipoDAO();
 		Tipo tipo = tipoDAO.buscarPorId(tipoId);
-		Usuario usuario = usuarioService.modificar(id,nombre,tipo,monedas,tiempo,imagenPerfil,contrasenia,activo,admin);
 		
-		if (usuario.esValido()) {
+		Atraccion atraccion = atraccionService.crear(nombre,tipo,precio,tiempo,cupo,imagen,descripcion,activo);
+		
+		if (atraccion.esValido()) {
 			//resp.sendRedirect("/turismo/admin-usuarios/crear.do");
-			resp.sendRedirect("/turismo/admin-usuarios");
+			resp.sendRedirect("/turismo/admin-atracciones/crear");
 		} else {
-			req.setAttribute("usuario", usuario);
+			req.setAttribute("atraccion", atraccion);
 
 			RequestDispatcher dispatcher = getServletContext()
-					.getRequestDispatcher("/views/usuarios/modificar.jsp");
+					.getRequestDispatcher("/views/usuarios/crear.jsp");
 			dispatcher.forward(req, resp);
 		}
-
+		
 	}
+
 }

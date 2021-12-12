@@ -18,8 +18,8 @@ public class Usuario {
     private int id;
     private String nombre;
     private int monedas;
-    private TipoAtraccion tipoPreferido;
-    private String tipo;
+    //private TipoAtraccion tipoPreferido;
+    private Tipo tipo;
     private double tiempoDisponible;
     private List<Producto> itinerario;
     private List<Atraccion> atraccionesCompradas;
@@ -31,18 +31,18 @@ public class Usuario {
     private Map<String, String> errores;
     
 
-
-    public Usuario(int id, String nombre, String preferencia, int monedas, double tiempo) {
-        this.id = id;
-        this.nombre = nombre;
-        this.tipoPreferido = TipoAtraccion.valueOf(preferencia.toUpperCase());
-        this.monedas = monedas;
-        this.tiempoDisponible = tiempo;
-        this.itinerario = new ArrayList<>();
-        this.atraccionesCompradas = new ArrayList<>();
-    }
-    
-    public Usuario(int id, String nombre, String preferencia, int monedas, double tiempo, String imagenPerfil, String hashContrasenia,Boolean activo,Boolean admin) {
+//
+//    public Usuario(int id, String nombre, String preferencia, int monedas, double tiempo) {
+//        this.id = id;
+//        this.nombre = nombre;
+//        this.tipoPreferido = TipoAtraccion.valueOf(preferencia.toUpperCase());
+//        this.monedas = monedas;
+//        this.tiempoDisponible = tiempo;
+//        this.itinerario = new ArrayList<>();
+//        this.atraccionesCompradas = new ArrayList<>();
+//    }
+//    
+    public Usuario(int id, String nombre, Tipo preferencia, int monedas, double tiempo, String imagenPerfil, String hashContrasenia,Boolean activo,Boolean admin) {
         this.id = id;
         this.nombre = nombre;
         this.tipo = preferencia;
@@ -101,9 +101,9 @@ public class Usuario {
 		this.monedas = monedas;
 	}
 
-	public void setTipoPreferido(TipoAtraccion tipoPreferido) {
-		this.tipoPreferido = tipoPreferido;
-	}
+//	public void setTipoPreferido(TipoAtraccion tipoPreferido) {
+//		this.tipoPreferido = tipoPreferido;
+//	}
 
 	public void setTiempoDisponible(double tiempoDisponible) {
 		this.tiempoDisponible = tiempoDisponible;
@@ -121,17 +121,16 @@ public class Usuario {
         return monedas;
     }
 
-    public TipoAtraccion getTipoPreferido() {
-        return tipoPreferido;
-    }
+//    public TipoAtraccion getTipoPreferido() {
+//        return tipoPreferido;
+//    }
     
-    
-
-    public String getTipo() {
+  
+    public Tipo getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(String tipo) {
+	public void setTipo(Tipo tipo) {
 		this.tipo = tipo;
 	}
 
@@ -212,14 +211,14 @@ public class Usuario {
 
     private void mostrarProducto(Producto sugerencia) {
         System.out.println("Nombre: " + sugerencia.getNombre());
-        System.out.println("Precio: " + sugerencia.getCosto() + " monedas");
+        System.out.println("Precio: " + sugerencia.getPrecio() + " monedas");
         System.out.println("Tiempo: " + sugerencia.getTiempo() + " horas");
         System.out.println("Tipo: " + sugerencia.getTipo());
         System.out.println("Querés comprarlo?(Si/No)");
     }
 
     private boolean puedeComprar(Producto sugerencia) {
-        return this.monedas >= sugerencia.getCosto() && this.tiempoDisponible >= sugerencia.getTiempo()
+        return this.monedas >= sugerencia.getPrecio() && this.tiempoDisponible >= sugerencia.getTiempo()
                 && this.noSeVisito(sugerencia) && sugerencia.tieneCupo();
     }
 
@@ -227,7 +226,7 @@ public class Usuario {
         System.out.println("¡Hola, " + this.getNombre() + "!");
         System.out.println("Tus monedas: " + this.monedas);
         System.out.println("Tu tiempo disponible: " + this.tiempoDisponible + " horas");
-        System.out.println("Tu preferencia: " + this.tipoPreferido);
+        System.out.println("Tu preferencia: " + this.tipo.getNombre());
     }
 
     private void productosSinCupo(List<Producto> sugerencias) {
@@ -247,7 +246,7 @@ public class Usuario {
     }
 
     private void actualizarUsuario(Producto sugerencia) throws SQLException {
-        this.monedas -= sugerencia.getCosto();
+        this.monedas -= sugerencia.getPrecio();
         this.tiempoDisponible -= sugerencia.getTiempo();
         UsuarioDAO usuarioDAO = DAOFactory.getUsuarioDAO();
 
@@ -323,6 +322,10 @@ public class Usuario {
 		if (tiempoDisponible <= 0) {
 			errores.put("duration", "El tiempo disponible debe ser positivo");
 		}
+	}
+	
+	public Boolean estaActivo() {
+		return activo;
 	}
 
 }

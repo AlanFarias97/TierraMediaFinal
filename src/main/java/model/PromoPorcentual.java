@@ -5,22 +5,17 @@ import java.util.List;
 public class PromoPorcentual extends Promocion {
     private int porcentaje;
 
-    public PromoPorcentual(int id, String nombre, TipoAtraccion tipoAtraccion, List<Atraccion> atracciones, int porcentaje) {
-        super(id, nombre, tipoAtraccion, atracciones);
-        this.porcentaje = porcentaje;
-    }
-    
-    public PromoPorcentual(int id, String nombre, String tipoAtraccion,String tipoPromocion,String descripcion,String imagen,Boolean activo, List<Atraccion> atracciones, int porcentaje) {
-    	//idPromo, nombre, tipo_atraccion, descripcion,imagen,activo,"PORCENTUAL",atracciones, Integer.parseInt(descuento)
+    public PromoPorcentual(int id, String nombre, Tipo tipoAtraccion,String tipoPromocion,String descripcion,
+    		String imagen,Boolean activo, List<Atraccion> atracciones, int porcentaje) {
     	super(id, nombre, tipoAtraccion, tipoPromocion,0,descripcion,imagen,activo, atracciones);
         this.porcentaje = porcentaje;
-        int costo = this.getCosto();
+        int costo = this.getPrecio();
         super.setDescuento(costo);
     }
 
     @Override
-    public Integer getCosto() {
-        return (int) Math.ceil(super.getCosto() * (1 - this.porcentaje/100.0));
+    public Integer getPrecio() {
+        return (int) Math.ceil(super.getPrecio() * (1 - this.porcentaje/100.0));
     }
 
     @Override

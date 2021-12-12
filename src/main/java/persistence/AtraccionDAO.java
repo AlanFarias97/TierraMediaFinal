@@ -18,4 +18,7 @@ public interface AtraccionDAO {
     public Atraccion obtenerPorId(int id);
     
     public int insertar(Atraccion atraccion);
+
+	public abstract int eliminar(int id);
+
 }
