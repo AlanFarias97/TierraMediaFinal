@@ -21,6 +21,8 @@ public class Atraccion implements Producto, Comparable<Atraccion> {
     private String descripcion;
     private String imagen;
     private Boolean activo;
+    private Map<String, String> errores;
+
     
     public Boolean getActivo() {
 		return activo;
@@ -30,8 +32,7 @@ public class Atraccion implements Producto, Comparable<Atraccion> {
 		this.activo = activo;
 	}
 
-	private Map<String, String> errores;
-
+	
 //    public Atraccion(int id, String nombre, int costo, double tiempo, int cupoDiario, String tipo) {
 //        this.id = id;
 //        this.nombre = nombre;
@@ -172,14 +173,6 @@ public class Atraccion implements Producto, Comparable<Atraccion> {
 			errores.put("capacity", "Debe ser positivo");
 		}
 	}
-
-//	public TipoAtraccion getTipoAtraccion() {
-//		return tipoAtraccion;
-//	}
-//
-//	public void setTipoAtraccion(TipoAtraccion tipoAtraccion) {
-//		this.tipoAtraccion = tipoAtraccion;
-//	}
 
 	public Map<String, String> getErrores() {
 		return errores;

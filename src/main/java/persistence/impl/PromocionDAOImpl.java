@@ -138,4 +138,45 @@ public class PromocionDAOImpl implements PromocionDAO {
         return resultadoId.getString(1).toUpperCase();
     }
 
+	@Override
+	public int insertar(Promocion promocion) {
+		try {
+			String sql = "INSERT INTO promocion (nombre, tipo_atraccion_id, tipo_promocion, descuento, descripcion, imagen, activo) VALUES (?, ?, ?, ?, ?, ?, ?)";
+			Connection conn = ConnectionProvider.getConnection();
+
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, promocion.getNombre());
+			statement.setInt(2, promocion.getTipo().getId());
+			
+			
+			String descuento = "";
+			if(promocion.esAbsoluta()) {
+				statement.setInt(3, 2);
+				PromoAbsoluta absoluta = (PromoAbsoluta) promocion;
+				descuento = String.valueOf(absoluta.getDescuento());
+			} else if(promocion.esPromoAxB()) {
+				statement.setInt(3, 1);
+				PromoAxB axb = (PromoAxB) promocion;
+				descuento = String.valueOf(axb.getAtraccionGratis().getNombre());
+			} else if(promocion.esPorcentual()) {
+				statement.setInt(3, 3);
+				PromoPorcentual porcentual = (PromoPorcentual) promocion;
+				descuento = String.valueOf(porcentual.getPorcentaje());
+			}
+			
+			statement.setString(4, descuento);
+			statement.setString(5, promocion.getDescripcion());
+			statement.setString(6, promocion.getImagen());
+			statement.setString(7, "true");
+			int rows = statement.executeUpdate();
+
+			return rows;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+
+	}
+    
+    
+
 }

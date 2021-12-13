@@ -10,11 +10,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Atraccion;
+import model.Promocion;
 import model.Tipo;
+import persistence.AtraccionDAO;
 import persistence.TipoDAO;
 import persistence.commons.DAOFactory;
 import services.PromocionService;
-import utils.Crypt;
 
 @WebServlet("/admin-promociones/crear")
 public class CrearPromocionServlet extends HttpServlet implements Servlet{
@@ -34,7 +36,11 @@ public class CrearPromocionServlet extends HttpServlet implements Servlet{
 		List<Tipo> tipos = tipoDAO.obtenerTodos();
 		req.setAttribute("tipos", tipos);
 		
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/atracciones/crear.jsp");
+		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
+		List<Atraccion> atracciones = atraccionDAO.obtenerTodos();
+		req.setAttribute("atracciones", atracciones);
+		
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/promociones/crear.jsp");
 		dispatcher.forward(req, resp);
 	}
 	
@@ -42,27 +48,38 @@ public class CrearPromocionServlet extends HttpServlet implements Servlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//int id, String nombre, String tipoAtraccion, String tipoPromocion, int descuento,String descripcion,String imagen, Boolean activo,List<Atraccion> atracciones
 		String nombre = req.getParameter("nombre");
+		String tipoPromocion = req.getParameter("tipoPromocion");
 		int tipoAtraccionId = Integer.valueOf(req.getParameter("tipoAtraccion"));
-		int tipoPromocionId = Integer.valueOf(req.getParameter("tipoPromocion"));
+		String[] atracciones = req.getParameterValues("atracciones"); 
 		String descripcion = req.getParameter("descripcion");
 		String imagen = req.getParameter("imagen");
 		Boolean activo = true;
 		
 		TipoDAO tipoDAO = DAOFactory.getTipoDAO();
-		Tipo tipo = tipoDAO.buscarPorId(tipoAtraccionId);
+		Tipo tipoAtraccion = tipoDAO.buscarPorId(tipoAtraccionId);
 		
-		//Promocion promocion = promocionService.crear(nombre,tipo,precio,tiempo,imagen,descripcion,activo);
+		int descuento = 0;
+		if(tipoPromocion.equals("Absoluta")) {
+			descuento = Integer.valueOf(req.getParameter("descuento"));
+		} else if(tipoPromocion.equals("AxB")) {
+			descuento = Integer.valueOf(req.getParameter("atraccionGratis"));
+		} else if(tipoPromocion.equals("Porcentual")) {
+			descuento = Integer.valueOf(req.getParameter("porcentaje"));
+		}
 		
-//		if (promocion.esValido()) {
-//			//resp.sendRedirect("/turismo/admin-usuarios/crear.do");
-//			resp.sendRedirect("/turismo/admin-atracciones/crear");
-//		} else {
-//			req.setAttribute("usuario", usuario);
-//
-//			RequestDispatcher dispatcher = getServletContext()
-//					.getRequestDispatcher("/views/usuarios/crear.jsp");
-//			dispatcher.forward(req, resp);
-//		}
+		
+		Promocion promocion = promocionService.crear(tipoPromocion, nombre, atracciones, tipoAtraccion, descuento,imagen,descripcion,activo);
+		
+		if (promocion.esValido()) {
+			//resp.sendRedirect("/turismo/admin-usuarios/crear.do");
+			resp.sendRedirect("/turismo/admin-promociones/crear");
+		} else {
+			req.setAttribute("promocion", promocion);
+
+			RequestDispatcher dispatcher = getServletContext()
+					.getRequestDispatcher("/views/promociones/crear.jsp");
+			dispatcher.forward(req, resp);
+		}
 		
 	}
 

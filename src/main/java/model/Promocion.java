@@ -1,6 +1,8 @@
 package model;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public abstract class Promocion implements Producto, Comparable<Promocion> {
@@ -13,6 +15,7 @@ public abstract class Promocion implements Producto, Comparable<Promocion> {
 	protected String imagen;
 	protected int descuento;
 	protected Boolean activo;
+	private Map<String, String> errores;
 	
 	public Promocion(int id, String nombre, Tipo tipoAtraccion, String tipoPromocion, int descuento,String descripcion,String imagen, Boolean activo,List<Atraccion> atracciones) {
 		this.id = id;
@@ -29,7 +32,6 @@ public abstract class Promocion implements Producto, Comparable<Promocion> {
 	public int getId() {
 		return this.id;
 	}
-
 
 
 	public void setTipo(Tipo tipoAtraccion) {
@@ -181,4 +183,11 @@ public abstract class Promocion implements Producto, Comparable<Promocion> {
 		}
 		return listado;
 	}
+	
+	public boolean esValido() {
+		
+		return true;
+	}
+	
+	
 }

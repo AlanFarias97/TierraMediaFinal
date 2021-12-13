@@ -148,10 +148,6 @@
 		$(this).blur();
 	});
 	
-	$(document).ready(function() {
-   		$('#carouselAtracciones').find('.carousel-item').first().addClass('active');
-	});
-
 })(jQuery);
 
 

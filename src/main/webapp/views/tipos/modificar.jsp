@@ -101,7 +101,7 @@
 
 
 
-				<form action="/turismo/admin-tipos/modificar" method="post">
+				<form action="/turismo/admin-tipos/modificar" method="post" class="shadow">
 					<div class="modal-body">
 						<h1 class="text-center">
 							Modificar tipo <i class="fas fa-user-edit"></i>
@@ -152,7 +152,7 @@
 
 					</div>
 
-					<div class="text-center">
+					<div class="text-center py-3">
 						<button type="submit" class="btn btn-primary">Guardar</button>
 						<a onclick="window.history.back();" class="btn btn-secondary"
 							role="button">Cancelar</a>

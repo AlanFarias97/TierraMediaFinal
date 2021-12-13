@@ -29,20 +29,26 @@ public class GestorDeSugerencias {
         this.tiposAtraccion = new ArrayList<>();
     }
 
-    public void cargarUsuarios(String url) {
+    public void cargarUsuarios() {
             this.usuarios = DAOFactory.getUsuarioDAO().obtenerTodos();
     }
 
-    public void cargarPromociones(String url) {
+    public void cargarPromociones() {
             this.promociones = DAOFactory.getPromocionDAO().obtenerTodos();
     }
 
-    public void cargarAtracciones(String  url) {
+    public void cargarAtracciones() {
         this.atracciones = DAOFactory.getAtraccionDAO().obtenerTodos();
     }
     
-    public void cargarTipos(String  url) {
+    public void cargarTipos() {
         this.tiposAtraccion = DAOFactory.getTipoDAO().obtenerTodos();
+    }
+    
+    public void cargarTodo() {
+    	 this.tiposAtraccion = DAOFactory.getTipoDAO().obtenerTodos();
+    	 this.atracciones = DAOFactory.getAtraccionDAO().obtenerTodos();
+    	 this.promociones = DAOFactory.getPromocionDAO().obtenerTodos();
     }
 
 

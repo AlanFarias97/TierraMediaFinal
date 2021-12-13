@@ -71,7 +71,7 @@
                 <p class="text-center">Altas, bajas, modificaciones y consultas</p>
                 <br>
                 <div class="mb-3 text-right">
-                    <a href="/turismo/attractions/create.do" class="btn btn-primary" role="button"> <i
+                    <a href="/turismo/admin-promociones/crear" class="btn btn-primary" role="button"> <i
                             class="fas fa-plus"></i> Nueva Promoción
                     </a>
                 </div>
@@ -92,19 +92,17 @@
                         <tr>
                             <th scope="col"><c:out value="${promocion.nombre}"></c:out></th>
                             <td scope="col"><c:out value="${promocion.descripcion}"></c:out></td>
-                            <td scope="col"><c:out value="${promocion.tipoAtraccion}"></c:out></td>
+                            <td scope="col"><c:out value="${promocion.tipo.nombre}"></c:out></td>
                             <td scope="col"><c:out value="${promocion.tipoPromocion}"></c:out></td>
                             <td scope="col"><c:out value="${promocion.descuento}"></c:out> monedas</td>
                             <td scope="col"><c:out value="${promocion.listado}"></c:out></td>
                             <!--cambiar el href-->
                             <td style="width: 11%">
-                                <a href="/turismo/promociones/edit.do?id=${promocion.id}"
-                                    class="btn btn-warning rounded" role="button"><i class="fas fa-pen"></i></a>
-                                <!--cambiar el href-->
-                                <button data-id="${promocion.id}" class="btn btn-danger rounded" type="button" data-toggle="modal"
-                                    data-target="#exampleModal" name="button" role="button"><i
-                                        class="fas fa-trash-alt"></i></button>
-
+									<a href="/turismo/admin-promociones/modificar?id=${promocion.id}"
+									class="btn btn-warning rounded" role="button"><i class="fas fa-pen"></i></a>
+									<a class="btn btn-danger rounded" href="/turismo/admin-promociones/eliminar?id=${promocion.id}"
+									type="button" name="button" role="button"> <i class="fas fa-trash-alt"></i></a>
+							</td>
                         </tr>
                         </c:forEach>
                     </tbody>

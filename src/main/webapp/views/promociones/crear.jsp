@@ -70,11 +70,11 @@
 						href="/turismo/admin-usuarios"> <i class="fas fa-users"></i> <span
 							class="ml-2">Usuarios</span>
 					</a></li>
-					<li class="nav-item"><a class="nav-link active"
+					<li class="nav-item"><a class="nav-link"
 						href="/turismo/admin-atracciones"> <i class="fas fa-mountain"></i>
 							<span class="ml-2">Atracciones</span>
 					</a></li>
-					<li class="nav-item"><a class="nav-link"
+					<li class="nav-item"><a class="nav-link active"
 						href="/turismo/admin-promociones"> <i class="fas fa-route"></i>
 							<span class="ml-2">Promociones</span>
 					</a></li>
@@ -97,88 +97,111 @@
 
 
 
-			<form action="/turismo/admin-atracciones/crear" method="post" class="shadow">
+			<form action="/turismo/admin-promociones/crear" method="post"
+				class="shadow">
 				<div class="modal-body">
 					<h1 class="text-center">
-						Nueva atracción <i class="fas fa-mountain"></i>
+						Nueva promoción <i class="fas fa-route"></i>
 					</h1>
 					<div class="row">
-						<div class="col-lg-4">
-							<div class="mb-3">
-								<label for="nombre" class="col-form-label">Nombre:</label> <input
-									type="text" class="form-control" id="nombre" name="nombre"
-									required>
-							</div>
+						<div class="col-lg-4 mb-3">
+							<label for="nombre" class="col-form-label">Nombre:</label> <input
+								type="text" class="form-control" id="nombre" name="nombre"
+								required>
 						</div>
-						<div class="col-lg-4">
-							<div class="mb-3">
-								<label for="tipos" class="col-form-label">Tipo de
-									atracción:</label> <select class="form-select"
-									aria-label="Default select example" name="tipo" required>
+						<div class="row">
+							<small>Elegí el tipo de promoción y completá el descuento
+								correspondiente:</small>
+							<div class="col-sm-2 mb-3">
+								<label for="tipoPromocion" class="col-form-label">Tipo
+									promo:</label> <select class="form-select"
+									aria-label="Default select example" name="tipoPromocion"
+									id="tipoPromocion" required>
 									<option selected>...</option>
-									<c:forEach items="${tipos}" var="tipo">
-										<option value="${tipo.id}"><c:out
-												value="${tipo.nombre}"></c:out></option>
+									<option value="Absoluta">Absoluta</option>
+									<option value="AxB">AxB</option>
+									<option value="Porcentual">Porcentual</option>
+								</select>
+							</div>
+
+							<div class="col-lg-2 mb-3">
+								<label for="descuento" class="col-form-label">Descuento:</label> <input
+									type="text" class="form-control" id="descuento" name="descuento">(monedas)
+							</div>
+
+							<div class="col-lg-2 mb-3">
+								<label for="porcentaje" class="col-form-label">Porcentaje:</label>
+								<input type="text" class="form-control" id="porcentaje"
+									name="porcentaje">(%)
+							</div>
+
+							<div class="col-sm-4 mb-3">
+								<label for="atraccionGratis" class="col-form-label">Atracción
+									gratuita:</label> <select class="form-select"
+									aria-label="Default select example" name="atraccionGratis" id="atraccionGratis">
+									<option selected>...</option>
+									<c:forEach items="${atracciones}" var="atraccion">
+										<option value="${atraccion.id}"><c:out
+												value="${atraccion.nombre}"></c:out>-
+											<c:out value="${atraccion.tipo.nombre}"></c:out></option>
 									</c:forEach>
 								</select>
 							</div>
 						</div>
+
+						<div class="row">
+							<div class="col-lg-4">
+								<div class="mb-3">
+									<label for="tipoAtraccion" class="col-form-label">Tipo de
+										atracción:</label> <select class="form-select"
+										aria-label="Default select example" name="tipoAtraccion" id="tipoAtraccion" required>
+										<option selected>...</option>
+										<c:forEach items="${tipos}" var="tipo">
+											<option value="${tipo.id}"><c:out
+													value="${tipo.nombre}"></c:out></option>
+										</c:forEach>
+									</select>
+								</div>
+							</div>
+							<div class="col-lg-4 mb-3">
+								<select class="form-select" size="9" multiple
+									aria-label="multiple select example" name="atracciones" required>
+									<option selected>Seleccioná las atracciones</option>
+									<c:forEach items="${atracciones}" var="atraccion">
+										<option value="${atraccion.id}"><c:out
+												value="${atraccion.nombre}"></c:out>-
+											<c:out value="${atraccion.tipo.nombre}"></c:out></option>
+									</c:forEach>
+								</select>
+							</div>
+						</div>
+
 						<div class="row">
 							<div class="col-lg-12 mb-3">
 								<label for="descripcion"
-									class='col-form-label ${atraccion.errores.get("descripcion") != null ? "is-invalid" : "" }'>Descripción:</label>
+									class='col-form-label ${promocion.errores.get("descripcion") != null ? "is-invalid" : "" }'>Descripción:</label>
 								<input class="form-control" type="text" id="descripcion"
 									value="" name="descripcion" required></input>
 								<div class="invalid-feedback">
-									<c:out value='${atraccion.errores.get("descripcion")}'></c:out>
+									<c:out value='${promocion.errores.get("descripcion")}'></c:out>
 								</div>
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-lg-3">
+							<div class="col-lg-6">
 								<div class="mb-3">
-									<label for="precio"
-										class='col-form-label ${atraccion.errores.get("precio") != null ? "is-invalid" : "" }'>Precio:</label>
-									<input class="form-control" type="number" id="precio" min="0"
-										value="0" name="precio" required></input>
-									<div class="invalid-feedback">
-										<c:out value='${atraccion.errores.get("precio")}'></c:out>
-									</div>
+									<label for="imagen" class='col-form-label'>Imagen:</label> <input
+										class="form-control" type="file" id="imagen" name="imagen"
+										required></input>
 								</div>
-							</div>
-							<div class="col-lg-3">
-								<div class="mb-3">
-									<label for="tiempo"
-										class='col-form-label ${atraccion.errores.get("tiempo") != null ? "is-invalid" : "" }'>Tiempo:</label>
-									<input class="form-control" type="number" id="tiempo" min="0"
-										value="0" name="tiempo" required></input>
-									<div class="invalid-feedback">
-										<c:out value='${atraccion.errores.get("tiempo")}'></c:out>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-3 mb-3">
-								<label for="cupo"
-									class='col-form-label ${atraccion.errores.get("cupo") != null ? "is-invalid" : "" }'>Cupo:</label>
-								<input class="form-control" type="number" id="cupo" min="0"
-									value="0" name="cupo" required></input>
-								<div class="invalid-feedback">
-									<c:out value='${atraccion.errores.get("cupo")}'></c:out>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-6">
-							<div class="mb-3">
-								<label for="imagen"
-									class='col-form-label ${atraccion.errores.get("imagen") != null ? "is-invalid" : "" }'>Imagen:</label>
-								<input class="form-control" type="file" id="imagen"
-									name="imagen" required></input>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="text-center py-3">
-					<button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Guardar</button>
+					<button type="submit" class="btn btn-primary">
+						<i class="fas fa-save"></i> Guardar
+					</button>
 					<a onclick="window.history.back();" class="btn btn-secondary"
 						role="button"><i class="fas fa-times"></i> Cancelar</a>
 				</div>
