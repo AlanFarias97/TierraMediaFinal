@@ -95,7 +95,7 @@
 			<c:forEach items="${productos}" var="producto">
 				<div class="col-md-4  p-3">
 					<div class="card shadow">
-						<img src="assets/img/${producto.imagen}" class="card-img-top"
+						<img src="assets/img/${producto.imagen}" class="card-img-top" style="height:100px;"
 							alt="Imagen Producto">
 						<div class="card-body">
 							<h5 class="card-title">
