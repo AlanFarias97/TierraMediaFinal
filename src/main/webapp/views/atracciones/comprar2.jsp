@@ -2,7 +2,36 @@
 <html lang="en">
 
 <head>
-<jsp:include page="../../partials/head.jsp"></jsp:include>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <!-- Webpage Title -->
+    <title>Tierra Media Turismo</title>
+
+    <!-- Styles -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/css/fontawesome-all.css" rel="stylesheet">
+    <link href="../assets/css/magnific-popup.css" rel="stylesheet">
+    <link href="../assets/css/styles.css" rel="stylesheet">
+    <link href="../assets/css/swiper.css" rel="stylesheet">
+
+    
+     <!-- Scripts -->
+    
+    <script defer src="../assets/js/jquery.min.js"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
+    <script defer src="../assets/js/jquery.easing.min.js"></script> <!-- jQuery Easing for smooth scrolling between anchors -->
+	<script defer src="../assets/js/swiper.min.js"></script> <!-- Swiper for image and text sliders -->
+    <script defer src="../assets/js/jquery.magnific-popup.js"></script> <!-- Magnific Popup for lightboxes -->
+    <script defer src="../assets/js/scripts.js"></script> <!-- Custom scripts -->
+	<script defer src="../assets/js/bootstrap.bundle.min.js" ></script>
+    <!-- Favicon  
+    <link rel="icon" href="images/favicon.png">-->
+
 </head>
 
 <body data-spy="scroll" data-target=".fixed-top">
@@ -15,8 +44,8 @@
 			<!-- Text Logo - Use this if you don't have a graphic logo 
             <a class="navbar-brand logo-text page-scroll" href="index.html">Tierra Media</a>-->
 			<!-- Image Logo-->
-			<a class="navbar-brand logo-image" href="index.jsp"><img
-				src="assets/img/logo.png" alt="logo"><span id="nombreLogo"
+			<a class="navbar-brand logo-image" href="index.html"><img
+				src="../assets/img/logo.png" alt="logo"><span id="nombreLogo"
 				style="font-family: 'Berkshire Swash', cursive; text-decoration: none !important;">Tierra
 					Media</span></a>
 
@@ -31,11 +60,11 @@
 					<li class="nav-item"><a class="nav-link page-scroll"
 						href="#header">Inicio <span class="sr-only">(current)</span></a></li>
 					<li class="nav-item"><a class="nav-link page-scroll"
-						href="#">Productos</a></li>
+						href="#carouselExampleCaptions">Productos</a></li>
 					<li class="nav-item"><a class="nav-link page-scroll"
-						href="/turismo/promociones">Promociones</a></li>
+						href="#carouselExampleCaptions">Promociones</a></li>
 					<li class="nav-item"><a class="nav-link page-scroll"
-						href="/turismo/atracciones">Atracciones</a></li>
+						href="#carouselAtracciones">Atracciones</a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="dropdown01"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tierra
@@ -86,42 +115,17 @@
 	<br>
 
 
-	<!-- Comienzan las cards y sus botones -->
-	<div class="container pt-5">
-		<br>
-		<h1 class="text-center">Nuestros sugerencia para vos</h1>
-		<br>
-		<div class="row">
-			<c:forEach items="${productos}" var="producto">
-				<div class="col-md-4  p-3">
-					<div class="card shadow">
-						<img src="assets/img/${producto.imagen}" class="card-img-top"
-							alt="Imagen Producto" style="max-height:170px;">
-						<div class="card-body">
-							<h5 class="card-title">
-								<c:out value="${producto.nombre}"></c:out>
-							</h5>
-							<p class="card-text" style="max-height:20 rem">							
-								<c:out value="${producto.descripcion}"></c:out>
-							</p>
-						</div>
-						<div class="text-center m-3">
-							<!-- /atraccion o /promocion -->
-							<a href="#" class="btn btn-secondary" role="button">Ver más</a>
-							<!-- cuando es atraccion -->
-							<a href="/turismo/productos/comprar?id=${producto.id}" class="btn btn-success" aria-current="page" role="button">Comprar</a>
-							<!-- cuando es promocion 
-							<a href="/turismo/productos/comprarPromo?id=${producto.id}" class="btn btn-success" aria-current="page" role="button">Comprar</a>	
-						--></div>
-					</div>
-				</div>
-			</c:forEach>
-		</div>
-
-	</div>
+	
+	<c:out value="${atraccion.id}"></c:out>
+	
+	
+	
+	
+	
+	
 
 	<div>
-		<img src="assets/img/footer-bg-fellowship.svg" id="footerimg" />
+		<img src="../assets/img/footer-bg-fellowship.svg" id="footerimg" />
 	</div>
 	<!-- Footer -->
 	<div class="footer">
@@ -180,7 +184,7 @@
 				<div class="col-lg-6">
 					<p class="p-small statement"
 						style="background-color: rgb(55, 68, 66);">
-						Copyright Â© <a href="#your-link">Your name</a>
+						Copyright © <a href="#your-link">Your name</a>
 					</p>
 				</div>
 				<!-- end of col -->

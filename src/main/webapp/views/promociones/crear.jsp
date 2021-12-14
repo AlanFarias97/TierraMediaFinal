@@ -88,7 +88,7 @@
 
 		<main class="col-md-9 ml-sm-auto col-lg-10 px-md-5 py-4">
 
-			<c:if test="${atraccion != null && !atraccion.esValido()}">
+			<c:if test="${promocion != null && !promocion.esValido()}">
 				<div class="alert alert-danger">
 					<p>Se encontraron errores al crear la atracción.</p>
 				</div>
@@ -97,8 +97,7 @@
 
 
 
-			<form action="/turismo/admin-promociones/crear" method="post"
-				class="shadow">
+			<form action="/turismo/admin-promociones/crear" method="post" class="shadow">
 				<div class="modal-body">
 					<h1 class="text-center">
 						Nueva promoción <i class="fas fa-route"></i>

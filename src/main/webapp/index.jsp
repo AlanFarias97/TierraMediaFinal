@@ -31,7 +31,7 @@
 					<li class="nav-item"><a class="nav-link page-scroll"
 						href="#header">Inicio <span class="sr-only">(current)</span></a></li>
 					<li class="nav-item"><a class="nav-link page-scroll"
-						href="#carouselExampleCaptions">Productos</a></li>
+						href="/turismo/productos">Productos</a></li>
 					<li class="nav-item"><a class="nav-link page-scroll"
 						href="#carouselExampleCaptions">Promociones</a></li>
 					<li class="nav-item"><a class="nav-link page-scroll"

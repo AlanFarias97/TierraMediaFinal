@@ -32,8 +32,8 @@ public class BuyAttractionServlet extends HttpServlet {
 		User user = (User) req.getSession().getAttribute("user");
 		Map<String, String> errors = buyAttractionService.buy(user.getId(), attractionId);
 		
-		User user2 = DAOFactory.getUserDAO().find(user.getId());
-		req.getSession().setAttribute("user", user2);
+		//User user2 = DAOFactory.getUserDAO().find(user.getId());
+		//req.getSession().setAttribute("user", user2);
 		
 		if (errors.isEmpty()) {
 			req.setAttribute("flash", "¡Gracias por comprar!");

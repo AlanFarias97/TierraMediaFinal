@@ -12,14 +12,9 @@ import persistence.impl.AttractionDAOImpl;
 import persistence.impl.ItinerarioDAOImpl;
 import persistence.impl.PromocionDAOImpl;
 import persistence.impl.TipoDAOImpl;
-import persistence.impl.UserDAOImpl;
 import persistence.impl.UsuarioDAOImpl;
 
 public class DAOFactory {
-
-	public static UserDAO getUserDAO() {
-		return new UserDAOImpl();
-	}
 
 	public static AttractionDAO getAttractionDAO() {
 		return new AttractionDAOImpl();
