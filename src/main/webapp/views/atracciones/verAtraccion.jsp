@@ -25,7 +25,6 @@
 <link href="../assets/css/styles.css" rel="stylesheet">
 <link href="../assets/css/swiper.css" rel="stylesheet">
 
-
 <!-- Scripts -->
 
 <script defer src="../assets/js/jquery.min.js"></script>
@@ -66,25 +65,16 @@
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a class="nav-link page-scroll"
 						href="#header">Inicio <span class="sr-only">(current)</span></a></li>
-					<li class="nav-item"><a class="nav-link page-scroll" href="/turismo/productos">Productos</a></li>
+					<c:if test="${usuario != null}">
+						<li class="nav-item"><a class="nav-link page-scroll"
+							href="/turismo/productos">Mi sugerencia</a></li>
+					</c:if>
 					<li class="nav-item"><a class="nav-link page-scroll"
 						href="/turismo/promociones">Promociones</a></li>
 					<li class="nav-item"><a class="nav-link page-scroll"
 						href="/turismo/atracciones">Atracciones</a></li>
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#" id="dropdown01"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tierra
-							Media</a>
-						<div class="dropdown-menu" aria-labelledby="dropdown01">
-							<a class="dropdown-item page-scroll" href="article.html">Quiénes
-								Somos</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item page-scroll" href="terms.html">Qué
-								Somos</a>
-						</div></li>
 
-					<li class="nav-item"><a class="nav-link page-scroll"
-						href="#wiki">Wiki</a></li>
+
 					<!--  si no esta logueado -->
 					<c:choose>
 						<c:when test="${usuario != null}">
@@ -96,13 +86,15 @@
 									style="font-family: 'Berkshire Swash'; font-size: 20px;"><c:out
 											value="${usuario.nombre}" /> </span><i class="fas fa-user-circle"></i></a>
 								<div class="dropdown-menu" aria-labelledby="dropdown01">
-								<a class="dropdown-item page-scroll" href="/turismo/perfil">Mi perfil</a>
-									<a class="dropdown-item page-scroll" href="/turismo/salir">Salir</a>
+									<a class="dropdown-item page-scroll" href="/turismo/perfil">Mi perfil</a> 
+										<a class="dropdown-item page-scroll" href="/turismo/perfil"><i class="fab fa-bitcoin" style="color: gold;"></i>  Monedas: <c:out value="${usuario.monedas}"></c:out></a>
+										<a class="dropdown-item page-scroll" href="/turismo/perfil"><i class="fas fa-lg fa-stopwatch" style="color: green;"></i>  Tiempo: <c:out value="${usuario.tiempoDisponible}"></c:out></a>
+										<a class="dropdown-item page-scroll" href="/turismo/salir">Salir</a>
 								</div></li>
 						</c:when>
 						<c:otherwise>
 							<li class="nav-item"><a class="nav-link page-scroll"
-								href="login.jsp">Login</a></li>
+								href="login.jsp">Ingresar</a></li>
 							<span class="nav-item social-icons"> <a href="#your-link">
 									<i class="fab fa-instagram"></i>
 							</a> <a href="#your-link"> <i class="fab fa-facebook"></i>
@@ -119,8 +111,7 @@
 	</nav>
 
 	<div class="container py-5">
-		<br>
-		<br> <br>
+		<br> <br> <br>
 		<h1>
 			<c:out value="${atraccion.nombre}"></c:out>
 		</h1>
@@ -140,8 +131,9 @@
 		<div class="d-flex flex-row-reverse bd-highlight">
 			<div class="p-2 bd-highlight">
 				<div class="d-grid gap-2">
-					<a type="button" class="btn btn-success btn-md" href="/turismo/atracciones">
-						Ver todas las atracciones &nbsp; <i class="fas fa-arrow-right"></i>
+					<a type="button" class="btn btn-success btn-md"
+						href="/turismo/atracciones"> Ver todas las atracciones &nbsp;
+						<i class="fas fa-arrow-right"></i>
 					</a>
 				</div>
 			</div>
@@ -185,10 +177,32 @@
 	<!-- end of counter -->
 	<!-- end of statistics -->
 	<!-- botÃ³n de comprar -->
+
 	<div class="d-grid gap-2 col-12 mx-auto d-flex justify-content-center">
-		<a class="btn btn-success btn-lg"
-			href="/turismo/atracciones/comprar?id=${atraccion.id}" type="button">Comprar
-			atracción</a>
+		<c:if test="${usuario != null}">
+			<c:choose>
+				<c:when test="${usuario.puedeComprar(atraccion)}">
+					<a href="/turismo/atracciones/comprar?id=${atraccion.id}"
+						class="btn btn-success rounded" role="button">Comprar</a>
+				</c:when>
+				<c:otherwise>
+					<a href="#" class="btn btn-secondary rounded disabled"
+						role="button">Comprar</a>
+				</c:otherwise>
+			</c:choose>
+			<!-- <a class="btn btn-success btn-lg"
+				href="/turismo/atracciones/comprar?id=${atraccion.id}" type="button">Comprar
+				atracción</a> -->
+		</c:if>
+		<c:if test="${usuario == null}">
+			<div class="col text-center">
+			<div class="alert alert-warning m-5" role="alert">Ingresá para
+					poder comprar</div>
+				<a href="#" class="btn btn-secondary rounded disabled" role="button">Comprar</a>
+				
+			</div>
+		</c:if>
+
 	</div>
 	<!-- Fin de botÃ³n comprar -->
 	<br>
@@ -197,15 +211,15 @@
 	<br>
 
 	<div>
-		<img src="images/footer-bg-fellowship.svg" id="footerimg" />
+		<img src="../assets/img/footer-bg-fellowship.svg" id="footerimg" />
 	</div>
 	<!-- Footer -->
 	<div class="footer">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
-					<h4>Tierra Media es el único parque de atracciones temático
-						de El Señor de los Anillos</h4>
+					<h4>Tierra Media es el único parque de atracciones temático de
+						El Señor de los Anillos</h4>
 					<div class="social-container">
 						<span class="fa-stack"> <a href="#your-link"> <i
 								class="fas fa-circle fa-stack-2x"></i> <i

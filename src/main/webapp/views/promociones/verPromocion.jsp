@@ -50,7 +50,7 @@
 	<nav class="navbar navbar-expand-lg fixed-top navbar-light">
 		<div class="container">
 
-			<a class="navbar-brand logo-image" href="index.html"><img
+			<a class="navbar-brand logo-image" href="/turismo"><img
 				src="../assets/img/logo.png" alt="logo"><span id="nombreLogo"
 				style="font-family: 'Berkshire Swash', cursive; text-decoration: none !important;">Tierra
 					Media</span></a>
@@ -65,25 +65,16 @@
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a class="nav-link page-scroll"
 						href="#header">Inicio <span class="sr-only">(current)</span></a></li>
-					<li class="nav-item"><a class="nav-link page-scroll" href="/turismo/productos">Productos</a></li>
+					<c:if test="${usuario != null}">
+						<li class="nav-item"><a class="nav-link page-scroll"
+							href="/turismo/productos">Mi sugerencia</a></li>
+					</c:if>
 					<li class="nav-item"><a class="nav-link page-scroll"
 						href="/turismo/promociones">Promociones</a></li>
 					<li class="nav-item"><a class="nav-link page-scroll"
 						href="/turismo/atracciones">Atracciones</a></li>
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#" id="dropdown01"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tierra
-							Media</a>
-						<div class="dropdown-menu" aria-labelledby="dropdown01">
-							<a class="dropdown-item page-scroll" href="article.html">Quiénes
-								Somos</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item page-scroll" href="terms.html">Qué
-								Somos</a>
-						</div></li>
 
-					<li class="nav-item"><a class="nav-link page-scroll"
-						href="#wiki">Wiki</a></li>
+
 					<!--  si no esta logueado -->
 					<c:choose>
 						<c:when test="${usuario != null}">
@@ -95,13 +86,15 @@
 									style="font-family: 'Berkshire Swash'; font-size: 20px;"><c:out
 											value="${usuario.nombre}" /> </span><i class="fas fa-user-circle"></i></a>
 								<div class="dropdown-menu" aria-labelledby="dropdown01">
-								<a class="dropdown-item page-scroll" href="/turismo/perfil">Mi perfil</a>
-									<a class="dropdown-item page-scroll" href="/turismo/salir">Salir</a>
+									<a class="dropdown-item page-scroll" href="/turismo/perfil">Mi perfil</a> 
+										<a class="dropdown-item page-scroll" href="/turismo/perfil"><i class="fab fa-bitcoin" style="color: gold;"></i>  Monedas: <c:out value="${usuario.monedas}"></c:out></a>
+										<a class="dropdown-item page-scroll" href="/turismo/perfil"><i class="fas fa-lg fa-stopwatch" style="color: green;"></i>  Tiempo: <c:out value="${usuario.tiempoDisponible}"></c:out></a>
+										<a class="dropdown-item page-scroll" href="/turismo/salir">Salir</a>
 								</div></li>
 						</c:when>
 						<c:otherwise>
 							<li class="nav-item"><a class="nav-link page-scroll"
-								href="login.jsp">Login</a></li>
+								href="login.jsp">Ingresar</a></li>
 							<span class="nav-item social-icons"> <a href="#your-link">
 									<i class="fab fa-instagram"></i>
 							</a> <a href="#your-link"> <i class="fab fa-facebook"></i>
@@ -185,10 +178,35 @@
 	<!-- end of statistics -->
 	<!-- botÃ³n de comprar -->
 	<div class="d-grid gap-2 col-12 mx-auto d-flex justify-content-center">
-		<a class="btn btn-success btn-lg"
-			href="/turismo/promociones/comprar?id=${promocion.id}" type="button">Comprar
-			promoción</a>
+		<c:if test="${usuario != null}">
+			<c:choose>
+				<c:when test="${usuario.puedeComprar(promocion)}">
+					<a href="/turismo/promociones/comprar?id=${promocion.id}"
+						class="btn btn-success rounded" role="button">Comprar</a>
+				</c:when>
+				<c:otherwise>
+				<div class="col text-center">
+				<div class="alert alert-warning m-5" role="alert">No podés comprar esta promoción.</div>
+					<a href="#" class="btn btn-secondary rounded disabled"
+						role="button">Comprar</a>
+						</div>
+				</c:otherwise>
+			</c:choose>
+			<!-- <a class="btn btn-success btn-lg"
+				href="/turismo/atracciones/comprar?id=${atraccion.id}" type="button">Comprar
+				atracción</a> -->
+		</c:if>
+		<c:if test="${usuario == null}">
+			<div class="col text-center">
+			<div class="alert alert-warning m-5" role="alert">Ingresá para
+					poder comprar</div>
+				<a href="#" class="btn btn-secondary rounded disabled" role="button">Comprar</a>
+				
+			</div>
+		</c:if>
+
 	</div>
+	
 	<!-- Fin de botÃ³n comprar -->
 	<br>
 	<br>

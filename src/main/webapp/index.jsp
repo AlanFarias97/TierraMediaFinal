@@ -12,12 +12,9 @@
 	<nav class="navbar navbar-expand-lg fixed-top navbar-light">
 		<div class="container">
 
-			<!-- Text Logo - Use this if you don't have a graphic logo 
-            <a class="navbar-brand logo-text page-scroll" href="index.html">Tierra Media</a>-->
-			<!-- Image Logo-->
-			<a class="navbar-brand logo-image" href="index.html"><img
+			<a class="navbar-brand logo-image" href="/turismo"><img
 				src="assets/img/logo.png" alt="logo"><span id="nombreLogo"
-				style="font-family: 'Berkshire Swash', cursive; text-decoration: none !important; color: #374442;">Tierra
+				style="font-family: 'Berkshire Swash', cursive; text-decoration: none !important;">Tierra
 					Media</span></a>
 
 			<button class="navbar-toggler p-0 border-0" type="button"
@@ -35,23 +32,11 @@
 							href="/turismo/productos">Mi sugerencia</a></li>
 					</c:if>
 					<li class="nav-item"><a class="nav-link page-scroll"
-						href="#carouselExampleCaptions">Promociones</a></li>
+						href="/turismo/promociones">Promociones</a></li>
 					<li class="nav-item"><a class="nav-link page-scroll"
-						href="#carouselAtracciones">Atracciones</a></li>
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#" id="dropdown01"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tierra
-							Media</a>
-						<div class="dropdown-menu" aria-labelledby="dropdown01">
-							<a class="dropdown-item page-scroll" href="article.html">Quiénes
-								Somos</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item page-scroll" href="terms.html">Qué
-								Somos</a>
-						</div></li>
+						href="/turismo/atracciones">Atracciones</a></li>
 
-					<li class="nav-item"><a class="nav-link page-scroll"
-						href="#wiki">Wiki</a></li>
+
 					<!--  si no esta logueado -->
 					<c:choose>
 						<c:when test="${usuario != null}">
@@ -65,7 +50,13 @@
 								<div class="dropdown-menu" aria-labelledby="dropdown01">
 									<a class="dropdown-item page-scroll" href="/turismo/perfil">Mi
 										perfil</a> <a class="dropdown-item page-scroll"
-										href="/turismo/salir">Salir</a>
+										href="/turismo/perfil"><i class="fab fa-bitcoin"
+										style="color: gold;"></i> Monedas: <c:out
+											value="${usuario.monedas}"></c:out></a> <a
+										class="dropdown-item page-scroll" href="/turismo/perfil"><i
+										class="fas fa-lg fa-stopwatch" style="color: green;"></i>
+										Tiempo: <c:out value="${usuario.tiempoDisponible}"></c:out></a> <a
+										class="dropdown-item page-scroll" href="/turismo/salir">Salir</a>
 								</div></li>
 						</c:when>
 						<c:otherwise>
@@ -85,6 +76,7 @@
 		</div>
 		<!-- end of container -->
 	</nav>
+
 
 
 	<!-- Hero Image-->
@@ -150,26 +142,15 @@
 		<div id="carouselExampleCaptions" class="carousel slide"
 			data-bs-ride="carousel">
 			<div class="carousel-inner">
-				<div class="carousel-item active">
-					<img src="assets/img/gandalf-minas-tirith.jpg"
-						class="d-block w-100" alt="...">
-					<div class="carousel-caption d-none d-md-block">
-						<h1>Minas Tirith</h1>
+				<c:forEach items="${promociones}" var="promocion" begin="0" end="2" varStatus="status">
+					<div class="carousel-item <c:if test='${status.first}'>active</c:if>">
+						<img src="assets/img/${promocion.imagen}" class="d-block w-100"
+							alt="Imagen promocion">
+						<div class="carousel-caption d-none d-md-block">
+							<h1>${promocion.nombre}</h1>
+						</div>
 					</div>
-				</div>
-				<div class="carousel-item">
-					<img src="assets/img/reyes-gondor.jpg" class="d-block w-100"
-						alt="...">
-					<div class="carousel-caption d-none d-md-block">
-						<h1>Reyes de Gondor</h1>
-					</div>
-				</div>
-				<div class="carousel-item">
-					<img src="assets/img/rivendel.jpg" class="d-block w-100" alt="...">
-					<div class="carousel-caption d-none d-md-block">
-						<h1>Rivendel</h1>
-					</div>
-				</div>
+				</c:forEach>
 			</div>
 			<button class="carousel-control-prev" type="button"
 				data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
@@ -222,28 +203,26 @@
 	<!-- Carousel Atracciones -->
 	<div class="container text-center">
 		<h1>"Atracciones"</h1>
-		<div id="carouselAtracciones" class="carousel slide carousel-fade"
+		<div id="carouselExampleCaptions2" class="carousel slide"
 			data-bs-ride="carousel">
 			<div class="carousel-inner">
-				<div class="carousel-item active">
-					<img src="assets/img/rohan.jpg" class="d-block w-100" alt="...">
-				</div>
-				<div class="carousel-item">
-					<img src="assets/img/ganldaf-vs-balrog.jpg" class="d-block w-100"
-						alt="...">
-				</div>
-				<div class="carousel-item">
-					<img src="assets/img/reyes-gondor.jpg" class="d-block w-100"
-						alt="...">
-				</div>
+				<c:forEach items="${atracciones}" var="atraccion" begin="0" end="2" varStatus="status">
+					<div class="carousel-item <c:if test='${status.first}'>active</c:if>">
+						<img src="assets/img/${atraccion.imagen}" class="d-block w-100"
+							alt="Imagen atraccion">
+						<div class="carousel-caption d-none d-md-block">
+							<h1>${atraccion.nombre}</h1>
+						</div>
+					</div>
+				</c:forEach>
 			</div>
 			<button class="carousel-control-prev" type="button"
-				data-bs-target="#carouselAtracciones" data-bs-slide="prev">
+				data-bs-target="#carouselExampleCaptions2" data-bs-slide="prev">
 				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 				<span class="visually-hidden">Previous</span>
 			</button>
 			<button class="carousel-control-next" type="button"
-				data-bs-target="#carouselAtracciones" data-bs-slide="next">
+				data-bs-target="#carouselExampleCaptions2" data-bs-slide="next">
 				<span class="carousel-control-next-icon" aria-hidden="true"></span>
 				<span class="visually-hidden">Next</span>
 			</button>

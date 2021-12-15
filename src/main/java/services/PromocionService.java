@@ -1,5 +1,6 @@
 package services;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import model.PromoAxB;
 import model.PromoPorcentual;
 import model.Promocion;
 import model.Tipo;
+import model.Usuario;
 import persistence.AtraccionDAO;
 import persistence.PromocionDAO;
 import persistence.commons.DAOFactory;
@@ -59,6 +61,12 @@ public class PromocionService {
 	public void eliminar(int id) {
 		PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();
 		promocionDAO.eliminar(id);
+	}
+	
+	public void comprarPromocion(int promocionId,Usuario usuario) throws SQLException {
+		PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();
+		Promocion promocion = promocionDAO.obtenerPorId(promocionId);
+		usuario.adquirirProducto(promocion);
 	}
 
 }

@@ -1,6 +1,5 @@
 package model;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -185,6 +184,7 @@ public abstract class Promocion implements Producto, Comparable<Promocion> {
 	}
 	
 	public boolean esValido() {
+		//TODO
 		
 		return true;
 	}
