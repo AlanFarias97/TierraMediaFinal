@@ -1,46 +1,8 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
-<!-- Webpage Title -->
-<title>Tierra Media Turismo</title>
-
-<!-- Styles -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link
-	href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Open+Sans:wght@300&display=swap"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap"
-	rel="stylesheet">
-<link href="../assets/css/bootstrap.min.css" rel="stylesheet">
-<link href="../assets/css/fontawesome-all.css" rel="stylesheet">
-<link href="../assets/css/magnific-popup.css" rel="stylesheet">
-<link href="../assets/css/styles.css" rel="stylesheet">
-<link href="../assets/css/swiper.css" rel="stylesheet">
-
-<!-- Scripts -->
-
-<script defer src="../assets/js/jquery.min.js"></script>
-<!-- jQuery for Bootstrap's JavaScript plugins -->
-<script defer src="../assets/js/jquery.easing.min.js"></script>
-<!-- jQuery Easing for smooth scrolling between anchors -->
-<script defer src="../assets/js/swiper.min.js"></script>
-<!-- Swiper for image and text sliders -->
-<script defer src="../assets/js/jquery.magnific-popup.js"></script>
-<!-- Magnific Popup for lightboxes -->
-<script defer src="../assets/js/scripts.js"></script>
-<!-- Custom scripts -->
-<script defer src="../assets/js/bootstrap.bundle.min.js"></script>
-<!-- Favicon  
-    <link rel="icon" href="images/favicon.png">-->
-
+<jsp:include page="../../partials/head.jsp"></jsp:include>
 </head>
 
 <body data-spy="scroll" data-target=".fixed-top">
@@ -50,8 +12,11 @@
 	<nav class="navbar navbar-expand-lg fixed-top navbar-light">
 		<div class="container">
 
-			<a class="navbar-brand logo-image" href="index.html"><img
-				src="../assets/img/logo.png" alt="logo"><span id="nombreLogo"
+			<!-- Text Logo - Use this if you don't have a graphic logo 
+            <a class="navbar-brand logo-text page-scroll" href="index.html">Tierra Media</a>-->
+			<!-- Image Logo-->
+			<a class="navbar-brand logo-image" href="index.jsp"><img
+				src="assets/img/logo.png" alt="logo"><span id="nombreLogo"
 				style="font-family: 'Berkshire Swash', cursive; text-decoration: none !important;">Tierra
 					Media</span></a>
 
@@ -65,7 +30,7 @@
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a class="nav-link page-scroll"
 						href="#header">Inicio <span class="sr-only">(current)</span></a></li>
-					<li class="nav-item"><a class="nav-link page-scroll" href="/turismo/productos">Productos</a></li>
+					<li class="nav-item"><a class="nav-link page-scroll" href="#">Productos</a></li>
 					<li class="nav-item"><a class="nav-link page-scroll"
 						href="/turismo/promociones">Promociones</a></li>
 					<li class="nav-item"><a class="nav-link page-scroll"
@@ -116,87 +81,47 @@
 		</div>
 		<!-- end of container -->
 	</nav>
-
-	<div class="container py-5">
-		<br> <br> <br>
-		<h1>
-			<c:out value="${promocion.nombre}"></c:out>
-		</h1>
-		<br>
-		<div class="card-group">
-			<div class="card">
-				<img src="../assets/img/${promocion.imagen}" class="card-img-top"
-					alt="...">
-				<div class="card-body">
-					<p class="card-text">
-						<c:out value="${promocion.descripcion}"></c:out>
-					</p>
-				</div>
-			</div>
-		</div>
-		<!-- botÃ³n -->
-		<div class="d-flex flex-row-reverse bd-highlight">
-			<div class="p-2 bd-highlight">
-				<div class="d-grid gap-2">
-					<a type="button" class="btn btn-success btn-md"
-						href="/turismo/promociones"> Ver todas las promociones &nbsp;
-						<i class="fas fa-arrow-right"></i>
-					</a>
-				</div>
-			</div>
-		</div>
-		<br>
-		<!-- fin del botÃ³n -->
-	</div>
-	<!-- Terminan las cards -->
+	<br>
+	<br>
 	<br>
 
-	<!-- Statistics -->
-	<div class="counter">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
 
-					<!-- Counter -->
-					<div id="counter">
-						<div class="cell">
-							<h2 class="card-title">Tiempo total</h2>
-							<div class="counter-value number-count"
-								data-count="${promocion.tiempo}"></div>
-							<p class="counter-info">horas de duración</p>
-						</div>
-						<div class="cell">
-							<h2 class="card-title">Precio total</h2>
-							<div class="counter-value number-count"
-								data-count="${promocion.precio}"></div>
-							<p class="counter-info">monedas</p>
+	<!-- Comienzan las cards y sus botones -->
+	<div class="container pt-5">
+		<br>
+		<h1 class="text-center">Atracciones</h1>
+		<br>
+		<div class="row">
+			<c:if test="${atracciones.size() == 0}">
+				<div class="alert alert-warning text-center" role="alert">No
+					hay ninguna atracción disponible :(</div>
+			</c:if>
+			<c:forEach items="${atracciones}" var="atraccion">
+					<div class="col-md-4  p-3">
+						<div class="card shadow">
+							<img src="assets/img/${atraccion.imagen}" class="card-img-top"
+								alt="Imagen Producto" style="max-height: 170px;">
+							<div class="card-body">
+								<h5 class="card-title">
+									<c:out value="${atraccion.nombre}"></c:out>
+								</h5>
+								<p class="card-text" style="max-height: 20 rem">
+									<c:out value="${atraccion.descripcion}"></c:out>
+								</p>
+							</div>
+							<div class="text-center m-3">
+								<a href="/turismo/productos/atraccion?id=${atraccion.id}"
+									class="boton" aria-current="page" role="button">Más info</a>
+							</div>
 						</div>
 					</div>
-					<!-- end of counter -->
-
-				</div>
-				<!-- end of col -->
-			</div>
-			<!-- end of row -->
+			</c:forEach>
 		</div>
-		<!-- end of container -->
+
 	</div>
-	<!-- end of counter -->
-	<!-- end of statistics -->
-	<!-- botÃ³n de comprar -->
-	<div class="d-grid gap-2 col-12 mx-auto d-flex justify-content-center">
-		<a class="btn btn-success btn-lg"
-			href="/turismo/promociones/comprar?id=${promocion.id}" type="button">Comprar
-			promoción</a>
-	</div>
-	<!-- Fin de botÃ³n comprar -->
-	<br>
-	<br>
-	<br>
-	<br>
 
 	<div>
-		<img src="images/footer-bg-fellowship.svg" id="footerimg" />
+		<img src="assets/img/footer-bg-fellowship.svg" id="footerimg" />
 	</div>
 	<!-- Footer -->
 	<div class="footer">
@@ -255,7 +180,7 @@
 				<div class="col-lg-6">
 					<p class="p-small statement"
 						style="background-color: rgb(55, 68, 66);">
-						Copyright © <a href="#your-link">FreakisTeam</a>
+						Copyright Â© <a href="#your-link">Your name</a>
 					</p>
 				</div>
 				<!-- end of col -->
@@ -265,5 +190,6 @@
 		<!-- end of container -->
 	</div>
 	<!-- end of copyright -->
+
 </body>
 </html>
