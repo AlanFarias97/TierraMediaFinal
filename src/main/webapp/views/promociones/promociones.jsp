@@ -110,7 +110,7 @@
 								</p>
 							</div>
 							<div class="text-center m-3">
-								<a href="/turismo/productos/atraccion?id=${promocion.id}"
+								<a href="/turismo/productos/promocion?id=${promocion.id}"
 									class="boton" aria-current="page" role="button">Más info</a>
 							</div>
 						</div>
