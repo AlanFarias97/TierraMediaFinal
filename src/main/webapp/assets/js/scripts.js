@@ -148,6 +148,10 @@
 		$(this).blur();
 	});
 	
+	$(document).ready(function() {
+    $('#tabla').DataTable();
+} );
+	
 })(jQuery);
 
 

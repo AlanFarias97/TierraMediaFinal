@@ -5,6 +5,7 @@ import java.util.List;
 
 import model.Tipo;
 import model.Usuario;
+import persistence.ItinerarioDAO;
 import persistence.UsuarioDAO;
 import persistence.commons.DAOFactory;
 import utils.Crypt;

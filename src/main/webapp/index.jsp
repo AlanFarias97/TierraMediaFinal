@@ -61,6 +61,7 @@
 									style="font-family: 'Berkshire Swash'; font-size: 20px;"><c:out
 											value="${usuario.nombre}" /> </span><i class="fas fa-user-circle"></i></a>
 								<div class="dropdown-menu" aria-labelledby="dropdown01">
+									<a class="dropdown-item page-scroll" href="/turismo/perfil">Mi perfil</a>
 									<a class="dropdown-item page-scroll" href="/turismo/salir">Salir</a>
 								</div></li>
 						</c:when>

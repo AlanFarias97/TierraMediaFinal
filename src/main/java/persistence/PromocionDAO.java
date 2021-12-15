@@ -17,4 +17,6 @@ public interface PromocionDAO {
     List<Atraccion> obtenerAtraccionesDePromocion(int anInt) throws SQLException;
 
 	public abstract int insertar(Promocion promocion);
+	
+	public Promocion obtenerPorId(int id) throws SQLException;
 }

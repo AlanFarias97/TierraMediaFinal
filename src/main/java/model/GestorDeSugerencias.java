@@ -104,14 +104,14 @@ public class GestorDeSugerencias {
 
         return sugerencias;
     }
-
+/*
     public void generarSugerenciasParaUsuarios() throws SQLException {
         for (Usuario usuario : this.usuarios) {
             usuario.analizarSugerencias(this.generarSugerenciasPara(usuario));
             usuario.actualizarItinerario();
         }
     }
-
+*/
     public List<Producto> generarSugerenciasPara(Usuario usuario) {
         List<Producto> sugerencias = new ArrayList<>();
         sugerencias.addAll(agregarPromocionesOrdenadas(usuario.getTipo().getNombre()));

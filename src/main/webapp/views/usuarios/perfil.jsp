@@ -30,7 +30,7 @@
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a class="nav-link page-scroll"
 						href="#header">Inicio <span class="sr-only">(current)</span></a></li>
-					<li class="nav-item"><a class="nav-link page-scroll" href="#">Productos</a></li>
+					<li class="nav-item"><a class="nav-link page-scroll" href="/turismo/productos">Productos</a></li>
 					<li class="nav-item"><a class="nav-link page-scroll"
 						href="/turismo/promociones">Promociones</a></li>
 					<li class="nav-item"><a class="nav-link page-scroll"
@@ -60,7 +60,9 @@
 									style="font-family: 'Berkshire Swash'; font-size: 20px;"><c:out
 											value="${usuario.nombre}" /> </span><i class="fas fa-user-circle"></i></a>
 								<div class="dropdown-menu" aria-labelledby="dropdown01">
-									<a class="dropdown-item page-scroll" href="/turismo/salir">Salir</a>
+									<a class="dropdown-item page-scroll active" href="#">Mi
+										perfil</a> <a class="dropdown-item page-scroll"
+										href="/turismo/salir">Salir</a>
 								</div></li>
 						</c:when>
 						<c:otherwise>
@@ -85,50 +87,71 @@
 	<br>
 
 
-	<!-- Comienzan las cards y sus botones -->
-	<div class="container pt-5">
+	<div class="container">
 		<br>
-		<h1 class="text-center">Nuestros sugerencia para vos</h1>
 		<br>
-		<div class="row">
-			<c:if test="${productos.size() == 0}">
-			<div class="alert alert-warning text-center" role="alert">
-						No podés comprar ningún producto :(</div>
-			</c:if>
-			<c:forEach items="${productos}" var="producto">
-				<c:if test="${usuario.puedeComprar(producto)}">
-					<div class="col-md-4  p-3">
-						<div class="card shadow">
-							<img src="assets/img/${producto.imagen}" class="card-img-top"
-								alt="Imagen Producto" style="max-height: 170px;">
-							<div class="card-body">
-								<h5 class="card-title">
-									<c:out value="${producto.nombre}"></c:out>
-								</h5>
-								<p class="card-text" style="max-height: 20 rem">
-									<c:out value="${producto.descripcion}"></c:out>
-								</p>
-							</div>
-							<div class="text-center m-3">
-								<!-- /atraccion o /promocion
-							<a href="#" class="btn btn-secondary" role="button">Ver más</a> -->
-								<!-- cuando es atraccion -->
-								<c:if test="${producto.esAtraccion()}">
-									<a href="/turismo/productos/atraccion?id=${producto.id}"
-									class="boton" aria-current="page" role="button">Más info</a>
-								</c:if>
-								
-								<c:if test="${producto.esPromocion()}">
-									<a href="/turismo/productos/promocion?id=${producto.id}"
-									class="boton" aria-current="page" role="button">Más info</a>	
-								</c:if>
-							</div>
-						</div>
-					</div>
-				</c:if>
-			</c:forEach>
-		</div>
+		<h1 class="text-center">Mi perfil</h1>
+		<br>
 
+		<div class="class container">
+			<div class="class row pb-5">
+				<div class="class col-sm-6 text-center">
+					<img src="assets/img/${usuario.imagenPerfil}"
+						style="max-height: 200px;">
+				</div>
+				<div class="class col-sm-6">
+					<h4 class="pt-4">
+						Nombre:
+						<c:out value="${usuario.nombre}"></c:out>
+					</h4>
+					<h6>
+						Tipo preferido:
+						<c:out value="${usuario.tipo.nombre}"></c:out>
+					</h6>
+					<h6>
+						Dinero:
+						<c:out value="${usuario.monedas}"></c:out>
+						monedas
+					</h6>
+					<h6>
+						Tiempo:
+						<c:out value="${usuario.tiempoDisponible}"></c:out>
+						horas
+					</h6>
+				</div>
+			</div>
+			<c:choose>
+				<c:when test="${usuario.sinCompras()}">
+					<div class="alert alert-warning text-center" role="alert">
+						Todavía no realizaste ninguna compra.</div>
+				</c:when>
+				<c:otherwise>
+					<h3>Mi itinerario</h3>
+
+					<table class="table py-5">
+						<thead>
+							<tr>
+								<th scope="col">Tipo</th>
+								<th scope="col">Nombre</th>
+								<th scope="col">Tiempo</th>
+								<th scope="col">Precio</th>
+							</tr>
+						</thead>
+						<tbody>
+
+							<c:forEach items="${usuario.atraccionesCompradas}" var="producto">
+								<tr>
+									<th scope="row"><c:out value="${producto.tipo.nombre}"></c:out></th>
+									<td><c:out value="${producto.nombre}"></c:out></td>
+									<td><c:out value="${producto.tiempo}"></c:out></td>
+									<td><c:out value="${producto.precio}"></c:out></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</c:otherwise>
+			</c:choose>
+		</div>
 	</div>
 
 	<div>
@@ -191,7 +214,7 @@
 				<div class="col-lg-6">
 					<p class="p-small statement"
 						style="background-color: rgb(55, 68, 66);">
-						Copyright Â© <a href="#your-link">Your name</a>
+						Copyright © <a href="#your-link">FreakisTeam</a>
 					</p>
 				</div>
 				<!-- end of col -->

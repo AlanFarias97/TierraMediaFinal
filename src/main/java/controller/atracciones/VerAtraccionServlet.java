@@ -1,7 +1,7 @@
 package controller.atracciones;
 
 import java.io.IOException;
-import java.sql.SQLException;
+import java.util.List;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.Servlet;
@@ -11,16 +11,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Atraccion;
-import model.Usuario;
 import persistence.commons.DAOFactory;
 import services.AtraccionService;
 
-@WebServlet("/atracciones/comprar")
-public class ComprarAtraccionServlet extends HttpServlet implements Servlet{
+@WebServlet("/productos/atraccion")
+public class VerAtraccionServlet extends HttpServlet implements Servlet{
 
-	private static final long serialVersionUID = -7939597524495394303L;
+	private static final long serialVersionUID = -302965315989256711L;
 	private AtraccionService atraccionService;
-	
+
 	@Override
 	public void init() throws ServletException {
 		super.init();
@@ -29,19 +28,13 @@ public class ComprarAtraccionServlet extends HttpServlet implements Servlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		int atraccionId = Integer.valueOf(req.getParameter("id"));
-		Usuario usuario = (Usuario) req.getSession().getAttribute("usuario");
+		int id = Integer.parseInt(req.getParameter("id"));
+		Atraccion atraccion = DAOFactory.getAtraccionDAO().obtenerPorId(id);
+		req.setAttribute("atraccion", atraccion);
 		
-		try {
-			atraccionService.comprarAtraccion(atraccionId, usuario);
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		}
-
-		
-		resp.sendRedirect("/turismo/perfil");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/atracciones/verAtraccion.jsp");
+		dispatcher.forward(req, resp);
 	}
 	
-
+	
 }

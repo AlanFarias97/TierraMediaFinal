@@ -1,10 +1,13 @@
 package services;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import model.Atraccion;
 import model.Attraction;
 import model.Tipo;
+import model.Usuario;
 import persistence.AtraccionDAO;
 import persistence.AttractionDAO;
 import persistence.commons.DAOFactory;
@@ -64,6 +67,12 @@ public class AtraccionService {
 	public Attraction find(Integer id) {
 		AttractionDAO attractionDAO = DAOFactory.getAttractionDAO();
 		return attractionDAO.find(id);
+	}
+
+	public void comprarAtraccion(int atraccionId,Usuario usuario) throws SQLException {
+		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
+		Atraccion atraccion = atraccionDAO.obtenerPorId(atraccionId);
+		usuario.adquirirProducto(atraccion);
 	}
 
 }

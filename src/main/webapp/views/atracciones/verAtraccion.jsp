@@ -22,6 +22,7 @@
 
     
      <!-- Scripts -->
+    
     <script defer src="../assets/js/jquery.min.js"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
     <script defer src="../assets/js/jquery.easing.min.js"></script> <!-- jQuery Easing for smooth scrolling between anchors -->
 	<script defer src="../assets/js/swiper.min.js"></script> <!-- Swiper for image and text sliders -->
@@ -162,8 +163,8 @@
     <!-- end of statistics -->
         <!-- botÃ³n de comprar -->
         <div class="d-grid gap-2 col-12 mx-auto d-flex justify-content-center">
-            <a class="btn btn-success btn-lg" href="/turismo/productos/comprar?id=${atraccion.id}" type="button">Comprar atracción</a>
-          </div>
+            <a class="btn btn-success btn-lg" href="/turismo/atracciones/comprar?id=${atraccion.id}" type="button">Comprar atracción</a>
+         </div>
       <!-- Fin de botÃ³n comprar -->
       <br><br><br><br>
 

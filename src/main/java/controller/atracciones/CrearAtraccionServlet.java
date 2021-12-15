@@ -62,7 +62,7 @@ public class CrearAtraccionServlet extends HttpServlet implements Servlet{
 			req.setAttribute("atraccion", atraccion);
 
 			RequestDispatcher dispatcher = getServletContext()
-					.getRequestDispatcher("/views/usuarios/crear.jsp");
+					.getRequestDispatcher("/views/atracciones/crear.jsp");
 			dispatcher.forward(req, resp);
 		}
 		

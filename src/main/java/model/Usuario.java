@@ -18,7 +18,6 @@ public class Usuario {
     private int id;
     private String nombre;
     private int monedas;
-    //private TipoAtraccion tipoPreferido;
     private Tipo tipo;
     private double tiempoDisponible;
     private List<Producto> itinerario;
@@ -27,6 +26,8 @@ public class Usuario {
     private String hashContrasenia;
     private Boolean admin;
     private Boolean activo;
+    private int dineroGastado;
+    private double tiempoGastado;
     
     private Map<String, String> errores;
     
@@ -159,7 +160,7 @@ public class Usuario {
 	public void setHashContrasenia(String hashContrasenia) {
 		this.hashContrasenia = hashContrasenia;
 	}
-
+/*
 	public void analizarSugerencias(List<Producto> sugerencias) throws SQLException {
         Scanner in = new Scanner(System.in);
         String respuesta;
@@ -199,16 +200,20 @@ public class Usuario {
         in.close();
 
     }
-
-    private void adquirirProducto(Producto sugerencia) throws SQLException {
+*/
+    public void adquirirProducto(Producto sugerencia) throws SQLException {
         this.itinerario.add(sugerencia);
         this.atraccionesCompradas.addAll(sugerencia.getAtraccionesTotales());
         this.actualizarUsuario(sugerencia);
+        this.tiempoGastado += sugerencia.getTiempo();
+        this.dineroGastado += sugerencia.getPrecio();
         sugerencia.actualizarCupo();
-        System.out.println("Tiempo restante: " + this.tiempoDisponible);
-        System.out.println("Monedas restantes: " + this.monedas);
+        this.actualizarItinerario();
+        
+        //System.out.println("Tiempo restante: " + this.tiempoDisponible);
+        //System.out.println("Monedas restantes: " + this.monedas);
     }
-
+/*
     private void mostrarProducto(Producto sugerencia) {
         System.out.println("Nombre: " + sugerencia.getNombre());
         System.out.println("Precio: " + sugerencia.getPrecio() + " monedas");
@@ -216,19 +221,20 @@ public class Usuario {
         System.out.println("Tipo: " + sugerencia.getTipo());
         System.out.println("Querés comprarlo?(Si/No)");
     }
-
-    private boolean puedeComprar(Producto sugerencia) {
+*/
+    public boolean puedeComprar(Producto sugerencia) {
         return this.monedas >= sugerencia.getPrecio() && this.tiempoDisponible >= sugerencia.getTiempo()
                 && this.noSeVisito(sugerencia) && sugerencia.tieneCupo();
     }
-
+/*
     private void mostrarPresentacion() {
         System.out.println("¡Hola, " + this.getNombre() + "!");
         System.out.println("Tus monedas: " + this.monedas);
         System.out.println("Tu tiempo disponible: " + this.tiempoDisponible + " horas");
         System.out.println("Tu preferencia: " + this.tipo.getNombre());
     }
-
+*/
+    /*
     private void productosSinCupo(List<Producto> sugerencias) {
         boolean hayAtraccionSinCupo = false;
         for (Producto producto : sugerencias) {
@@ -244,7 +250,7 @@ public class Usuario {
 
         }
     }
-
+*/
     private void actualizarUsuario(Producto sugerencia) throws SQLException {
         this.monedas -= sugerencia.getPrecio();
         this.tiempoDisponible -= sugerencia.getTiempo();
@@ -326,6 +332,18 @@ public class Usuario {
 	
 	public Boolean estaActivo() {
 		return activo;
+	}
+	
+	public Boolean sinCompras() {
+		return this.atraccionesCompradas.size() == 0;
+	}
+	
+	public double getTiempoGastado() {
+		return this.tiempoGastado;
+	}
+	
+	public int getDineroGastado() {
+		return this.dineroGastado;
 	}
 
 }

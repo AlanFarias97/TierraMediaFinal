@@ -32,7 +32,6 @@ public class ListarPromocionesServlet extends HttpServlet implements Servlet{
 
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/promociones/index.jsp");
 		dispatcher.forward(req, resp);
-
 	}
 
 }
