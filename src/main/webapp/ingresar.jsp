@@ -55,7 +55,7 @@
 								<span class="input-group-text"><i class="fas fa-user"></i></span>
 							</div>
 							<input type="text" name="usuario" class="form-control input_user"
-								value="" placeholder="Nombre de Usuario">
+								value="" placeholder="Nombre de Usuario" required>
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-append">
@@ -63,7 +63,7 @@
 							</div>
 							<input type="password" name="contrasenia"
 								class="form-control input_pass" value=""
-								placeholder="Contraseña">
+								placeholder="Contraseña" required>
 						</div>
 						<div class="form-group">
 							<div class="custom-control custom-checkbox">

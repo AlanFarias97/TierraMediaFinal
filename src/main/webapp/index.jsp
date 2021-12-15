@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <head>
 <jsp:include page="partials/head.jsp"></jsp:include>
 </head>
@@ -17,7 +17,7 @@
 			<!-- Image Logo-->
 			<a class="navbar-brand logo-image" href="index.html"><img
 				src="assets/img/logo.png" alt="logo"><span id="nombreLogo"
-				style="font-family: 'Berkshire Swash', cursive; text-decoration: none !important;">Tierra
+				style="font-family: 'Berkshire Swash', cursive; text-decoration: none !important; color: #374442;">Tierra
 					Media</span></a>
 
 			<button class="navbar-toggler p-0 border-0" type="button"
@@ -30,8 +30,10 @@
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a class="nav-link page-scroll"
 						href="#header">Inicio <span class="sr-only">(current)</span></a></li>
-					<li class="nav-item"><a class="nav-link page-scroll"
-						href="/turismo/productos">Productos</a></li>
+					<c:if test="${usuario != null}">
+						<li class="nav-item"><a class="nav-link page-scroll"
+							href="/turismo/productos">Mi sugerencia</a></li>
+					</c:if>
 					<li class="nav-item"><a class="nav-link page-scroll"
 						href="#carouselExampleCaptions">Promociones</a></li>
 					<li class="nav-item"><a class="nav-link page-scroll"
@@ -61,13 +63,14 @@
 									style="font-family: 'Berkshire Swash'; font-size: 20px;"><c:out
 											value="${usuario.nombre}" /> </span><i class="fas fa-user-circle"></i></a>
 								<div class="dropdown-menu" aria-labelledby="dropdown01">
-									<a class="dropdown-item page-scroll" href="/turismo/perfil">Mi perfil</a>
-									<a class="dropdown-item page-scroll" href="/turismo/salir">Salir</a>
+									<a class="dropdown-item page-scroll" href="/turismo/perfil">Mi
+										perfil</a> <a class="dropdown-item page-scroll"
+										href="/turismo/salir">Salir</a>
 								</div></li>
 						</c:when>
 						<c:otherwise>
 							<li class="nav-item"><a class="nav-link page-scroll"
-								href="login.jsp">Login</a></li>
+								href="/turismo/ingresar">Ingresar</a></li>
 							<span class="nav-item social-icons"> <a href="#your-link">
 									<i class="fab fa-instagram"></i>
 							</a> <a href="#your-link"> <i class="fab fa-facebook"></i>
@@ -94,7 +97,33 @@
 	</div>
 	<!-- end of Hero img -->
 
+
+
 	<!-- Frase -->
+	<div class="basic-1 mt-3 py-5">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<p style="font-family: 'Open Sans'; font-size: 20px;">
+						<i class="fas fa-xs fa-quote-left text-left"></i>
+						<c:out value="${frase}"></c:out>
+						<i class="fas fa-xs fa-quote-right"></i>
+					</p>
+					<p style="text-align: end; font-family: 'Berkshire Swash';">
+						<c:out value="${autor}"></c:out>
+					</p>
+				</div>
+				<!-- end of col -->
+			</div>
+			<!-- end of row -->
+		</div>
+		<!-- end of container -->
+	</div>
+	<!-- end of basic-1 -->
+	<!-- end of Frase -->
+
+
+	<!-- Frase 
 	<div class="basic-1 mt-3">
 		<div class="container">
 			<div class="row">
@@ -109,14 +138,10 @@
 						style="text-align: end; text-decoration: underline; font-family: 'Berkshire Swash';">J.R.R
 						Tolkien</p>
 				</div>
-				<!-- end of col -->
 			</div>
-			<!-- end of row -->
 		</div>
-		<!-- end of container -->
 	</div>
-	<!-- end of basic-1 -->
-	<!-- end of Frase -->
+	 end of Frase -->
 
 
 	<!--Carousel Promo-->
@@ -233,36 +258,34 @@
 	<!-- end of BotÃ³n -->
 
 	<!--Tipos de atracciones-->
-	<div class="container marketing text-center" id="#tipos-atracciones">
+	<div class="container marketing text-center pt-5"
+		id="#tipos-atracciones">
 		<h1>Tipos de Atracciones</h1>
-		<div class="row">
+		<div class="row py-5">
 			<div class="col-lg-4">
 				<img src="assets/img/bilbo1.png" class="img-fluid" width="275px"></img>
 				<h2>Aventura</h2>
-				<p>Some representative placeholder content for the three columns
-					of text below the carousel. This is the first column.</p>
-				<p>
-					<a class="boton" href="#">View details &raquo;</a>
+
+				<p class="py-3">
+					<!--  <a class="boton" href="#">View details &raquo;</a>-->
 				</p>
 			</div>
 			<!-- /.col-lg-4 -->
 			<div class="col-lg-4">
 				<img src="assets/img/gandalf1.png" class="img-fluid" width="275px"></img>
 				<h2>Paisaje</h2>
-				<p>Another exciting bit of representative placeholder content.
-					This time, we've moved on to the second column.</p>
-				<p>
-					<a class="boton" href="#">View details &raquo;</a>
+
+				<p class="py-3">
+					<!--  <a class="boton" href="#">View details &raquo;</a>-->
 				</p>
 			</div>
 			<!-- /.col-lg-4 -->
 			<div class="col-lg-4">
 				<img src="assets/img/Sam1.png" class="img-fluid" width="275px"></img>
 				<h2>Degustación</h2>
-				<p>And lastly this, the third column of representative
-					placeholder content.</p>
-				<p>
-					<a class="boton" href="#">View details &raquo;</a>
+
+				<p class="py-3">
+					<!--  <a class="boton" href="#">View details &raquo;</a>-->
 				</p>
 			</div>
 			<!-- /.col-lg-4 -->
@@ -502,16 +525,17 @@
 			<div class="row">
 				<div class="col-lg-6">
 					<ul class="list-unstyled li-space-lg p-small">
-						<li><a href="article.html">Article Details</a></li>
-						<li><a href="terms.html">Terms & Conditions</a></li>
-						<li><a href="privacy.html">Privacy Policy</a></li>
+						<li><a href="#">Article Details</a></li>
+						<li><a href="#">Terms & Conditions</a></li>
+						<li><a href="#">Privacy Policy</a></li>
 					</ul>
 				</div>
 				<!-- end of col -->
 				<div class="col-lg-6">
 					<p class="p-small statement"
 						style="background-color: rgb(55, 68, 66);">
-						Copyright © <a href="#your-link">FreakisTeam</a>
+						Copyright © <a
+							href="https://github.com/FreakiesTeam/TierraMediaFinal">FreakisTeam</a>
 					</p>
 				</div>
 				<!-- end of col -->
