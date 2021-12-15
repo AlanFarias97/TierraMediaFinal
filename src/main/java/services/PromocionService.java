@@ -15,7 +15,14 @@ import persistence.commons.DAOFactory;
 
 public class PromocionService {
 	public List<Promocion> list() {
-		return DAOFactory.getPromocionDAO().obtenerTodos();
+		List<Promocion> promociones = DAOFactory.getPromocionDAO().obtenerTodos();
+		List<Promocion> activos = new ArrayList<Promocion>();
+		for (Promocion promocion : promociones) {
+			if(promocion.estaActivo()) {
+				activos.add(promocion);
+			}
+		}
+		return activos;
 	}
 
 	public Promocion crear(String tipoPromocion, String nombre,String[] atracciones, Tipo tipoAtraccion, int descuento, String imagen,
@@ -47,6 +54,11 @@ public class PromocionService {
 
 		
 		return promocion;
+	}
+	
+	public void eliminar(int id) {
+		PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();
+		promocionDAO.eliminar(id);
 	}
 
 }

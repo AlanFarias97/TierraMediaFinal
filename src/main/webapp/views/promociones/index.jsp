@@ -75,7 +75,7 @@
                             class="fas fa-plus"></i> Nueva Promoción
                     </a>
                 </div>
-                <table class="table table-striped table-hover">
+                <table class="table table-striped table-hover shadow">
                     <thead class="table-dark">
                         <tr>
                             <th scope="col">Nombre</th>

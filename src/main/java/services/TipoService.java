@@ -1,15 +1,24 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.Tipo;
+import model.Usuario;
 import persistence.TipoDAO;
 import persistence.UsuarioDAO;
 import persistence.commons.DAOFactory;
 
 public class TipoService {
 	public List<Tipo> list() {
-		return DAOFactory.getTipoDAO().obtenerTodos();
+		List<Tipo> tipos = DAOFactory.getTipoDAO().obtenerTodos();
+		List<Tipo> activos = new ArrayList<Tipo>();
+		for (Tipo tipo : tipos) {
+			if(tipo.estaActivo()) {
+				activos.add(tipo);
+			}
+		}
+		return activos;
 	}
 
 	public Tipo crear(String nombre, String imagen, String descripcion) {

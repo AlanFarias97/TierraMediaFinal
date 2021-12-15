@@ -49,7 +49,7 @@
 				<br>
 				<div class="row my-4 justify-content-center">
 					<div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0 py-2">
-						<div class="card">
+						<div class="card shadow">
 							<h5 class="card-header">
 								<i class="fas fa-users"></i> Usuarios
 							</h5>
@@ -64,7 +64,7 @@
 						</div>
 					</div>
 					<div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3 py-2">
-						<div class="card">
+						<div class="card shadow">
 							<h5 class="card-header">
 								<i class="fas fa-route"></i> Promociones
 							</h5>
@@ -79,7 +79,7 @@
 						</div>
 					</div>
 					<div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3 py-2">
-						<div class="card">
+						<div class="card shadow">
 							<h5 class="card-header">
 								<i class="fas fa-mountain"></i> Atracciones
 							</h5>
@@ -94,7 +94,7 @@
 						</div>
 					</div>
 					<div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3 py-2">
-						<div class="card">
+						<div class="card shadow">
 							<h5 class="card-header">
 								<i class="fas fa-shapes"></i> Tipos
 							</h5>

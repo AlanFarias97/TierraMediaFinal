@@ -174,10 +174,10 @@ public class PromocionDAOImpl implements PromocionDAO {
 
 			int promocionId = this.obtenerId(promocion.getNombre());
 			AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
-			for(Atraccion atraccion:promocion.getAtracciones()) {
+			for (Atraccion atraccion : promocion.getAtracciones()) {
 				this.insertarAtraccionesDePromocion(promocionId, atraccion.getId());
 			}
-			
+
 			return rows;
 		} catch (Exception e) {
 			throw new MissingDataException(e);
@@ -195,7 +195,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 
 		return resultadoId.getInt(1);
 	}
-	
+
 	private int insertarAtraccionesDePromocion(int promocionId, int atraccionId) throws SQLException {
 		Connection conn = ConnectionProvider.getConnection();
 		String sql = "INSERT INTO atraccion_x_promocion (promocion_id,atraccion_id) values (?,?)";
@@ -206,8 +206,8 @@ public class PromocionDAOImpl implements PromocionDAO {
 
 		return rows;
 	}
-	
-	public Promocion obtenerPorId(int id){
+
+	public Promocion obtenerPorId(int id) {
 		try {
 			String query = "SELECT * FROM promocion WHERE id = ?";
 			Connection con = ConnectionProvider.getConnection();
@@ -220,8 +220,24 @@ public class PromocionDAOImpl implements PromocionDAO {
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
-	
+
 	}
-	
+
+	public int eliminar(int id) {
+		try {
+			String sql = "UPDATE promocion SET activo = ? WHERE id = ?";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+
+			statement.setString(1, "false");
+			statement.setDouble(2, id);
+			int rows = statement.executeUpdate();
+
+			return rows;
+
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
 
 }

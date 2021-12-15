@@ -72,6 +72,8 @@ public class Tipo {
 		this.errores = errores;
 	}
 	
-	
+	public Boolean estaActivo() {
+		return activo;
+	}
 	
 }

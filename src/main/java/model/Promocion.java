@@ -189,5 +189,9 @@ public abstract class Promocion implements Producto, Comparable<Promocion> {
 		return true;
 	}
 	
+	public Boolean estaActivo() {
+		return activo;
+	}
+	
 	
 }

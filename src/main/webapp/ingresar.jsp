@@ -14,6 +14,7 @@
 <script defer
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="assets/stylesheets/login.css">
+<link href="assets/css/fontawesome-all.css" rel="stylesheet">
 
 <script defer
 	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>

@@ -133,9 +133,9 @@
 						</div>
 					</div>
 					<div class="text-center py-3">
-						<button type="submit" class="btn btn-primary">Guardar</button>
+						<button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Guardar</button>
 						<a onclick="window.history.back();" class="btn btn-secondary"
-							role="button">Cancelar</a>
+							role="button"><i class="fas fa-times"></i> Cancelar</a>
 					</div>
 				</form>
 			</main>

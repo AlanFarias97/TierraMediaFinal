@@ -81,7 +81,6 @@
                             <th scope="col">Nombre</th>
                             <th scope="col">Descripción</th>
                             <th scope="col">Imagen</th>
-                            <th scope="col">Activo</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
@@ -91,7 +90,6 @@
                             <th scope="col"><c:out value="${tipo.nombre}"></c:out></th>
                             <td scope="col"><c:out value="${tipo.descripcion}"></c:out></td>
                             <td scope="col"><c:out value="${tipo.imagen}"></c:out></td>
-                            <td scope="col"><c:out value="${tipo.activo}"></c:out></td>
                             <!--cambiar el href-->
                             <td style="width: 11%">
                                 <a href="/turismo/admin-tipos/modificar?id=${tipo.id}"
