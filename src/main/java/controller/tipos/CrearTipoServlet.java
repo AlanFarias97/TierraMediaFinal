@@ -17,7 +17,7 @@ import persistence.commons.DAOFactory;
 import services.TipoService;
 import utils.Crypt;
 
-@WebServlet("/admin-tipos/crear")
+@WebServlet("/admin-tipos/crear.do")
 public class CrearTipoServlet extends HttpServlet implements Servlet {
 
 	private static final long serialVersionUID = 2472236810007258386L;
@@ -45,8 +45,8 @@ public class CrearTipoServlet extends HttpServlet implements Servlet {
 		
 		Tipo tipo = tipoService.crear(nombre,imagen,descripcion);
 		if (tipo.esValido()) {
-			//resp.sendRedirect("/turismo/admin-usuarios/crear.do");
-			resp.sendRedirect("/turismo/admin-tipos/crear");
+			
+			resp.sendRedirect("/turismo/admin-tipos/crear.do");
 		} else {
 			req.setAttribute("tipo", tipo);
 

@@ -30,17 +30,19 @@ public class InicioServlet extends HttpServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		try {
-			req.setAttribute("frase", inicioService.getFrase());
-			req.setAttribute("autor", inicioService.getAutor());
+			req.getSession().setAttribute("frase", inicioService.getFrase());
+			req.getSession().setAttribute("autor", inicioService.getAutor());
 		} catch (IOException | InterruptedException e1) {
 			e1.printStackTrace();
 		}
 		
-		List<Promocion> promociones = DAOFactory.getPromocionDAO().obtenerTodos();
-		req.setAttribute("promociones", promociones);
+		List<Promocion> promociones = inicioService.getPromociones();
+		List<Atraccion> atracciones = inicioService.getAtracciones();
 		
-		List<Atraccion> atracciones = DAOFactory.getAtraccionDAO().obtenerTodos();
-		req.setAttribute("atracciones", atracciones);
+		
+		
+		req.getSession().setAttribute("promociones", promociones);
+		req.getSession().setAttribute("atracciones", atracciones);
 		
 		RequestDispatcher dispatcher = getServletContext()
   		      .getRequestDispatcher("/index.jsp");

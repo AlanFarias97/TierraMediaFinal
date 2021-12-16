@@ -40,8 +40,8 @@
 			<div class="user_card">
 
 				<div class="d-flex justify-content-center">
-					<div class="brand_logo_container">
-						<img src="assets/img/logo.png" class="brand_logo" alt="Logo">
+					<div class="brand_logo_container"><a href="/turismo">
+						<img src="assets/img/logo.png" class="brand_logo" alt="Logo"></a>
 					</div>
 				</div>
 

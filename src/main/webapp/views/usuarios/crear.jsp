@@ -3,29 +3,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
+
+<jsp:include page="../../partials/noAdmin2.jsp"></jsp:include>
+
+<c:if test="${usuario.esAdmin()}">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin</title>
-
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
-	integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I"
-	crossorigin="anonymous">
-<link href="../assets/css/admin.css" rel="stylesheet">
-<link href="../assets/css/all.css" rel="stylesheet">
-
-<script defer src="../assets/js/admin.js"></script>
-<script defer
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-	crossorigin="anonymous"></script>
-<script defer
-	src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
-	integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
-	crossorigin="anonymous"></script>
+<jsp:include page="../../partials/head-admin2.jsp"></jsp:include>
 </head>
-
 <body>
 	<nav class="navbar navbar-light bg-light p-3 px-5">
 		<div
@@ -71,19 +55,19 @@
 								<span class="ml-2">Inicio</span>
 						</a></li>
 						<li class="nav-item"><a class="nav-link active"
-							aria-current="page" href="/turismo/admin-usuarios"> <i
+							aria-current="page" href="/turismo/admin-usuarios.do"> <i
 								class="fas fa-users"></i> <span class="ml-2">Usuarios</span>
 						</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="/turismo/admin-atracciones"> <i class="fas fa-mountain"></i>
+							href="/turismo/admin-atracciones.do"> <i class="fas fa-mountain"></i>
 								<span class="ml-2">Atracciones</span>
 						</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="/turismo/admin-promociones"> <i class="fas fa-route"></i>
+							href="/turismo/admin-promociones.do"> <i class="fas fa-route"></i>
 								<span class="ml-2">Promociones</span>
 						</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="/turismo/admin-tipos"> <i class="fas fa-shapes"></i> <span
+							href="/turismo/admin-tipos.do"> <i class="fas fa-shapes"></i> <span
 								class="ml-2">Tipos</span>
 						</a></li>
 					</ul>
@@ -101,7 +85,7 @@
 
 
 
-				<form action="/turismo/admin-usuarios/crear" method="post" class="shadow">
+				<form action="/turismo/admin-usuarios/crear.do" method="post" class="shadow">
 					<div class="modal-body">
 						<h1 class="text-center">Nuevo usuario <i class="fas fa-user-plus"></i>
 						</h1>
@@ -194,4 +178,5 @@
 		<span>Copyright © 2021 <a href="#">FreakisTeam</a></span>
 	</footer>
 </body>
+</c:if>
 </html>

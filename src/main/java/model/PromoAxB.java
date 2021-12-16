@@ -72,4 +72,8 @@ public class PromoAxB extends Promocion {
 		return listado;
 	}
 
+	public void setAtraccionGratis(Atraccion atraccionGratis) {
+		this.atraccionGratis = atraccionGratis;
+	}
+
 }

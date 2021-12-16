@@ -13,6 +13,7 @@ import model.Tipo;
 import model.Usuario;
 import persistence.AtraccionDAO;
 import persistence.PromocionDAO;
+import persistence.TipoDAO;
 import persistence.commons.DAOFactory;
 
 public class PromocionService {
@@ -68,5 +69,59 @@ public class PromocionService {
 		Promocion promocion = promocionDAO.obtenerPorId(promocionId);
 		usuario.adquirirProducto(promocion);
 	}
+
+	public Promocion modificar(int id,String tipoPromocion, String nombre, String[] atracciones, Tipo tipoAtraccion,
+			int descuento, String imagen, String descripcion) throws SQLException {
+		PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();
+		Promocion promocion = promocionDAO.obtenerPorId(id);
+		promocion.setTipoPromocion(tipoPromocion);
+		promocion.setNombre(nombre);
+		
+		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
+		List<Atraccion> atraccionesPromo= new ArrayList<Atraccion>();
+				
+		for(int i = 0;i<atracciones.length;i++) {
+			int idAtraccion = Integer.valueOf(atracciones[i]);
+			Atraccion atraccion = atraccionDAO.obtenerPorId(idAtraccion);
+			atraccionesPromo.add(atraccion);
+		}
+		
+		promocion.setAtracciones(atraccionesPromo);
+		promocion.setTipo(tipoAtraccion);
+		
+		if(tipoPromocion.equals("Absoluta")) {
+			PromoAbsoluta promo = (PromoAbsoluta) promocion;
+			promo.setDescuento(descuento);
+			promocionDAO.modificar(promo);
+			return promo;
+		} else if(tipoPromocion.equals("AxB")) {
+			PromoAxB promo = (PromoAxB) promocion;
+			Atraccion atraccionGratis = DAOFactory.getAtraccionDAO().obtenerPorId(descuento);
+			promo.setAtraccionGratis(atraccionGratis);
+			promocionDAO.modificar(promo);
+			return promo;
+		} else if(tipoPromocion.equals("Porcentual")) {
+			PromoPorcentual promo = (PromoPorcentual) promocion;
+			promo.setDescuento(descuento);
+			promocionDAO.modificar(promo);
+			return promo;
+		}
+		
+		return promocion;
+	}
+	
+	public List<Atraccion> buscarAtracciones(){
+		return DAOFactory.getAtraccionDAO().obtenerTodos();
+	}
+	
+	public List<Promocion> buscarPromociones(){
+		return DAOFactory.getPromocionDAO().obtenerTodos();
+	}
+	
+	public List<Tipo> buscarTipos(){
+		return DAOFactory.getTipoDAO().obtenerTodos();
+	}
+	
+	
 
 }

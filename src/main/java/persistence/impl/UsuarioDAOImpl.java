@@ -145,9 +145,9 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		usuario.setImagenPerfil(imagenPerfil);
 		ItinerarioDAO itinerarioDAO = DAOFactory.getItinerarioDAO();
 		List<Atraccion> atraccionesCompradas = itinerarioDAO.obtenerAtraccionesCompradas(id);
-
+		List<Producto> productosComprados = itinerarioDAO.obtenerProductosComprados(id);
 		usuario.setAtraccionesCompradas(atraccionesCompradas);
-
+		usuario.setProductosComprados(productosComprados);
 		return usuario;
 	}
 

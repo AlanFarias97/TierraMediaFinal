@@ -21,4 +21,6 @@ public interface PromocionDAO {
 	public Promocion obtenerPorId(int id) throws SQLException;
 	
 	public int eliminar(int id);
+
+	public abstract int modificar(Promocion promo);
 }

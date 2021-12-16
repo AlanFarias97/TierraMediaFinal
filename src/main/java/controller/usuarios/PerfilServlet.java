@@ -16,7 +16,7 @@ import persistence.TipoDAO;
 import persistence.commons.DAOFactory;
 import services.UsuarioService;
 
-@WebServlet("/perfil")
+@WebServlet("/perfil.do")
 public class PerfilServlet extends HttpServlet implements Servlet{
 
 	private static final long serialVersionUID = -3639704310213287676L;
@@ -30,10 +30,7 @@ public class PerfilServlet extends HttpServlet implements Servlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		//Usuario usuario = (Usuario) req.getSession().getAttribute("usuario");
-		
-		//req.setAttribute("usuario", usuario);
-		
+
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/usuarios/perfil.jsp");
 		dispatcher.forward(req, resp);
 	}

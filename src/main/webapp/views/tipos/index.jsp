@@ -4,6 +4,9 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<jsp:include page="../../partials/noAdmin2.jsp"></jsp:include>
+
+<c:if test="${usuario.esAdmin()}">
 <head>
 <jsp:include page="../../partials/head-admin.jsp"></jsp:include>
 </head>
@@ -24,25 +27,25 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/turismo/admin-usuarios">
+                            <a class="nav-link" aria-current="page" href="/turismo/admin-usuarios.do">
                                 <i class="fas fa-users"></i>
                                 <span class="ml-2">Usuarios</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/turismo/admin-atracciones">
+                            <a class="nav-link" href="/turismo/admin-atracciones.do">
                                 <i class="fas fa-mountain"></i>
                                 <span class="ml-2">Atracciones</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/turismo/admin-promociones">
+                            <a class="nav-link" href="/turismo/admin-promociones.do">
                                 <i class="fas fa-route"></i>
                                 <span class="ml-2">Promociones</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="/turismo/admin-tipos">
+                            <a class="nav-link active" href="/turismo/admin-tipos.do">
                                 <i class="fas fa-shapes"></i>
                                 <span class="ml-2">Tipos</span>
                             </a>
@@ -71,7 +74,7 @@
                 <p class="text-center">Altas, bajas, modificaciones y consultas</p>
                 <br>
                 <div class="mb-3 text-right">
-                    <a href="/turismo/admin-tipos/crear" class="btn btn-primary" role="button"> <i
+                    <a href="/turismo/admin-tipos/crear.do" class="btn btn-primary" role="button"> <i
                             class="fas fa-plus"></i> Nuevo Tipo
                     </a>
                 </div>
@@ -92,35 +95,15 @@
                             <td scope="col"><c:out value="${tipo.imagen}"></c:out></td>
                             <!--cambiar el href-->
                             <td style="width: 11%">
-                                <a href="/turismo/admin-tipos/modificar?id=${tipo.id}"
+                                <a href="/turismo/admin-tipos/modificar.do?id=${tipo.id}"
 									class="btn btn-warning rounded" role="button"><i class="fas fa-pen"></i></a>
-								<a class="btn btn-danger rounded" href="/turismo/admin-tipos/eliminar?id=${tipo.id}"
+								<a class="btn btn-danger rounded" href="/turismo/admin-tipos/eliminar.do?id=${tipo.id}"
 									type="button" name="button" role="button"> <i class="fas fa-trash-alt"></i></a>
 							</td>
                         </tr>
                         </c:forEach>
                     </tbody>
                 </table>
-
-
-                <!-- ================= MODAL ELIMINACION ================== -->
-                <div class="col-md-9 ml-sm-auto col-lg-10 px-md-5 py-4">
-                    <div class="modalEliminar .modal-sm modal " id="modalEliminar">
-                        <div class="modalContent">
-                            <input id="userId" type="hidden" value="">
-                            <p>¿Desea eliminar la atracciÃ³n?</p>
-                            <br>
-                            <div class="">
-                                <button type="button" name="button" class="btn-rojo"
-                                    onclick="eliminarUsuario()">Eliminar</button>
-                                <button type="button" name="button" class="btn-cancelar"
-                                    onclick="cerrarModal()">Cancelar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- ================= FIN MODAL ELIMINACION ================== -->
-
 
             </main>
         </div>
@@ -131,3 +114,5 @@
     </footer>
 
 </body>
+</c:if>
+</html>

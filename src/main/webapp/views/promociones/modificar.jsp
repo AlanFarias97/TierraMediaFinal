@@ -3,28 +3,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
+<jsp:include page="../../partials/noAdmin2.jsp"></jsp:include>
+
+<c:if test="${usuario.esAdmin()}">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin</title>
-
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
-	integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I"
-	crossorigin="anonymous">
-<link href="../assets/css/admin.css" rel="stylesheet">
-<link href="../assets/css/all.css" rel="stylesheet">
-
-<script defer src="../assets/js/admin.js"></script>
-<script defer
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-	crossorigin="anonymous"></script>
-<script defer
-	src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
-	integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
-	crossorigin="anonymous"></script>
+<jsp:include page="../../partials/head-admin2.jsp"></jsp:include>
 </head>
+<body>
 <nav class="navbar navbar-light bg-light p-3 px-5">
 	<div
 		class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0 flex-wrap flex-md-nowrap justify-content-between">
@@ -67,19 +52,19 @@
 							class="ml-2">Inicio</span>
 					</a></li>
 					<li class="nav-item"><a class="nav-link" aria-current="page"
-						href="/turismo/admin-usuarios"> <i class="fas fa-users"></i> <span
+						href="/turismo/admin-usuarios.do"> <i class="fas fa-users"></i> <span
 							class="ml-2">Usuarios</span>
 					</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="/turismo/admin-atracciones"> <i class="fas fa-mountain"></i>
+						href="/turismo/admin-atracciones.do"> <i class="fas fa-mountain"></i>
 							<span class="ml-2">Atracciones</span>
 					</a></li>
 					<li class="nav-item"><a class="nav-link active"
-						href="/turismo/admin-promociones"> <i class="fas fa-route"></i>
+						href="/turismo/admin-promociones.do"> <i class="fas fa-route"></i>
 							<span class="ml-2">Promociones</span>
 					</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="/turismo/admin-tipos"> <i class="fas fa-shapes"></i> <span
+						href="/turismo/admin-tipos.do"> <i class="fas fa-shapes"></i> <span
 							class="ml-2">Tipos</span>
 					</a></li>
 				</ul>
@@ -97,7 +82,7 @@
 
 
 
-			<form action="/turismo/admin-promociones/modificar" method="post" class="shadow">
+			<form action="/turismo/admin-promociones/modificar.do?id=${promocion.id}" method="post" class="shadow">
 				<div class="modal-body">
 					<h1 class="text-center">
 						Modificar promoción <i class="fas fa-route"></i>
@@ -115,7 +100,7 @@
 									promo:</label> <select class="form-select"
 									aria-label="Default select example" name="tipoPromocion"
 									id="tipoPromocion" required>
-									<option value="${promocion.tipoPromocion}" selected>...</option>
+									<option value="${promocion.tipoPromocion}" selected><c:out value="${promocion.tipoPromocion}"></c:out></option>
 									<option value="Absoluta">Absoluta</option>
 									<option value="AxB">AxB</option>
 									<option value="Porcentual">Porcentual</option>
@@ -124,20 +109,20 @@
 							
 							<div class="col-lg-2 mb-3">
 								<label for="descuento" class="col-form-label">Descuento:</label> <input
-									type="text" class="form-control" id="descuento" name="descuento">(monedas)
+									type="text" class="form-control" id="descuento" name="descuento" value="${absoluta}">(monedas)
 							</div>
 
 							<div class="col-lg-2 mb-3">
 								<label for="porcentaje" class="col-form-label">Porcentaje:</label>
 								<input type="text" class="form-control" id="porcentaje"
-									name="porcentaje">(%)
+									name="porcentaje" value="${porcentual}">(%)
 							</div>
 
 							<div class="col-sm-4 mb-3">
 								<label for="atraccionGratis" class="col-form-label">Atracción
 									gratuita:</label> <select class="form-select"
 									aria-label="Default select example" name="atraccionGratis" id="atraccionGratis">
-									<option selected>...</option>
+									<option  value="${axb}" selected><c:out value="${axb}"></c:out></option>
 									<c:forEach items="${atracciones}" var="atraccion">
 										<option value="${atraccion.id}"><c:out
 												value="${atraccion.nombre}"></c:out>-
@@ -153,7 +138,7 @@
 									<label for="tipoAtraccion" class="col-form-label">Tipo de
 										atracción:</label> <select class="form-select"
 										aria-label="Default select example" name="tipoAtraccion" id="tipoAtraccion" required>
-										<option selected><c:out value="${promocion.tipo.nombre}"></c:out> </option>
+										<option value="${promocion.tipo.id}" selected><c:out value="${promocion.tipo.nombre}"></c:out> </option>
 										<c:forEach items="${tipos}" var="tipo">
 											<option value="${tipo.id}"><c:out
 													value="${tipo.nombre}"></c:out></option>
@@ -164,10 +149,10 @@
 							<div class="col-lg-4 mb-3">
 								<select class="form-select" size="9" multiple
 									aria-label="multiple select example" name="atracciones" required>
-									<option selected>Seleccioná las nuevas atracciones</option>
+									<option value="0" selected>Seleccioná las nuevas atracciones</option>
 									<c:forEach items="${atracciones}" var="atraccion">
 										<option value="${atraccion.id}"><c:out
-												value="${atraccion.nombre}"></c:out>-
+												value="${atraccion.nombre}"></c:out>
 											<c:out value="${atraccion.tipo.nombre}"></c:out></option>
 									</c:forEach>
 								</select>
@@ -194,7 +179,7 @@
 									<label for="imagen"
 										class='col-form-label'>Cambiar
 										imagen:</label> <input class="form-control" type="file" id="imagen"
-										name="imagen" value=""></input>
+										name="imagen" value="../assets/img/${promocion.imagen}"></input>
 								</div>
 							</div>
 						</div>
@@ -216,4 +201,5 @@
 	<span>Copyright © 2021 <a href="#">FreakisTeam</a></span>
 </footer>
 </body>
+</c:if>
 </html>

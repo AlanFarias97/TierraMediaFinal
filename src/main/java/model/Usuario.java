@@ -13,51 +13,41 @@ import persistence.UsuarioDAO;
 import persistence.commons.DAOFactory;
 import utils.Crypt;
 
-
 public class Usuario {
-    private int id;
-    private String nombre;
-    private int monedas;
-    private Tipo tipo;
-    private double tiempoDisponible;
-    private List<Producto> itinerario;
-    private List<Atraccion> atraccionesCompradas;
-    private String imagenPerfil;
-    private String hashContrasenia;
-    private Boolean admin;
-    private Boolean activo;
-    private int dineroGastado;
-    private double tiempoGastado;
-    
-    private Map<String, String> errores;
-    
+	private int id;
+	private String nombre;
+	private int monedas;
+	private Tipo tipo;
+	private double tiempoDisponible;
+	private List<Producto> itinerario;
+	private List<Atraccion> atraccionesCompradas;
+	private List<Producto> productosComprados;
+	private String imagenPerfil;
+	private String hashContrasenia;
+	private Boolean admin;
+	private Boolean activo;
+	private int dineroGastado;
+	private double tiempoGastado;
 
-//
-//    public Usuario(int id, String nombre, String preferencia, int monedas, double tiempo) {
-//        this.id = id;
-//        this.nombre = nombre;
-//        this.tipoPreferido = TipoAtraccion.valueOf(preferencia.toUpperCase());
-//        this.monedas = monedas;
-//        this.tiempoDisponible = tiempo;
-//        this.itinerario = new ArrayList<>();
-//        this.atraccionesCompradas = new ArrayList<>();
-//    }
-//    
-    public Usuario(int id, String nombre, Tipo preferencia, int monedas, double tiempo, String imagenPerfil, String hashContrasenia,Boolean activo,Boolean admin) {
-        this.id = id;
-        this.nombre = nombre;
-        this.tipo = preferencia;
-        this.monedas = monedas;
-        this.tiempoDisponible = tiempo;
-        this.itinerario = new ArrayList<>();
-        this.atraccionesCompradas = new ArrayList<>();
-        this.imagenPerfil = imagenPerfil;
-        this.hashContrasenia = hashContrasenia;
-        this.admin = admin;
-        this.activo = activo;
-    }
-    
-    public Map<String, String> getErrores() {
+	private Map<String, String> errores = new HashMap<String, String>();
+
+	public Usuario(int id, String nombre, Tipo preferencia, int monedas, double tiempo, String imagenPerfil,
+			String hashContrasenia, Boolean activo, Boolean admin) {
+		this.id = id;
+		this.nombre = nombre;
+		this.tipo = preferencia;
+		this.monedas = monedas;
+		this.tiempoDisponible = tiempo;
+		this.itinerario = new ArrayList<>();
+		this.atraccionesCompradas = new ArrayList<>();
+		this.productosComprados = new ArrayList<>();
+		this.imagenPerfil = imagenPerfil;
+		this.hashContrasenia = hashContrasenia;
+		this.admin = admin;
+		this.activo = activo;
+	}
+
+	public Map<String, String> getErrores() {
 		return errores;
 	}
 
@@ -69,12 +59,11 @@ public class Usuario {
 		this.id = id;
 	}
 
-    
-    public Boolean getAdmin() {
+	public Boolean getAdmin() {
 		return admin;
 	}
-    
-    public Boolean esAdmin() {
+
+	public Boolean esAdmin() {
 		return admin;
 	}
 
@@ -86,7 +75,7 @@ public class Usuario {
 		this.admin = admin;
 	}
 
-    public Boolean getActivo() {
+	public Boolean getActivo() {
 		return activo;
 	}
 
@@ -102,32 +91,23 @@ public class Usuario {
 		this.monedas = monedas;
 	}
 
-//	public void setTipoPreferido(TipoAtraccion tipoPreferido) {
-//		this.tipoPreferido = tipoPreferido;
-//	}
-
 	public void setTiempoDisponible(double tiempoDisponible) {
 		this.tiempoDisponible = tiempoDisponible;
 	}
 
 	public int getId() {
-        return this.id;
-    }
+		return this.id;
+	}
 
-    public String getNombre() {
-        return this.nombre;
-    }
+	public String getNombre() {
+		return this.nombre;
+	}
 
-    public int getMonedas() {
-        return monedas;
-    }
+	public int getMonedas() {
+		return monedas;
+	}
 
-//    public TipoAtraccion getTipoPreferido() {
-//        return tipoPreferido;
-//    }
-    
-  
-    public Tipo getTipo() {
+	public Tipo getTipo() {
 		return tipo;
 	}
 
@@ -136,189 +116,125 @@ public class Usuario {
 	}
 
 	public void setAtraccionesCompradas(List<Atraccion> atraccionesCompradas) {
-        this.atraccionesCompradas = atraccionesCompradas;
-    }
+		this.atraccionesCompradas = atraccionesCompradas;
+	}
 
-    public String getImagenPerfil() {
-        return imagenPerfil;
-    }
+	public String getImagenPerfil() {
+		return imagenPerfil;
+	}
 
-    public void setImagenPerfil(String imagenPerfil) {
-        this.imagenPerfil = imagenPerfil;
-    }
+	public void setImagenPerfil(String imagenPerfil) {
+		this.imagenPerfil = imagenPerfil;
+	}
 
+	public double getTiempoDisponible() {
+		return tiempoDisponible;
+	}
 
-    public double getTiempoDisponible() {
-        return tiempoDisponible;
-    }
-
-    
-    public String getHashContrasenia() {
+	public String getHashContrasenia() {
 		return hashContrasenia;
 	}
 
 	public void setHashContrasenia(String hashContrasenia) {
 		this.hashContrasenia = hashContrasenia;
 	}
-/*
-	public void analizarSugerencias(List<Producto> sugerencias) throws SQLException {
-        Scanner in = new Scanner(System.in);
-        String respuesta;
 
-        mostrarPresentacion();
-        productosSinCupo(sugerencias);
-        System.out.println("---Armá tu itinerario---");
+	public void adquirirProducto(Producto sugerencia) throws SQLException {
+		this.itinerario.add(sugerencia);
+		this.atraccionesCompradas.addAll(sugerencia.getAtraccionesTotales());
+		this.productosComprados.add(sugerencia);
+		this.actualizarUsuario(sugerencia);
+		this.tiempoGastado += sugerencia.getTiempo();
+		this.dineroGastado += sugerencia.getPrecio();
+		sugerencia.actualizarCupo();
+		this.actualizarItinerario();
+	}
 
-        for (Producto sugerencia : sugerencias) {
-            if (this.monedas == 0) {
-                System.out.println("Te quedaste sin monedas :(");
-                break;
-            }
-            if (this.tiempoDisponible == 0) {
-                System.out.println("Te quedaste sin tiempo :(");
-                break;
-            }
+	public void validarCompra(Producto sugerencia) throws SQLException {
+		if (this.puedeComprar(sugerencia)) {
+			this.adquirirProducto(sugerencia);
+		} else if (!sugerencia.tieneCupo()) {
+			this.errores.put("comprar", "Ya compraste esta atraccion");
+		} else if (this.monedas >= sugerencia.getPrecio()) {
+			this.errores.put("comprar", "No tenés monedas suficientes para comprar esta atracción.");
+		} else if (this.tiempoDisponible >= sugerencia.getTiempo()) {
+			this.errores.put("comprar", "No tenés el tiempo suficiente para realizar esta atracción.");
+		}
+	}
 
-            if (puedeComprar(sugerencia)) {
-                mostrarProducto(sugerencia);
-                respuesta = in.nextLine().toUpperCase();
+	public boolean puedeComprar(Producto sugerencia) {
+		return this.monedas >= sugerencia.getPrecio() && this.tiempoDisponible >= sugerencia.getTiempo()
+				&& this.noSeVisito(sugerencia) && sugerencia.tieneCupo();
+	}
 
-                while (!respuesta.equals("SI") && !respuesta.equals("NO")) {
-                    System.out.println("Por favor, ingresá Si o No.");
-                    respuesta = in.nextLine().toUpperCase();
-                }
+	private void actualizarUsuario(Producto sugerencia) throws SQLException {
+		this.monedas -= sugerencia.getPrecio();
+		this.tiempoDisponible -= sugerencia.getTiempo();
+		UsuarioDAO usuarioDAO = DAOFactory.getUsuarioDAO();
 
-                if (respuesta.equals("SI")) {
-                    adquirirProducto(sugerencia);
-                }
-                System.out.println("---------------------------------");
-            }
-        }
+		usuarioDAO.actualizar(this);
+	}
 
-        System.out.println("¡Listo! Itinerario generado.");
-        System.out.println("---------------------------------");
-        in.close();
+	public List<Atraccion> getAtraccionesCompradas() {
+		return this.atraccionesCompradas;
+	}
 
-    }
-*/
-    public void adquirirProducto(Producto sugerencia) throws SQLException {
-        this.itinerario.add(sugerencia);
-        this.atraccionesCompradas.addAll(sugerencia.getAtraccionesTotales());
-        this.actualizarUsuario(sugerencia);
-        this.tiempoGastado += sugerencia.getTiempo();
-        this.dineroGastado += sugerencia.getPrecio();
-        sugerencia.actualizarCupo();
-        this.actualizarItinerario();
-        
-        //System.out.println("Tiempo restante: " + this.tiempoDisponible);
-        //System.out.println("Monedas restantes: " + this.monedas);
-    }
-/*
-    private void mostrarProducto(Producto sugerencia) {
-        System.out.println("Nombre: " + sugerencia.getNombre());
-        System.out.println("Precio: " + sugerencia.getPrecio() + " monedas");
-        System.out.println("Tiempo: " + sugerencia.getTiempo() + " horas");
-        System.out.println("Tipo: " + sugerencia.getTipo());
-        System.out.println("Querés comprarlo?(Si/No)");
-    }
-*/
-    public boolean puedeComprar(Producto sugerencia) {
-        return this.monedas >= sugerencia.getPrecio() && this.tiempoDisponible >= sugerencia.getTiempo()
-                && this.noSeVisito(sugerencia) && sugerencia.tieneCupo();
-    }
-/*
-    private void mostrarPresentacion() {
-        System.out.println("¡Hola, " + this.getNombre() + "!");
-        System.out.println("Tus monedas: " + this.monedas);
-        System.out.println("Tu tiempo disponible: " + this.tiempoDisponible + " horas");
-        System.out.println("Tu preferencia: " + this.tipo.getNombre());
-    }
-*/
-    /*
-    private void productosSinCupo(List<Producto> sugerencias) {
-        boolean hayAtraccionSinCupo = false;
-        for (Producto producto : sugerencias) {
+	public boolean noSeVisito(Producto sugerencia) {
+		if (sugerencia.esAtraccion()) {
+			return !atraccionesCompradas.contains((Atraccion) sugerencia);
+		}
 
-            if (!producto.tieneCupo() && !hayAtraccionSinCupo) {
-                hayAtraccionSinCupo = true;
-                System.out.println("Los siguientes productos ya no tienen cupo:");
-            }
+		if (sugerencia.esPromocion()) {
+			List<Atraccion> atraccionesPromo = ((Promocion) sugerencia).getAtracciones();
+			boolean noContieneGratis = true;
+			if (sugerencia.esPromoAxB()) {
+				PromoAxB axb = (PromoAxB) sugerencia;
+				noContieneGratis = !atraccionesCompradas.contains(axb.getAtraccionGratis());
+			}
+			return Collections.disjoint(atraccionesCompradas, atraccionesPromo) && noContieneGratis;
+		}
+		return false;
+	}
 
-            if (!producto.tieneCupo()) {
-                System.out.println("-" + producto.getNombre());
-            }
+	public void setItinerario(List<Producto> itinerario) {
+		this.itinerario = itinerario;
+	}
 
-        }
-    }
-*/
-    private void actualizarUsuario(Producto sugerencia) throws SQLException {
-        this.monedas -= sugerencia.getPrecio();
-        this.tiempoDisponible -= sugerencia.getTiempo();
-        UsuarioDAO usuarioDAO = DAOFactory.getUsuarioDAO();
+	public List<Producto> getItinerario() {
+		return itinerario;
+	}
 
-        usuarioDAO.actualizar(this);
-    }
+	public void actualizarItinerario() {
+		UsuarioDAO usuarioDAO = DAOFactory.getUsuarioDAO();
+		usuarioDAO.actualizarItinerario(this);
+	}
 
-    public List<Atraccion> getAtraccionesCompradas() {
-        return this.atraccionesCompradas;
-    }
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, nombre);
+	}
 
-    public boolean noSeVisito(Producto sugerencia) {
-        if (sugerencia.esAtraccion()) {
-            return !atraccionesCompradas.contains((Atraccion) sugerencia);
-        }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		return id == other.id && Objects.equals(nombre, other.nombre);
+	}
 
-        if (sugerencia.esPromocion()) {
-            List<Atraccion> atraccionesPromo = ((Promocion) sugerencia).getAtracciones();
-            boolean noContieneGratis = true;
-            if (sugerencia.esPromoAxB()) {
-                PromoAxB axb = (PromoAxB) sugerencia;
-                noContieneGratis = !atraccionesCompradas.contains(axb.getAtraccionGratis());
-            }
-            return Collections.disjoint(atraccionesCompradas, atraccionesPromo) && noContieneGratis;
-        }
-        return false;
-    }
-
-    public void setItinerario(List<Producto> itinerario) {
-        this.itinerario = itinerario;
-    }
-
-    public List<Producto> getItinerario() {
-        return itinerario;
-    }
-
-    public void actualizarItinerario() {
-        UsuarioDAO usuarioDAO = DAOFactory.getUsuarioDAO();
-        usuarioDAO.actualizarItinerario(this);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, nombre);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Usuario other = (Usuario) obj;
-        return id == other.id && Objects.equals(nombre, other.nombre);
-    }
-    
-    public boolean checkPassword(String password) {
+	public boolean checkPassword(String password) {
 		return Crypt.match(password, this.hashContrasenia);
 	}
-    
-    public boolean esValido() {
+
+	public boolean esValido() {
 		validar();
 		return errores.isEmpty();
 	}
-	
+
 	public void validar() {
 		errores = new HashMap<String, String>();
 
@@ -326,24 +242,40 @@ public class Usuario {
 			errores.put("monedas", "La cantidad de monedas debe ser positiva");
 		}
 		if (tiempoDisponible <= 0) {
-			errores.put("duration", "El tiempo disponible debe ser positivo");
+			errores.put("duracion", "El tiempo disponible debe ser positivo");
 		}
 	}
-	
+
 	public Boolean estaActivo() {
 		return activo;
 	}
-	
+
 	public Boolean sinCompras() {
 		return this.atraccionesCompradas.size() == 0;
 	}
-	
+
 	public double getTiempoGastado() {
 		return this.tiempoGastado;
 	}
-	
+
 	public int getDineroGastado() {
 		return this.dineroGastado;
+	}
+
+	public List<Producto> getProductosComprados() {
+		return productosComprados;
+	}
+
+	public void setProductosComprados(List<Producto> productosComprados) {
+		this.productosComprados = productosComprados;
+	}
+
+	public void setDineroGastado(int dineroGastado) {
+		this.dineroGastado = dineroGastado;
+	}
+
+	public void setTiempoGastado(double tiempoGastado) {
+		this.tiempoGastado = tiempoGastado;
 	}
 
 }

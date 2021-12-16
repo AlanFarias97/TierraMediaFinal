@@ -13,7 +13,7 @@ import model.Usuario;
 import persistence.commons.DAOFactory;
 import services.TipoService;
 
-@WebServlet("/admin-tipos/modificar")
+@WebServlet("/admin-tipos/modificar.do")
 public class ModificarTipoServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 8378696872102799518L;
@@ -46,8 +46,7 @@ public class ModificarTipoServlet extends HttpServlet {
 		Tipo tipo = tipoService.modificar(id, nombre, imagen, descripcion);
 		
 		if (tipo.esValido()) {
-			//resp.sendRedirect("/turismo/admin-usuarios/crear.do");
-			resp.sendRedirect("/turismo/admin-tipos");
+			resp.sendRedirect("/turismo/admin-tipos.do");
 		} else {
 			req.setAttribute("tipo", tipo);
 

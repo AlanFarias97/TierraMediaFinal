@@ -17,7 +17,7 @@ import persistence.commons.DAOFactory;
 import services.UsuarioService;
 import utils.Crypt;
 
-@WebServlet("/admin-usuarios/crear")
+@WebServlet("/admin-usuarios/crear.do")
 public class CrearUsuarioServlet extends HttpServlet implements Servlet{
 	/**
 	 * 
@@ -58,7 +58,7 @@ public class CrearUsuarioServlet extends HttpServlet implements Servlet{
 		Usuario usuario = usuarioService.crear(nombre,tipo,monedas,tiempo,imagenPerfil,hashContrasenia,activo,admin);
 		if (usuario.esValido()) {
 			//resp.sendRedirect("/turismo/admin-usuarios/crear.do");
-			resp.sendRedirect("/turismo/admin-usuarios/crear");
+			resp.sendRedirect("/turismo/admin-usuarios.do");
 		} else {
 			req.setAttribute("usuario", usuario);
 

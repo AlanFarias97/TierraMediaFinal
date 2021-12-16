@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import services.UsuarioService;
 
-@WebServlet("/admin-usuarios/eliminar")
+@WebServlet("/admin-usuarios/eliminar.do")
 public class EliminarUsuarioServlet extends HttpServlet implements Servlet{
 
 	private static final long serialVersionUID = -3950471947962978031L;
@@ -28,7 +28,6 @@ public class EliminarUsuarioServlet extends HttpServlet implements Servlet{
 
 		usuarioService.eliminar(id);
 
-		//.do
-		resp.sendRedirect("/turismo/admin-usuarios");
+		resp.sendRedirect("/turismo/admin-usuarios.do");
 	}
 }

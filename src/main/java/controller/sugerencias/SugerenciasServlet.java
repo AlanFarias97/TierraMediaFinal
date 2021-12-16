@@ -14,7 +14,7 @@ import model.Producto;
 import model.Usuario;
 import services.SugerenciasService;
 
-@WebServlet("/productos")
+@WebServlet("/productos.do")
 public class SugerenciasServlet extends HttpServlet implements Servlet{
 
 	private static final long serialVersionUID = -2391780229411329691L;

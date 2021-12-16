@@ -15,7 +15,7 @@ import persistence.TipoDAO;
 import persistence.commons.DAOFactory;
 import services.UsuarioService;
 
-@WebServlet("/admin-usuarios/modificar")
+@WebServlet("/admin-usuarios/modificar.do")
 public class ModificarUsuarioServlet extends HttpServlet {
 
 	private static final long serialVersionUID = -1410527637321647037L;
@@ -60,7 +60,7 @@ public class ModificarUsuarioServlet extends HttpServlet {
 		
 		if (usuario.esValido()) {
 			//resp.sendRedirect("/turismo/admin-usuarios/crear.do");
-			resp.sendRedirect("/turismo/admin-usuarios");
+			resp.sendRedirect("/turismo/admin-usuarios.do");
 		} else {
 			req.setAttribute("usuario", usuario);
 

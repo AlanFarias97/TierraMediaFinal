@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.Tipo;
 import services.TipoService;
 
-@WebServlet("/admin-tipos")
+@WebServlet("/admin-tipos.do")
 public class ListarTiposServlet extends HttpServlet implements Servlet{
 	
 	private static final long serialVersionUID = -8326909032903919367L;

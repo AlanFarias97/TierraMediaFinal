@@ -184,8 +184,7 @@ public abstract class Promocion implements Producto, Comparable<Promocion> {
 	}
 	
 	public boolean esValido() {
-		//TODO
-		
+		//TODO validaciones
 		return true;
 	}
 	

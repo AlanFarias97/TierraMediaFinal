@@ -39,7 +39,7 @@ public class ComprarPromocionServlet extends HttpServlet implements Servlet{
 		}
 
 		
-		resp.sendRedirect("/turismo/perfil");
+		resp.sendRedirect("/turismo/perfil.do");
 	}
 	
 }

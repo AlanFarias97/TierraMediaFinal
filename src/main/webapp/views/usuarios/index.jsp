@@ -23,19 +23,19 @@
 								<span class="ml-2">Inicio</span>
 						</a></li>
 						<li class="nav-item"><a class="nav-link active"
-							aria-current="page" href="/turismo/admin-usuarios"> <i
+							aria-current="page" href="/turismo/admin-usuarios.do"> <i
 								class="fas fa-users"></i> <span class="ml-2">Usuarios</span>
 						</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="/turismo/admin-atracciones"> <i class="fas fa-mountain"></i>
+							href="/turismo/admin-atracciones.do"> <i class="fas fa-mountain"></i>
 								<span class="ml-2">Atracciones</span>
 						</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="/turismo/admin-promociones"> <i class="fas fa-route"></i>
+							href="/turismo/admin-promociones.do"> <i class="fas fa-route"></i>
 								<span class="ml-2">Promociones</span>
 						</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="/turismo/admin-tipos"> <i class="fas fa-shapes"></i> <span
+							href="/turismo/admin-tipos.do"> <i class="fas fa-shapes"></i> <span
 								class="ml-2">Tipos</span>
 						</a></li>
 					</ul>
@@ -65,7 +65,7 @@
 				<p class="text-center">Altas, bajas, modificaciones y consultas</p>
 				<br>
 				<div class="mb-3 text-right">
-					<a href="/turismo/admin-usuarios/crear" class="btn btn-primary"
+					<a href="/turismo/admin-usuarios/crear.do" class="btn btn-primary"
 						role="button"> <i class="fas fa-user-plus"></i> Nuevo Usuario
 					</a>
 				</div>
@@ -89,9 +89,9 @@
 								<td scope="col"><c:out value="${usuario.tiempoDisponible}"></c:out></td>
 
 								<td style="width: 11%">
-									<a href="/turismo/admin-usuarios/modificar?id=${usuario.id}"
+									<a href="/turismo/admin-usuarios/modificar.do?id=${usuario.id}"
 									class="btn btn-warning rounded" role="button"><i class="fas fa-pen"></i></a>
-									<a class="btn btn-danger rounded" href="/turismo/admin-usuarios/eliminar?id=${usuario.id}"
+									<a class="btn btn-danger rounded" href="/turismo/admin-usuarios/eliminar.do?id=${usuario.id}"
 									type="button" name="button" role="button"> <i class="fas fa-trash-alt"></i></a>
 								</td>
 							</tr>

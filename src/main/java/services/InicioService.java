@@ -1,10 +1,15 @@
 package services;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 
 import api.Frases;
 import api.InfoLOTR;
 import api.Personajes;
+import model.Atraccion;
+import model.Promocion;
+import persistence.commons.DAOFactory;
 
 public class InicioService {
 	public String getFrase() throws IOException, InterruptedException {
@@ -18,4 +23,20 @@ public class InicioService {
 		Personajes autor = InfoLOTR.getAutor(autorId);
 		return autor.getDocs().get(0).getName();
 	}
+
+	public List<Promocion> getPromociones() {
+		List<Promocion> promociones = DAOFactory.getPromocionDAO().obtenerTodos();
+		Collections.sort(promociones);
+		return promociones;
+	}
+
+	public List<Atraccion> getAtracciones() {
+		List<Atraccion> atracciones = DAOFactory.getAtraccionDAO().obtenerTodos();
+		Collections.sort(atracciones);
+		return atracciones;
+	}
+	
+	
+	
+	
 }

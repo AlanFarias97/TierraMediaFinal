@@ -4,7 +4,7 @@
 		<div class="container">
 
 			<a class="navbar-brand logo-image" href="/turismo"><img
-				src="assets/img/logo.png" alt="logo"><span id="nombreLogo"
+				src="/turismo/assets/img/logo.png" alt="logo"><span id="nombreLogo"
 				style="font-family: 'Berkshire Swash', cursive; text-decoration: none !important;">Tierra
 					Media</span></a>
 
@@ -39,9 +39,11 @@
 									style="font-family: 'Berkshire Swash'; font-size: 20px;"><c:out
 											value="${usuario.nombre}" /> </span><i class="fas fa-user-circle"></i></a>
 								<div class="dropdown-menu" aria-labelledby="dropdown01">
-									<a class="dropdown-item page-scroll" href="/turismo/perfil.do">Mi perfil</a> 
+									<c:if test="${!usuario.esAdmin()}">
+										<a class="dropdown-item page-scroll" href="/turismo/perfil.do">Mi perfil</a> 
 										<a class="dropdown-item page-scroll"><i class="fab fa-bitcoin" style="color: gold;"></i>  Monedas: <c:out value="${usuario.monedas}"></c:out></a>
 										<a class="dropdown-item page-scroll"><i class="fas fa-lg fa-stopwatch" style="color: green;"></i>  Tiempo: <c:out value="${usuario.tiempoDisponible}"></c:out></a>
+									</c:if>
 										<a class="dropdown-item page-scroll" href="/turismo/salir">Salir</a>
 								</div></li>
 						</c:when>

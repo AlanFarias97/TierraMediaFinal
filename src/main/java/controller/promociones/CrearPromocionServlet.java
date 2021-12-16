@@ -18,7 +18,7 @@ import persistence.TipoDAO;
 import persistence.commons.DAOFactory;
 import services.PromocionService;
 
-@WebServlet("/admin-promociones/crear")
+@WebServlet("/admin-promociones/crear.do")
 public class CrearPromocionServlet extends HttpServlet implements Servlet{
 	
 	private static final long serialVersionUID = 1700264657831357434L;
@@ -46,7 +46,6 @@ public class CrearPromocionServlet extends HttpServlet implements Servlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		//int id, String nombre, String tipoAtraccion, String tipoPromocion, int descuento,String descripcion,String imagen, Boolean activo,List<Atraccion> atracciones
 		String nombre = req.getParameter("nombre");
 		String tipoPromocion = req.getParameter("tipoPromocion");
 		int tipoAtraccionId = Integer.valueOf(req.getParameter("tipoAtraccion"));
@@ -71,8 +70,7 @@ public class CrearPromocionServlet extends HttpServlet implements Servlet{
 		Promocion promocion = promocionService.crear(tipoPromocion, nombre, atracciones, tipoAtraccion, descuento,imagen,descripcion,activo);
 		
 		if (promocion.esValido()) {
-			//resp.sendRedirect("/turismo/admin-usuarios/crear.do");
-			resp.sendRedirect("/turismo/admin-promociones/crear");
+			resp.sendRedirect("/turismo/admin-promociones.do");
 		} else {
 			req.setAttribute("promocion", promocion);
 

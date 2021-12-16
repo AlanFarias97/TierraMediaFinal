@@ -17,7 +17,7 @@ import persistence.commons.DAOFactory;
 import services.AtraccionService;
 import utils.Crypt;
 
-@WebServlet("/admin-atracciones/crear")
+@WebServlet("/admin-atracciones/crear.do")
 public class CrearAtraccionServlet extends HttpServlet implements Servlet{
 
 	private static final long serialVersionUID = 7942691175502179445L;
@@ -56,8 +56,7 @@ public class CrearAtraccionServlet extends HttpServlet implements Servlet{
 		Atraccion atraccion = atraccionService.crear(nombre,tipo,precio,tiempo,cupo,imagen,descripcion,activo);
 		
 		if (atraccion.esValido()) {
-			//resp.sendRedirect("/turismo/admin-usuarios/crear.do");
-			resp.sendRedirect("/turismo/admin-atracciones/crear");
+			resp.sendRedirect("/turismo/admin-atracciones.do");
 		} else {
 			req.setAttribute("atraccion", atraccion);
 

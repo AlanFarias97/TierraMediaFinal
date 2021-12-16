@@ -16,7 +16,7 @@ import persistence.TipoDAO;
 import persistence.commons.DAOFactory;
 import services.AtraccionService;
 
-@WebServlet("/admin-atracciones/modificar")
+@WebServlet("/admin-atracciones/modificar.do")
 public class ModificarAtraccionServlet extends HttpServlet implements Servlet{
 
 	private static final long serialVersionUID = -1245639632973569460L;
@@ -44,6 +44,7 @@ public class ModificarAtraccionServlet extends HttpServlet implements Servlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		int id = Integer.parseInt(req.getParameter("id"));
 		String nombre = req.getParameter("nombre");
 		Integer precio = Integer.parseInt(req.getParameter("precio"));
 		Double tiempo = Double.parseDouble(req.getParameter("tiempo"));
@@ -51,24 +52,22 @@ public class ModificarAtraccionServlet extends HttpServlet implements Servlet{
 		int tipoId = Integer.valueOf(req.getParameter("tipo"));
 		String descripcion = req.getParameter("descripcion");
 		String imagen = req.getParameter("imagen");
-		Boolean activo = true;
 		
 		TipoDAO tipoDAO = DAOFactory.getTipoDAO();
 		Tipo tipo = tipoDAO.buscarPorId(tipoId);
 		
-		Atraccion atraccion = atraccionService.crear(nombre,tipo,precio,tiempo,cupo,imagen,descripcion,activo);
+		Atraccion atraccion = atraccionService.modificar(id,nombre,tipo,precio,tiempo,cupo,imagen,descripcion);
 		
 		if (atraccion.esValido()) {
-			//resp.sendRedirect("/turismo/admin-usuarios/crear.do");
-			resp.sendRedirect("/turismo/admin-atracciones/crear");
+			resp.sendRedirect("/turismo/admin-atracciones.do");
+		
 		} else {
 			req.setAttribute("atraccion", atraccion);
 
 			RequestDispatcher dispatcher = getServletContext()
-					.getRequestDispatcher("/views/usuarios/crear.jsp");
+					.getRequestDispatcher("/views/atracciones/modificar.jsp");
 			dispatcher.forward(req, resp);
 		}
-		
 	}
 
 }

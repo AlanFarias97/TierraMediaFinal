@@ -41,22 +41,24 @@ public class AtraccionService {
 		return atraccion;
 	}
 
-	public Attraction update(Integer id, String name, Integer cost, Double duration, Integer capacity) {
+	public Atraccion modificar(int id,String nombre, Tipo tipo, Integer costo, Double duracion, Integer cupo, String imagen, String descripcion) {
 
-		AttractionDAO attractionDAO = DAOFactory.getAttractionDAO();
-		Attraction attraction = attractionDAO.find(id);
+		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
+		Atraccion atraccion = atraccionDAO.obtenerPorId(id);
+		
+		atraccion.setNombre(nombre);
+		atraccion.setTiempo(duracion);
+		atraccion.setPrecio(costo);
+		atraccion.setCupoDisponible(cupo);
+		atraccion.setImagen(imagen);
+		atraccion.setDescripcion(descripcion);
 
-		attraction.setName(name);
-		attraction.setCost(cost);
-		attraction.setDuration(duration);
-		attraction.setCapacity(capacity);
-
-		if (attraction.isValid()) {
-			attractionDAO.update(attraction);
+		if (atraccion.esValido()) {
+			atraccionDAO.modificar(atraccion);
 			// XXX: si no devuelve "1", es que hubo más errores
 		}
 
-		return attraction;
+		return atraccion;
 	}
 
 	public void eliminar(int id) {
@@ -72,7 +74,7 @@ public class AtraccionService {
 	public void comprarAtraccion(int atraccionId,Usuario usuario) throws SQLException {
 		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
 		Atraccion atraccion = atraccionDAO.obtenerPorId(atraccionId);
-		usuario.adquirirProducto(atraccion);
+		usuario.validarCompra(atraccion);
 	}
 
 }

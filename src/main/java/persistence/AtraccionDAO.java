@@ -21,4 +21,6 @@ public interface AtraccionDAO {
 
 	public abstract int eliminar(int id);
 
+	public abstract int modificar(Atraccion atraccion);
+
 }

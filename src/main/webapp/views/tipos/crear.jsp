@@ -3,27 +3,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
+
+<jsp:include page="../../partials/noAdmin2.jsp"></jsp:include>
+
+<c:if test="${usuario.esAdmin()}">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin</title>
-
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
-	integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I"
-	crossorigin="anonymous">
-<link href="../assets/css/admin.css" rel="stylesheet">
-<link href="../assets/css/all.css" rel="stylesheet">
-
-<script defer src="../assets/js/admin.js"></script>
-<script defer
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-	crossorigin="anonymous"></script>
-<script defer
-	src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
-	integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
-	crossorigin="anonymous"></script>
+<jsp:include page="../../partials/head-admin2.jsp"></jsp:include>
 </head>
 
 <body>
@@ -115,7 +100,7 @@
 									<label for="imagen"
 										class='col-form-label ${usuario.errores.get("imagen") != null ? "is-invalid" : "" }'>Imagen
 										de perfil:</label> <input class="form-control" type="file" id="imagen"
-										name="imagen" required></input>
+										name="imagen" accept="image/*" required multiple></input>
 									<div class="invalid-feedback">
 										<c:out value='${usuario.errores.get("imagen")}'></c:out>
 									</div>
@@ -146,4 +131,5 @@
 		<span>Copyright © 2021 <a href="#">FreakisTeam</a></span>
 	</footer>
 </body>
+</c:if>
 </html>

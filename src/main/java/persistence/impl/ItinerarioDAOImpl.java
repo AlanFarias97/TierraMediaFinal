@@ -9,6 +9,7 @@ import java.util.List;
 
 import model.Atraccion;
 import model.Producto;
+import model.Promocion;
 import model.Usuario;
 import persistence.AtraccionDAO;
 import persistence.ItinerarioDAO;
@@ -68,5 +69,29 @@ public class ItinerarioDAOImpl implements ItinerarioDAO {
         }
 
         return atraccionesCompradas;
+    }
+    
+    public List<Producto> obtenerProductosComprados(int idUsuario) throws SQLException{
+    	String sql = "SELECT * FROM itinerario WHERE usuario_id = ?";
+        Connection conn = ConnectionProvider.getConnection();
+        PreparedStatement statement2 = conn.prepareStatement(sql);
+        statement2.setInt(1, idUsuario);
+        ResultSet resultados = statement2.executeQuery();
+        
+        List<Producto> productos = new ArrayList<>();
+        AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
+        PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();
+        
+        while (resultados.next()) {
+            if(resultados.getString(2) != null){
+                Atraccion atraccion = atraccionDAO.obtenerPorId(resultados.getInt(2));
+                productos.add(atraccion);
+            }
+            if(resultados.getString(3) != null){
+            	Promocion promocion = promocionDAO.obtenerPorId(resultados.getInt(3));
+                productos.add(promocion);
+            }
+    	}
+        return productos;
     }
 }

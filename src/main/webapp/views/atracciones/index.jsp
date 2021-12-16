@@ -2,8 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
+<jsp:include page="../../partials/noAdmin.jsp"></jsp:include>
+
+<c:if test="${usuario.esAdmin()}">
 <head>
 <jsp:include page="../../partials/head-admin.jsp"></jsp:include>
 </head>
@@ -24,25 +27,25 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/turismo/admin-usuarios">
+                            <a class="nav-link" aria-current="page" href="/turismo/admin-usuarios.do">
                                 <i class="fas fa-users"></i>
                                 <span class="ml-2">Usuarios</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="/turismo/admin-atracciones">
+                            <a class="nav-link active" href="/turismo/admin-atracciones.do">
                                 <i class="fas fa-mountain"></i>
                                 <span class="ml-2">Atracciones</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/turismo/admin-promociones">
+                            <a class="nav-link" href="/turismo/admin-promociones.do">
                                 <i class="fas fa-route"></i>
                                 <span class="ml-2">Promociones</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/turismo/admin-tipos">
+                            <a class="nav-link" href="/turismo/admin-tipos.do">
                                 <i class="fas fa-shapes"></i>
                                 <span class="ml-2">Tipos</span>
                             </a>
@@ -71,7 +74,7 @@
                 <p class="text-center">Altas, bajas, modificaciones y consultas</p>
                 <br>
                 <div class="mb-3 text-right">
-                    <a href="/turismo/admin-atracciones/crear" class="btn btn-primary" role="button"> <i
+                    <a href="/turismo/admin-atracciones/crear.do" class="btn btn-primary" role="button"> <i
                             class="fas fa-plus"></i> Nueva Atracción
                     </a>
                 </div>
@@ -98,9 +101,9 @@
                             <td scope="col"><c:out value="${atraccion.cupoDisponible}"></c:out></td>
                             
                             <td style="width: 11%">
-                                <a href="/turismo/admin-atracciones/modificar?id=${atraccion.id}"
+                                <a href="/turismo/admin-atracciones/modificar.do?id=${atraccion.id}"
 									class="btn btn-warning rounded" role="button"><i class="fas fa-pen"></i></a>
-								<a class="btn btn-danger rounded" href="/turismo/admin-atracciones/eliminar?id=${atraccion.id}"
+								<a class="btn btn-danger rounded" href="/turismo/admin-atracciones/eliminar.do?id=${atraccion.id}"
 									type="button" name="button" role="button"> <i class="fas fa-trash-alt"></i></a>
 
                         </tr>
@@ -139,6 +142,6 @@
 
 </body>
 
-
+</c:if>
 
 </html>

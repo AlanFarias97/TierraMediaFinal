@@ -15,7 +15,7 @@ import model.Usuario;
 import persistence.commons.DAOFactory;
 import services.AtraccionService;
 
-@WebServlet("/atracciones/comprar")
+@WebServlet("/atracciones/comprar.do")
 public class ComprarAtraccionServlet extends HttpServlet implements Servlet{
 
 	private static final long serialVersionUID = -7939597524495394303L;
@@ -32,15 +32,20 @@ public class ComprarAtraccionServlet extends HttpServlet implements Servlet{
 		int atraccionId = Integer.valueOf(req.getParameter("id"));
 		Usuario usuario = (Usuario) req.getSession().getAttribute("usuario");
 		
+		if (!usuario.getErrores().containsKey("compra")) {
+			req.setAttribute("flash", "¡Gracias por comprar!");
+		} else {
+			req.setAttribute("flash", usuario.getErrores().get("compra"));
+			usuario.getErrores().remove("compra");
+		}
 		try {
 			atraccionService.comprarAtraccion(atraccionId, usuario);
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
 		}
-
 		
-		resp.sendRedirect("/turismo/perfil");
+		resp.sendRedirect("/turismo/perfil.do");
 	}
 	
 

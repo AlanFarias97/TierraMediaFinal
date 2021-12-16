@@ -2,7 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html>
+<html lang="es">
+
+<jsp:include page="../../partials/noAdmin.jsp"></jsp:include>
+
+<c:if test="${usuario.esAdmin()}">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -97,7 +101,7 @@
 
 
 
-			<form action="/turismo/admin-atracciones/crear" method="post"
+			<form action="/turismo/admin-atracciones/modificar.do" method="post"
 				class="shadow">
 				<div class="modal-body">
 					<h1 class="text-center">
@@ -187,9 +191,7 @@
 										class='col-form-label ${atraccion.errores.get("imagen") != null ? "is-invalid" : "" }'>Cambiar
 										imagen:</label> <input class="form-control" type="file" id="imagen"
 										name="imagen" value=""></input>
-									<div class="invalid-feedback">
-										<c:out value='${atracciones.errores.get("imagen")}'></c:out>
-									</div>
+								
 								</div>
 							</div>
 						</div>
@@ -211,4 +213,5 @@
 	<span>Copyright © 2021 <a href="#">FreakisTeam</a></span>
 </footer>
 </body>
+</c:if>
 </html>

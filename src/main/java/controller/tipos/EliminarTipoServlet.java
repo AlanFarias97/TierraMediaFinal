@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import services.TipoService;
 
-@WebServlet("/admin-tipos/eliminar")
+@WebServlet("/admin-tipos/eliminar.do")
 public class EliminarTipoServlet extends HttpServlet implements Servlet{
 
 	private static final long serialVersionUID = -8477081821346493097L;

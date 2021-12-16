@@ -207,8 +207,8 @@ public class PromocionDAOImpl implements PromocionDAO {
 		return rows;
 	}
 
-	public Promocion obtenerPorId(int id) {
-		try {
+	public Promocion obtenerPorId(int id) throws SQLException {
+
 			String query = "SELECT * FROM promocion WHERE id = ?";
 			Connection con = ConnectionProvider.getConnection();
 			PreparedStatement ps = con.prepareStatement(query);
@@ -216,11 +216,6 @@ public class PromocionDAOImpl implements PromocionDAO {
 			ResultSet rs = ps.executeQuery();
 
 			return toPromocion(rs);
-
-		} catch (Exception e) {
-			throw new MissingDataException(e);
-		}
-
 	}
 
 	public int eliminar(int id) {
@@ -239,5 +234,43 @@ public class PromocionDAOImpl implements PromocionDAO {
 			throw new MissingDataException(e);
 		}
 	}
+	
+	public int modificar(Promocion promocion) {
+		try {
+			String sql = "UPDATE atraccion SET nombre = ?, tipo_atraccion_id = ?, tipo_promocion = ?, descuento = ?, descripcion = ?, imagen = ?  WHERE id = ?";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, promocion.getNombre());
+			statement.setInt(2, promocion.getTipo().getId());
+			statement.setString(3, promocion.getTipoPromocion());
+			String descuento = "";
+			if (promocion.esAbsoluta()) {
+				statement.setInt(4, 2);
+				PromoAbsoluta absoluta = (PromoAbsoluta) promocion;
+				descuento = String.valueOf(absoluta.getDescuento());
+			} else if (promocion.esPromoAxB()) {
+				statement.setInt(4, 1);
+				PromoAxB axb = (PromoAxB) promocion;
+				descuento = String.valueOf(axb.getAtraccionGratis().getNombre());
+			} else if (promocion.esPorcentual()) {
+				statement.setInt(4, 3);
+				PromoPorcentual porcentual = (PromoPorcentual) promocion;
+				descuento = String.valueOf(porcentual.getPorcentaje());
+			}
+			statement.setString(5, descuento);
+			statement.setString(6, promocion.getDescripcion());
+			statement.setString(7, promocion.getImagen());
+			statement.setInt(8, promocion.getId());
+
+			int rows = statement.executeUpdate();
+
+			return rows;
+
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
+	
+	
 
 }
