@@ -151,14 +151,17 @@ public class Usuario {
 	}
 
 	public void validarCompra(Producto sugerencia) throws SQLException {
+		errores = new HashMap<String, String>();
 		if (this.puedeComprar(sugerencia)) {
 			this.adquirirProducto(sugerencia);
 		} else if (!sugerencia.tieneCupo()) {
-			this.errores.put("comprar", "Ya compraste esta atraccion");
+			errores.put("comprar", "La atracción no tiene cupo.");
 		} else if (this.monedas >= sugerencia.getPrecio()) {
-			this.errores.put("comprar", "No tenés monedas suficientes para comprar esta atracción.");
+			errores.put("comprar", "No tenés monedas suficientes para comprar esta atracción.");
 		} else if (this.tiempoDisponible >= sugerencia.getTiempo()) {
-			this.errores.put("comprar", "No tenés el tiempo suficiente para realizar esta atracción.");
+			errores.put("comprar", "No tenés el tiempo suficiente para realizar esta atracción.");
+		} else if (!this.noSeVisito(sugerencia)) {
+			errores.put("comprar", "Ya compraste esta atracción.");
 		}
 	}
 

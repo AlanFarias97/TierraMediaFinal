@@ -3,13 +3,13 @@ package services;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import model.Atraccion;
 import model.Attraction;
 import model.Tipo;
 import model.Usuario;
 import persistence.AtraccionDAO;
-import persistence.AttractionDAO;
 import persistence.commons.DAOFactory;
 
 public class AtraccionService {
@@ -66,15 +66,23 @@ public class AtraccionService {
 		atraccionDAO.eliminar(id);
 	}
 
-	public Attraction find(Integer id) {
-		AttractionDAO attractionDAO = DAOFactory.getAttractionDAO();
-		return attractionDAO.find(id);
+	public Atraccion find(Integer id) {
+		AtraccionDAO attractionDAO = DAOFactory.getAtraccionDAO();
+		return attractionDAO.obtenerPorId(id);
 	}
 
 	public void comprarAtraccion(int atraccionId,Usuario usuario) throws SQLException {
 		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
 		Atraccion atraccion = atraccionDAO.obtenerPorId(atraccionId);
-		usuario.validarCompra(atraccion);
+		
+		 usuario.validarCompra(atraccion);
+	}
+	
+	public void delete(Integer id) {
+		Atraccion atraccion = new Atraccion(id, null, 0, 0, 0,null,null,null,null);
+
+		AtraccionDAO attractionDAO = DAOFactory.getAtraccionDAO();
+		attractionDAO.delete(atraccion);
 	}
 
 }

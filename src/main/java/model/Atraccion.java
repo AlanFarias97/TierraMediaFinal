@@ -31,16 +31,6 @@ public class Atraccion implements Producto, Comparable<Atraccion> {
 	public void setActivo(Boolean activo) {
 		this.activo = activo;
 	}
-
-	
-//    public Atraccion(int id, String nombre, int costo, double tiempo, int cupoDiario, String tipo) {
-//        this.id = id;
-//        this.nombre = nombre;
-//        this.tipoAtraccion = TipoAtraccion.valueOf(tipo.toUpperCase());
-//        this.costo = costo;
-//        this.tiempo = tiempo;
-//        this.cupoDisponible = cupoDiario;
-//    }
     
     public Atraccion(int id, String nombre, int costo, double tiempo, int cupoDiario, Tipo tipo, String descripcion, String imagen, Boolean activo) {
         this.id = id;

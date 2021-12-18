@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.Atraccion;
+import model.Attraction;
 import model.Tipo;
 import persistence.AtraccionDAO;
 import persistence.TipoDAO;
@@ -194,6 +195,39 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 
 			return rows;
 
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
+	
+	@Override
+	public int contarTodos() {
+		try {
+			String sql = "SELECT COUNT(1) AS TOTAL FROM atracciones";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			ResultSet resultados = statement.executeQuery();
+
+			resultados.next();
+			int total = resultados.getInt("TOTAL");
+
+			return total;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
+	
+	@Override
+	public int delete(Atraccion atraccion) {
+		try {
+			String sql = "DELETE FROM atraccion WHERE ID = ?";
+			Connection conn = ConnectionProvider.getConnection();
+
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setInt(1, atraccion.getId());
+			int rows = statement.executeUpdate();
+
+			return rows;
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
