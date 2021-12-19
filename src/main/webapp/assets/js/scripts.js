@@ -1,6 +1,3 @@
-/* Description: Custom JS file */
-
-
 (function($) {
     "use strict"; 
 	
@@ -44,21 +41,7 @@
     $('body')
     .on('mouseenter mouseleave','.dropdown',toggleDropdown)
     .on('click', '.dropdown-menu a', toggleDropdown);
-
-
-    /* Details Lightbox - Magnific Popup */
-    $('.popup-with-move-anim').magnificPopup({
-		type: 'inline',
-		fixedContentPos: true,
-		fixedBgPos: true,
-		overflowY: 'auto',
-		closeBtnInside: true,
-		preloader: false,
-		midClick: true,
-		removalDelay: 300,
-		mainClass: 'my-mfp-slide-bottom'
-    });
-    
+   
 
     /* Card Slider - Swiper */
 	var cardSlider = new Swiper('.card-slider', {
@@ -147,10 +130,6 @@
 	$(".button, a, button").mouseup(function() {
 		$(this).blur();
 	});
-	
-	$(document).ready(function() {
-    $('#tabla').DataTable();
-} );
 	
 })(jQuery);
 

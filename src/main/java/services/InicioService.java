@@ -4,24 +4,25 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
+import api.Frase;
 import api.Frases;
 import api.InfoLOTR;
-import api.Personajes;
 import model.Atraccion;
 import model.Promocion;
 import persistence.commons.DAOFactory;
 
 public class InicioService {
+	
 	public String getFrase() throws IOException, InterruptedException {
-		Frases info = InfoLOTR.getInfo();
+		Frases info = InfoLOTR.getFrase();
 		return info.getDocs().get(0).getDialog();
 	}
 	
 	public String getAutor() throws IOException, InterruptedException {
-		Frases info = InfoLOTR.getInfo();
-		String autorId = info.getDocs().get(0).getCharacter();
-		Personajes autor = InfoLOTR.getAutor(autorId);
-		return autor.getDocs().get(0).getName();
+		Frase frase = InfoLOTR.getFrase().getDocs().get(0);
+		String autorId = frase.getCharacter();
+		String autor = InfoLOTR.getAutor(autorId);
+		return autor;
 	}
 
 	public List<Promocion> getPromociones() {
@@ -35,8 +36,5 @@ public class InicioService {
 		Collections.sort(atracciones);
 		return atracciones;
 	}
-	
-	
-	
 	
 }

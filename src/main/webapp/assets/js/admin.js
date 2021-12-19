@@ -18,3 +18,12 @@
 			}, false)
 		})
 })()
+
+$(document).ready(function() {
+    $('#tabla').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    } );
+} );

@@ -2,7 +2,6 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-
 <!-- Webpage Title -->
 <title>Tierra Media Turismo</title>
 
@@ -23,16 +22,11 @@
 
 <!-- Scripts -->
 
-<script defer src="../assets/js/jquery.min.js"></script>
-<!-- jQuery for Bootstrap's JavaScript plugins -->
-<script defer src="../assets/js/jquery.easing.min.js"></script>
-<!-- jQuery Easing for smooth scrolling between anchors -->
-<script defer src="../assets/js/swiper.min.js"></script>
-<!-- Swiper for image and text sliders -->
-<script defer src="../assets/js/jquery.magnific-popup.js"></script>
-<!-- Magnific Popup for lightboxes -->
-<script defer src="../assets/js/scripts.js"></script>
-<!-- Custom scripts -->
+<script defer src="../assets/js/jquery.min.js"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
+<script defer src="../assets/js/jquery.easing.min.js"></script> <!-- jQuery Easing for smooth scrolling between anchors -->
+<script defer src="../assets/js/swiper.min.js"></script> <!-- Swiper for image and text sliders -->
+<script defer src="../assets/js/jquery.magnific-popup.js"></script> <!-- Magnific Popup for lightboxes -->
+<script defer src="../assets/js/scripts.js"></script> <!-- Custom scripts -->
 <script defer src="../assets/js/bootstrap.bundle.min.js"></script>
-<!-- Favicon  
-    <link rel="icon" href="images/favicon.png">-->
+<!-- Favicon  -->
+<link rel="icon" href="../assets/img/logo.png">

@@ -78,7 +78,7 @@
                             class="fas fa-plus"></i> Nuevo Tipo
                     </a>
                 </div>
-                <table class="table table-striped table-hover shadow" id="tabla">
+                <table class="table table-striped table-hover shadow display pt-2" id="tabla">
                     <thead class="table-dark">
                         <tr>
                             <th scope="col">Nombre</th>

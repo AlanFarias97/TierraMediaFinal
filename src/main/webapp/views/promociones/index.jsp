@@ -77,7 +77,7 @@
                             class="fas fa-plus"></i> Nueva Promoción
                     </a>
                 </div>
-                <table class="table table-striped table-hover shadow">
+                <table class="table table-striped table-hover shadow display pt-2" id="tabla">
                     <thead class="table-dark">
                         <tr>
                             <th scope="col">Nombre</th>
@@ -109,26 +109,6 @@
                         </c:forEach>
                     </tbody>
                 </table>
-
-
-                <!-- ================= MODAL ELIMINACION ================== -->
-                <div class="col-md-9 ml-sm-auto col-lg-10 px-md-5 py-4">
-                    <div class="modalEliminar .modal-sm modal " id="modalEliminar">
-                        <div class="modalContent">
-                            <input id="userId" type="hidden" value="">
-                            <p>¿Desea eliminar la atracción?</p>
-                            <br>
-                            <div class="">
-                                <button type="button" name="button" class="btn-rojo"
-                                    onclick="eliminarUsuario()">Eliminar</button>
-                                <button type="button" name="button" class="btn-cancelar"
-                                    onclick="cerrarModal()">Cancelar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- ================= FIN MODAL ELIMINACION ================== -->
-
 
             </main>
         </div>

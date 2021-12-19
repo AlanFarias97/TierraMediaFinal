@@ -25,5 +25,5 @@
     <script defer src="assets/js/jquery.magnific-popup.js"></script> <!-- Magnific Popup for lightboxes -->
     <script defer src="assets/js/scripts.js"></script> <!-- Custom scripts -->
 	<script defer src="assets/js/bootstrap.bundle.min.js" ></script>
-    <!-- Favicon  
-    <link rel="icon" href="images/favicon.png">-->
+    <!-- Favicon  -->
+    <link rel="icon" href="assets/img/logo.png">
