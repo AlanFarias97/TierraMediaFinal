@@ -46,7 +46,7 @@
 
 			<main class="col-md-9 ml-sm-auto col-lg-10 px-md-5 py-4">
 
-				<c:if test="${usuario != null && !usuario.esValido()}">
+				<c:if test="${usuarioCreado != null && !usuarioCreado.esValido()}">
 					<div class="alert alert-danger">
 						<p>Se encontraron errores al crear el usuario.</p>
 					</div>
@@ -73,7 +73,7 @@
 										<label for="tipos" class="col-form-label">Tipo
 											preferido:</label> <select class="form-select"
 											aria-label="Default select example" name="tipo" required>
-											<option selected>...</option>
+											<option value="">...</option>
 											<c:forEach items="${tipos}" var="tipo">
 												<option value="${tipo.id}"><c:out
 														value="${tipo.nombre}"></c:out></option>
@@ -84,22 +84,22 @@
 								<div class="col-lg-4">
 									<div class="mb-3">
 										<label for="monedas"
-											class='col-form-label ${usuario.errores.get("monedas") != null ? "is-invalid" : "" }'>Monedas:</label>
+											class='col-form-label ${usuarioCreado.errores.get("monedas") != null ? "is-invalid" : "" }'>Monedas:</label>
 										<input class="form-control" type="number" id="monedas" min="0"
 											value="0" name="monedas" required></input>
 										<div class="invalid-feedback">
-											<c:out value='${usuario.errores.get("monedas")}'></c:out>
+											<c:out value='${usuarioCreado.errores.get("monedas")}'></c:out>
 										</div>
 									</div>
 								</div>
 								<div class="col-lg-4">
 									<div class="mb-3">
 										<label for="tiempo"
-											class='col-form-label ${usuario.errores.get("tiempoDisponible") != null ? "is-invalid" : "" }'>Tiempo:</label>
+											class='col-form-label ${usuarioCreado.errores.get("tiempoDisponible") != null ? "is-invalid" : "" }'>Tiempo:</label>
 										<input class="form-control" type="number" id="tiempo" min="0"
 											value="0" name="tiempo" required></input>
 										<div class="invalid-feedback">
-											<c:out value='${usuario.errores.get("tiempoDisponible")}'></c:out>
+											<c:out value='${usuarioCreado.errores.get("tiempoDisponible")}'></c:out>
 										</div>
 									</div>
 								</div>
@@ -107,11 +107,11 @@
 							<div class="col-lg-6">
 								<div class="mb-3">
 									<label for="imagen"
-										class='col-form-label ${usuario.errores.get("imagen") != null ? "is-invalid" : "" }'>Imagen
+										class='col-form-label ${usuarioCreado.errores.get("imagen") != null ? "is-invalid" : "" }'>Imagen
 										de perfil:</label> <input class="form-control" type="file" id="imagen"
 										name="imagen" required></input>
 									<div class="invalid-feedback">
-										<c:out value='${usuario.errores.get("imagen")}'></c:out>
+										<c:out value='${usuarioCreado.errores.get("imagen")}'></c:out>
 									</div>
 								</div>
 							</div>

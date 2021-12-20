@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.Atraccion;
-import model.Attraction;
 import model.Tipo;
 import persistence.AtraccionDAO;
 import persistence.TipoDAO;

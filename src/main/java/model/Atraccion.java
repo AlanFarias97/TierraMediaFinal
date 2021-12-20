@@ -154,13 +154,13 @@ public class Atraccion implements Producto, Comparable<Atraccion> {
 		errores = new HashMap<String, String>();
 
 		if (precio <= 0) {
-			errores.put("cost", "Debe ser positivo");
+			errores.put("precio", "Debe ser positivo");
 		}
 		if (tiempo <= 0) {
-			errores.put("duration", "Debe ser positivo");
+			errores.put("tiempo", "Debe ser positivo");
 		}
 		if (cupoDisponible <= 0) {
-			errores.put("capacity", "Debe ser positivo");
+			errores.put("cupo", "Debe ser positivo");
 		}
 	}
 

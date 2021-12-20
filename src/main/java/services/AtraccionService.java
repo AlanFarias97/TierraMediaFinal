@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import model.Atraccion;
-import model.Attraction;
 import model.Tipo;
 import model.Usuario;
 import persistence.AtraccionDAO;

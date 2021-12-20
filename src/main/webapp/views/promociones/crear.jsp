@@ -83,7 +83,7 @@
 									</div>
 
 									<div class="col-lg-2 mb-3">
-										<label for="descuento" class="col-form-label">Descuento:</label>
+										<label for="descuento" class="col-form-label ">Descuento:</label>
 										<input type="text" class="form-control" id="descuento"
 											name="descuento">(monedas)
 									</div>

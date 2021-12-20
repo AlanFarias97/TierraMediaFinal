@@ -60,7 +60,7 @@ public class CrearUsuarioServlet extends HttpServlet implements Servlet{
 			//resp.sendRedirect("/turismo/admin-usuarios/crear.do");
 			resp.sendRedirect("/turismo/admin-usuarios.do");
 		} else {
-			req.setAttribute("usuario", usuario);
+			req.setAttribute("usuarioCreado", usuario);
 
 			RequestDispatcher dispatcher = getServletContext()
 					.getRequestDispatcher("/views/usuarios/crear.jsp");

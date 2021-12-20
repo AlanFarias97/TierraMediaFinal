@@ -1,5 +1,6 @@
 package model;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Tipo {
@@ -59,9 +60,17 @@ public class Tipo {
 		this.activo = activo;
 	}
 	
-	public Boolean esValido() {
-		//TODO validaciones
-		return true;
+	public boolean esValido() {
+		validar();
+		return errores.isEmpty();
+	}
+	
+	public void validar() {
+		errores = new HashMap<String, String>();
+		if (nombre == null) {
+			errores.put("nombre", "Debés ingresar un nombre");
+		}
+		
 	}
 	
 	public Map<String, String> getErrores() {

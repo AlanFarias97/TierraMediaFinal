@@ -75,7 +75,7 @@
 										<label for="tipos" class="col-form-label">Tipo de
 											atracción:</label> <select class="form-select"
 											aria-label="Default select example" name="tipo" required>
-											<option selected>...</option>
+											<option value="">...</option>
 											<c:forEach items="${tipos}" var="tipo">
 												<option value="${tipo.id}"><c:out
 														value="${tipo.nombre}"></c:out></option>

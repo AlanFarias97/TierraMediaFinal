@@ -1,5 +1,6 @@
 package model;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -192,8 +193,31 @@ public abstract class Promocion implements Producto, Comparable<Promocion> {
 	}
 	
 	public boolean esValido() {
-		//TODO validaciones
-		return true;
+		validar();
+		return errores.isEmpty();
+	}
+	
+	public void validar() {
+		errores = new HashMap<String, String>();
+		if (nombre.equals("") || nombre == null) {
+			errores.put("nombre", "Debés ingresar un nombre");
+		}
+		
+		if (tipoAtraccion == null) {
+			errores.put("tipoAtraccion", "Debés elegir un tipo de atracción");
+		}
+		
+		if (tipoPromocion.equals("") || tipoPromocion == null) {
+			errores.put("tipoPromocion", "Debés elegir un tipo de promoción");
+		}
+		
+		if (nombre.equals("") || nombre == null) {
+			errores.put("descripcion", "Debés ingresar una descripcion");
+		}
+		
+		if (atracciones == null || atracciones.size()<2) {
+			errores.put("atracciones", "Debés seleccionar 2 o más atracciones");
+		}
 	}
 	
 	public Boolean estaActivo() {
