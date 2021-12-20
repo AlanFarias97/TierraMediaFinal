@@ -3,6 +3,7 @@ package controller.promociones;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.Servlet;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -37,9 +38,18 @@ public class ComprarPromocionServlet extends HttpServlet implements Servlet{
 			
 			e.printStackTrace();
 		}
-
 		
-		resp.sendRedirect("/turismo/perfil.do");
+		if (!usuario.getErrores().containsKey("comprar")) {
+			req.setAttribute("ok", "¡Gracias por comprar!");
+			
+		} else {
+			req.setAttribute("error", usuario.getErrores().get("comprar"));
+			usuario.getErrores().remove("compra");
+		}
+
+		// resp.sendRedirect("/turismo/perfil.do");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/usuarios/perfil.jsp");
+		dispatcher.forward(req, resp);
 	}
 	
 }

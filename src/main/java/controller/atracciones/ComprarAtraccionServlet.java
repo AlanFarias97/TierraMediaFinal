@@ -16,37 +16,39 @@ import persistence.commons.DAOFactory;
 import services.AtraccionService;
 
 @WebServlet("/atracciones/comprar.do")
-public class ComprarAtraccionServlet extends HttpServlet implements Servlet{
+public class ComprarAtraccionServlet extends HttpServlet implements Servlet {
 
 	private static final long serialVersionUID = -7939597524495394303L;
 	private AtraccionService atraccionService;
-	
+
 	@Override
 	public void init() throws ServletException {
 		super.init();
 		this.atraccionService = new AtraccionService();
 	}
-	
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int atraccionId = Integer.valueOf(req.getParameter("id"));
 		Usuario usuario = (Usuario) req.getSession().getAttribute("usuario");
-		
-		if (!usuario.getErrores().containsKey("compra")) {
-			req.setAttribute("flash", "¡Gracias por comprar!");
-		} else {
-			req.setAttribute("flash", usuario.getErrores().get("compra"));
-			usuario.getErrores().remove("compra");
-		}
+
 		try {
 			atraccionService.comprarAtraccion(atraccionId, usuario);
 		} catch (SQLException e) {
-			
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		resp.sendRedirect("/turismo/perfil.do");
+
+		if (!usuario.getErrores().containsKey("comprar")) {
+			req.setAttribute("ok", "¡Gracias por comprar!");
+			
+		} else {
+			req.setAttribute("error", usuario.getErrores().get("comprar"));
+			usuario.getErrores().remove("compra");
+		}
+
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/usuarios/perfil.jsp");
+		dispatcher.forward(req, resp);
 	}
-	
 
 }

@@ -86,11 +86,26 @@
 						class="btn btn-success rounded" role="button">Comprar</a>
 				</c:when>
 				<c:otherwise>
-				<div class="col text-center">
-				<div class="alert alert-warning m-5" role="alert">No podés comprar esta promoción.</div>
-					<a href="#" class="btn btn-secondary rounded disabled"
-						role="button">Comprar</a>
-						</div>
+				<div class="alert alert-danger text-center">
+				<c:choose>
+						<c:when test="${!usuario.noSeVisito(promocion)}">
+							Ya compraste esta promoción o alguna de sus atracciones.<br>
+						</c:when>
+						<c:otherwise>
+						<c:if test="${usuario.monedas < promocion.precio}">
+							No tenés monedas suficientes para comprar esta promoción.<br>
+						</c:if>
+						
+						<c:if test="${usuario.tiempoDisponible < promocion.tiempo}">
+							No tenés el tiempo suficiente para realizar esta promoción.<br>
+						</c:if>
+						
+						<c:if test="${!promocion.tieneCupo(promocion)}">
+							No hay cupo disponible para esta promoción.
+						</c:if>
+						</c:otherwise>	
+				</c:choose>
+				</div>	
 				</c:otherwise>
 			</c:choose>
 			<!-- <a class="btn btn-success btn-lg"

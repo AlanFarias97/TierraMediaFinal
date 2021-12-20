@@ -4,7 +4,7 @@
 		<div class="container">
 
 			<a class="navbar-brand logo-image" href="/turismo"><img
-				src="assets/img/logo.png" alt="logo"><span id="nombreLogo"
+				src="<%=request.getContextPath()%>/assets/img/logo.png" alt="logo"><span id="nombreLogo"
 				style="font-family: 'Berkshire Swash', cursive; text-decoration: none !important;">Tierra
 					Media</span></a>
 

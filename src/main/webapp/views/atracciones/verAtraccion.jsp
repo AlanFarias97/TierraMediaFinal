@@ -41,18 +41,14 @@
 			</div>
 		</div>
 		<br>
-		<!-- fin del botÃ³n -->
+
 	</div>
-	<!-- Terminan las cards -->
 	<br>
 
-	<!-- Statistics -->
 	<div class="counter">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
-
-					<!-- Counter -->
 					<div id="counter">
 						<div class="cell">
 							<h2 class="card-title">Tiempo total</h2>
@@ -67,18 +63,10 @@
 							<p class="counter-info">monedas</p>
 						</div>
 					</div>
-					<!-- end of counter -->
-
 				</div>
-				<!-- end of col -->
 			</div>
-			<!-- end of row -->
 		</div>
-		<!-- end of container -->
 	</div>
-	<!-- end of counter -->
-	<!-- end of statistics -->
-	<!-- botÃ³n de comprar -->
 
 	<div class="d-grid gap-2 col-12 mx-auto d-flex justify-content-center">
 		<c:if test="${usuario != null}">
@@ -88,13 +76,29 @@
 						class="btn btn-success rounded" role="button">Comprar</a>
 				</c:when>
 				<c:otherwise>
-					<a href="#" class="btn btn-secondary rounded disabled"
-						role="button">Comprar</a>
+				<div class="alert alert-danger text-center">
+				<c:choose>
+						<c:when test="${!usuario.noSeVisito(atraccion)}">
+							Ya compraste esta atracción.<br>
+						</c:when>
+						<c:otherwise>
+						<c:if test="${usuario.monedas < atraccion.precio}">
+							No tenés monedas suficientes para comprar esta atracción.<br>
+						</c:if>
+						
+						<c:if test="${usuario.tiempoDisponible < atraccion.tiempo}">
+							No tenés el tiempo suficiente para realizar esta atracción.<br>
+						</c:if>
+						
+						<c:if test="${!(atraccion.cupoDisponible > 0)}">
+							No hay cupo disponible para esta atracción.
+						</c:if>
+						</c:otherwise>	
+						</c:choose>
+				</div>		
 				</c:otherwise>
+				
 			</c:choose>
-			<!-- <a class="btn btn-success btn-lg"
-				href="/turismo/atracciones/comprar?id=${atraccion.id}" type="button">Comprar
-				atracción</a> -->
 		</c:if>
 		<c:if test="${usuario == null}">
 			<div class="col text-center">

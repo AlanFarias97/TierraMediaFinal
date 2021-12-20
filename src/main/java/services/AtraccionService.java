@@ -13,9 +13,10 @@ import persistence.AtraccionDAO;
 import persistence.commons.DAOFactory;
 
 public class AtraccionService {
+	private AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
 
 	public List<Atraccion> list() {
-		return DAOFactory.getAtraccionDAO().obtenerTodos();
+		return atraccionDAO.obtenerTodos();
 	}
 	
 	public List<Atraccion> listarActivos(){
@@ -33,7 +34,6 @@ public class AtraccionService {
 		Atraccion atraccion = new Atraccion(-1, nombre, costo, duracion, cupo, tipo, descripcion, imagen,activo);
 
 		if (atraccion.esValido()) {
-			AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
 			atraccionDAO.insertar(atraccion);
 			// XXX: si no devuelve "1", es que hubo más errores
 		}
@@ -42,8 +42,6 @@ public class AtraccionService {
 	}
 
 	public Atraccion modificar(int id,String nombre, Tipo tipo, Integer costo, Double duracion, Integer cupo, String imagen, String descripcion) {
-
-		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
 		Atraccion atraccion = atraccionDAO.obtenerPorId(id);
 		
 		atraccion.setNombre(nombre);
@@ -62,27 +60,21 @@ public class AtraccionService {
 	}
 
 	public void eliminar(int id) {
-		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
 		atraccionDAO.eliminar(id);
 	}
 
 	public Atraccion find(Integer id) {
-		AtraccionDAO attractionDAO = DAOFactory.getAtraccionDAO();
-		return attractionDAO.obtenerPorId(id);
+		return atraccionDAO.obtenerPorId(id);
 	}
 
 	public void comprarAtraccion(int atraccionId,Usuario usuario) throws SQLException {
-		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
 		Atraccion atraccion = atraccionDAO.obtenerPorId(atraccionId);
-		
 		 usuario.validarCompra(atraccion);
 	}
 	
 	public void delete(Integer id) {
 		Atraccion atraccion = new Atraccion(id, null, 0, 0, 0,null,null,null,null);
-
-		AtraccionDAO attractionDAO = DAOFactory.getAtraccionDAO();
-		attractionDAO.delete(atraccion);
+		atraccionDAO.delete(atraccion);
 	}
 
 }

@@ -29,7 +29,7 @@ public class Usuario {
 	private int dineroGastado;
 	private double tiempoGastado;
 
-	private Map<String, String> errores = new HashMap<String, String>();
+	private Map<String, String> errores;
 
 	public Usuario(int id, String nombre, Tipo preferencia, int monedas, double tiempo, String imagenPerfil,
 			String hashContrasenia, Boolean activo, Boolean admin) {
@@ -45,6 +45,8 @@ public class Usuario {
 		this.hashContrasenia = hashContrasenia;
 		this.admin = admin;
 		this.activo = activo;
+		this.errores = new HashMap<String, String>();
+		
 	}
 
 	public Map<String, String> getErrores() {
@@ -154,11 +156,17 @@ public class Usuario {
 		errores = new HashMap<String, String>();
 		if (this.puedeComprar(sugerencia)) {
 			this.adquirirProducto(sugerencia);
-		} else if (!sugerencia.tieneCupo()) {
+		} else  {
+			this.errorComprar(sugerencia);
+		}
+	}
+	
+	public void errorComprar(Producto sugerencia) {
+		if (!sugerencia.tieneCupo()) {
 			errores.put("comprar", "La atracción no tiene cupo.");
-		} else if (this.monedas >= sugerencia.getPrecio()) {
+		} else if (this.monedas < sugerencia.getPrecio()) {
 			errores.put("comprar", "No tenés monedas suficientes para comprar esta atracción.");
-		} else if (this.tiempoDisponible >= sugerencia.getTiempo()) {
+		} else if (this.tiempoDisponible < sugerencia.getTiempo()) {
 			errores.put("comprar", "No tenés el tiempo suficiente para realizar esta atracción.");
 		} else if (!this.noSeVisito(sugerencia)) {
 			errores.put("comprar", "Ya compraste esta atracción.");

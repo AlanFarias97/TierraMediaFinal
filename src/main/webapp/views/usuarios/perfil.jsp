@@ -23,7 +23,8 @@
 		<div class="class container">
 			<div class="class row pb-5">
 				<div class="class col-sm-6 text-center">
-					<img src="assets/img/${usuario.imagenPerfil}"
+					<img
+						src="<%=request.getContextPath()%>/assets/img/${usuario.imagenPerfil}"
 						style="max-height: 200px;">
 				</div>
 				<div class="class col-sm-6">
@@ -48,11 +49,14 @@
 				</div>
 			</div>
 
-			<c:if test="${flash != null}">
+			<c:if test="${ok != null}">
+				<div class="alert alert-success text-center" role="alert">
+						<c:out value="${ok}" /></div>
+			</c:if>
+
+			<c:if test='${usuario.errores.get("comprar") != null}'>
 				<div class="alert alert-danger text-center">
-					<p>
-						<c:out value="${flash}" />
-					</p>
+						<c:out value='${usuario.errores.get("comprar")}' />
 				</div>
 			</c:if>
 

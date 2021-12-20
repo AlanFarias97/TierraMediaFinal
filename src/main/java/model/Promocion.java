@@ -129,6 +129,14 @@ public abstract class Promocion implements Producto, Comparable<Promocion> {
 		}
 		return hay;
 	}
+	
+	public boolean tieneCupo(Promocion promocion) {
+		boolean hay = true;
+		for (Atraccion atraccion : atracciones) {
+			hay &= atraccion.tieneCupo();
+		}
+		return hay;
+	}
 
 	public void actualizarCupo() {
 		for (Atraccion atraccion : atracciones) {
