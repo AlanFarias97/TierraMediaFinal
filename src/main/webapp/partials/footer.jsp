@@ -1,4 +1,7 @@
-
+<br><br><br><br>
+<div>
+	<img src="<%=request.getContextPath()%>/assets/img/footer-bg-fellowship.svg" id="footerimg"/>
+</div>
 <div class="footer">
 		<div class="container">
 			<div class="row">

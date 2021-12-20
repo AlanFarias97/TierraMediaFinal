@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<jsp:include page="../../partials/noAdmin2.jsp"></jsp:include>
+<jsp:include page="../../partials/noAdmin.jsp"></jsp:include>
 
 <c:if test="${usuario.esAdmin()}">
 <head>

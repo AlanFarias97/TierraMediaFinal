@@ -9,7 +9,7 @@
 
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	<!-- NAV  -->
-	<jsp:include page="../../partials/nav2.jsp"></jsp:include>
+	<jsp:include page="../../partials/nav.jsp"></jsp:include>
 	<br>
 	<br>
 	<br>

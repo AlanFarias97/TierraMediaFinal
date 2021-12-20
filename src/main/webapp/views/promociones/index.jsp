@@ -3,18 +3,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
-<jsp:include page="../../partials/noAdmin2.jsp"></jsp:include>
+
+<jsp:include page="../../partials/noAdmin.jsp"></jsp:include>
 
 <c:if test="${usuario.esAdmin()}">
 <head>
-<jsp:include page="../../partials/head-admin.jsp"></jsp:include>
+	<jsp:include page="../../partials/head-admin.jsp"></jsp:include>
 </head>
 
 <body>
      <jsp:include page="../../partials/nav-admin.jsp"></jsp:include>
 
-    
-            <div class="container-fluid">
+        <div class="container-fluid">
         <div class="row">
             <nav id="sidebar" class="px-3 col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
                 <div class="position-sticky pt-md-5">

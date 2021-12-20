@@ -1,16 +1,16 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
 <head>
-<jsp:include page="partials/head.jsp"></jsp:include>
+	<jsp:include page="partials/head.jsp"></jsp:include>
 </head>
 
 <body data-spy="scroll" data-target=".fixed-top">
-<head>
-<jsp:include page="partials/nav.jsp"></jsp:include>
-</head>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-	
+
+	<!-- NAV -->
+	<jsp:include page="partials/nav.jsp"></jsp:include>
+
 
 	<!-- Hero Image-->
 	<div class="hero-image"
@@ -21,7 +21,6 @@
 		</div>
 	</div>
 	<!-- end of Hero img -->
-
 
 
 	<!-- Frase -->
@@ -46,27 +45,6 @@
 	</div>
 	<!-- end of basic-1 -->
 	<!-- end of Frase -->
-
-
-	<!-- Frase 
-	<div class="basic-1 mt-3">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-11">
-					<p>
-						"La <span style="font-family: 'Berkshire Swash'">fantasía</span>
-						es, como muchas otras cosas, un derecho legítimo de todo ser
-						humano, pues a través de ella se halla una completa libertad y
-						satisfacción"
-					</p>
-					<p
-						style="text-align: end; text-decoration: underline; font-family: 'Berkshire Swash';">J.R.R
-						Tolkien</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	 end of Frase -->
 
 
 	<!--Carousel Promo-->
@@ -200,11 +178,8 @@
 					<!--  <a class="boton" href="#">View details &raquo;</a>-->
 				</p>
 			</div>
-			<!-- /.col-lg-4 -->
 		</div>
-		<!-- /.row -->
 	</div>
-	<!-- end of Tipos -->
 
 	<!-- Testimonials -->
 	<div class="slider-1 bg-gray">
@@ -214,17 +189,13 @@
 					<h2 class="h2-heading">¿Qué piensan los usuarios de Tierra
 						Media Parque Temático?</h2>
 				</div>
-				<!-- end of col -->
 			</div>
-			<!-- end of row -->
 			<div class="row">
 				<div class="col-lg-12">
-					<!-- Card Slider -->
 					<div class="slider-container">
 						<div class="swiper-container card-slider">
 							<div class="swiper-wrapper">
 
-								<!-- Slide -->
 								<div class="swiper-slide">
 									<div class="card">
 										<img class="card-image" src="assets/img/testimonial-1.jpg"
@@ -238,10 +209,7 @@
 										</div>
 									</div>
 								</div>
-								<!-- end of swiper-slide -->
-								<!-- end of slide -->
 
-								<!-- Slide -->
 								<div class="swiper-slide">
 									<div class="card">
 										<img class="card-image" src="assets/img/testimonial-3.jpg"
@@ -254,10 +222,7 @@
 										</div>
 									</div>
 								</div>
-								<!-- end of swiper-slide -->
-								<!-- end of slide -->
 
-								<!-- Slide -->
 								<div class="swiper-slide">
 									<div class="card">
 										<img class="card-image" src="assets/img/testimonial-2.jpg"
@@ -271,10 +236,7 @@
 										</div>
 									</div>
 								</div>
-								<!-- end of swiper-slide -->
-								<!-- end of slide -->
 
-								<!-- Slide -->
 								<div class="swiper-slide">
 									<div class="card">
 										<img class="card-image" src="assets/img/testimonial-4.jpg"
@@ -288,10 +250,7 @@
 										</div>
 									</div>
 								</div>
-								<!-- end of swiper-slide -->
-								<!-- end of slide -->
 
-								<!-- Slide -->
 								<div class="swiper-slide">
 									<div class="card">
 										<img class="card-image" src="assets/img/testimonial-5.jpg"
@@ -305,10 +264,6 @@
 										</div>
 									</div>
 								</div>
-								<!-- end of swiper-slide -->
-								<!-- end of slide -->
-
-								<!-- Slide -->
 								<div class="swiper-slide">
 									<div class="card">
 										<img class="card-image" src="assets/img/testimonial-6.jpg"
@@ -322,32 +277,15 @@
 										</div>
 									</div>
 								</div>
-								<!-- end of swiper-slide -->
-								<!-- end of slide -->
-
 							</div>
-							<!-- end of swiper-wrapper -->
-
-							<!-- Add Arrows -->
 							<div class="swiper-button-next"></div>
 							<div class="swiper-button-prev"></div>
-							<!-- end of add arrows -->
-
 						</div>
-						<!-- end of swiper-container -->
 					</div>
-					<!-- end of slider-container -->
-					<!-- end of card slider -->
-
 				</div>
-				<!-- end of col -->
 			</div>
-			<!-- end of row -->
 		</div>
-		<!-- end of container -->
 	</div>
-	<!-- end of slider-1 -->
-	<!-- end of testimonials -->
 
 	<!-- Statistics -->
 	<div class="counter">
@@ -374,90 +312,13 @@
 							<p class="counter-info">Días sin Accidentes</p>
 						</div>
 					</div>
-					<!-- end of counter -->
-
 				</div>
-				<!-- end of col -->
 			</div>
-			<!-- end of row -->
 		</div>
-		<!-- end of container -->
 	</div>
-	<!-- end of counter -->
-	<!-- end of statistics -->
-
-	<div>
-		<img src="assets/img/footer-bg-fellowship.svg" id="footerimg" />
-	</div>
+	
 	<!-- Footer -->
-	<div class="footer">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<h4>Tierra Media es el único parque de atracciones temático de
-						El Señor de los Anillos en el mundo</h4>
-					<div class="social-container">
-						<span class="fa-stack"> <a href="#your-link"> <i
-								class="fas fa-circle fa-stack-2x"></i> <i
-								class="fab fa-facebook-f fa-stack-1x"></i>
-						</a>
-						</span> <span class="fa-stack"> <a href="#your-link"> <i
-								class="fas fa-circle fa-stack-2x"></i> <i
-								class="fab fa-twitter fa-stack-1x"></i>
-						</a>
-						</span> <span class="fa-stack"> <a href="#your-link"> <i
-								class="fas fa-circle fa-stack-2x"></i> <i
-								class="fab fa-pinterest-p fa-stack-1x"></i>
-						</a>
-						</span> <span class="fa-stack"> <a href="#your-link"> <i
-								class="fas fa-circle fa-stack-2x"></i> <i
-								class="fab fa-instagram fa-stack-1x"></i>
-						</a>
-						</span> <span class="fa-stack"> <a href="#your-link"> <i
-								class="fas fa-circle fa-stack-2x"></i> <i
-								class="fab fa-youtube fa-stack-1x"></i>
-						</a>
-						</span>
-					</div>
-					<!-- end of social-container -->
-				</div>
-				<!-- end of col -->
-			</div>
-			<!-- end of row -->
-		</div>
-		<!-- end of container -->
-	</div>
-	<!-- end of footer -->
-	<!-- end of footer -->
-
-
-	<!-- Copyright -->
-	<div class="copyright">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6">
-					<ul class="list-unstyled li-space-lg p-small">
-						<li><a href="#">Article Details</a></li>
-						<li><a href="#">Terms & Conditions</a></li>
-						<li><a href="#">Privacy Policy</a></li>
-					</ul>
-				</div>
-				<!-- end of col -->
-				<div class="col-lg-6">
-					<p class="p-small statement"
-						style="background-color: rgb(55, 68, 66); color:#fff;">
-						Copyright © <a
-							href="https://github.com/FreakiesTeam/TierraMediaFinal">FreakisTeam</a>
-					</p>
-				</div>
-				<!-- end of col -->
-			</div>
-			<!-- enf of row -->
-		</div>
-		<!-- end of container -->
-	</div>
-	<!-- end of copyright -->
-	<!-- end of copyright -->
+	<jsp:include page="/partials/footer.jsp"></jsp:include>
 
 </body>
 

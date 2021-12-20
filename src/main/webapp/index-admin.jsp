@@ -6,60 +6,12 @@
 
 <c:if test="${usuario.esAdmin()}">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin</title>
-
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
-	integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I"
-	crossorigin="anonymous">
-<link href="assets/css/admin.css" rel="stylesheet">
-<link href="assets/css/all.css" rel="stylesheet">
-
-
-<script defer src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script defer src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-<script defer src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
-<script defer src="assets/js/scripts.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script defer src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
-
-<!-- Favicon  -->
-<link rel="icon" href="assets/img/logo.png">
-
+	<jsp:include page="partials/head-admin.jsp"></jsp:include>
 </head>
 
 <body>
-
 	<!-- Navigation -->
-   
-    <nav class="navbar navbar-light bg-light p-3 px-5">
-        <div class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0 flex-wrap flex-md-nowrap justify-content-between">
-            <a class="navbar-brand" href="#">
-                <img src="assets/img/logo.png" alt="logo" height="50">
-                Admin
-            </a>
-
-
-            <button class="navbar-toggler d-md-none collapsed mb-3" type="button" data-toggle="collapse"
-                data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </div>
-
-        <div class="col-12 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-expanded="false">
-                    Hola, <c:out value="${usuario.nombre}"></c:out>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li><a class="dropdown-item" href="/turismo/salir">Logout</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+   <jsp:include page="partials/nav-admin.jsp"></jsp:include>
 
 	<div class="container-fluid">
 	

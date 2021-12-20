@@ -1,16 +1,16 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="es">
 
-<head>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<jsp:include page="../../partials/head2.jsp"></jsp:include>
+<head>	
+	<jsp:include page="../../partials/head.jsp"></jsp:include>
 </head>
 
 <body data-spy="scroll" data-target=".fixed-top">
 
-<jsp:include page="../../partials/nav2.jsp"></jsp:include>
-
-
+	<!-- NAV -->
+	<jsp:include page="../../partials/nav.jsp"></jsp:include>
+	
 	<div class="container py-5">
 		<br> <br> <br>
 		<h1>
@@ -128,7 +128,7 @@
 	<br>
 	
 	<!-- Footer -->
-	<jsp:include page="../../partials/footer2.jsp"></jsp:include>
+	<jsp:include page="../../partials/footer.jsp"></jsp:include>
 	<!-- end of footer -->
 
 </body>

@@ -3,7 +3,7 @@
     <nav class="navbar navbar-light bg-light p-3 px-5">
         <div class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0 flex-wrap flex-md-nowrap justify-content-between">
             <a class="navbar-brand" href="#">
-                <img src="assets/img/logo.png" alt="logo" height="50">
+                <img src="<%=request.getContextPath()%>/assets/img/logo.png" alt="logo" height="50">
                 Admin
             </a>
 

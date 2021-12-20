@@ -21,7 +21,7 @@ public class SalirServlet extends HttpServlet {
 		req.setAttribute("flash", "¡Hasta pronto!");
 		
 		RequestDispatcher dispatcher = getServletContext()
-  		      .getRequestDispatcher("/ingresar.jsp");
+  		      .getRequestDispatcher("/index.jsp");
   		    dispatcher.forward(req, resp); 	
     }
 }

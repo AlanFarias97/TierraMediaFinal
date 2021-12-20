@@ -94,12 +94,8 @@
 		</div>
 	</div>
 
-	<div class="mt-2">
-		<img src="assets/img/footer-bg-fellowship.svg" id="footerimg" />
-	</div>
-
 	<!-- Footer -->
-	<jsp:include page="../../partials/footer2.jsp"></jsp:include>
+	<jsp:include page="../../partials/footer.jsp"></jsp:include>
 
 </body>
 </html>

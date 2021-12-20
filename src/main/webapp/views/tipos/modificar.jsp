@@ -4,10 +4,10 @@
 <!DOCTYPE html>
 <html>
 
-<jsp:include page="../../partials/noAdmin2.jsp"></jsp:include>
+<jsp:include page="../../partials/noAdmin.jsp"></jsp:include>
 
 <head>
-<jsp:include page="../../partials/head-admin2.jsp"></jsp:include>
+<jsp:include page="../../partials/head-admin.jsp"></jsp:include>
 </head>
 
 <body>

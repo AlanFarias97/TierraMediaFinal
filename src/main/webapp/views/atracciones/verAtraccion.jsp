@@ -2,15 +2,14 @@
 <html lang="es">
 
 <head>
-<jsp:include page="../../partials/head2.jsp"></jsp:include>
-
+<jsp:include page="../../partials/head.jsp"></jsp:include>
 </head>
 
 <body data-spy="scroll" data-target=".fixed-top">
 
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	<!-- Navigation -->
-	<jsp:include page="../../partials/nav2.jsp"></jsp:include>
+	<jsp:include page="../../partials/nav.jsp"></jsp:include>
 
 	<div class="container py-5">
 		<br> <br> <br>
