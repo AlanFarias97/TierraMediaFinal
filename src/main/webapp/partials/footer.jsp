@@ -56,7 +56,7 @@
 				<div class="col-lg-6">
 					<p class="p-small statement"
 						style="background-color: rgb(55, 68, 66); color:#fff;">
-						Copyright © <a href="https://github.com/FreakiesTeam/TierraMediaFinal">FreakisTeam</a>
+						Copyright ©2022 <a href="https://github.com/AlanFarias97/TierraMediaFinal">AlanFarias</a>
 					</p>
 				</div>
 				<!-- end of col -->

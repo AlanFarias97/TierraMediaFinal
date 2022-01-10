@@ -65,9 +65,10 @@
     </div> <!-- end of counter -->
     <!-- end of statistics -->
         <!-- botÃ³n de comprar -->
+        <c:if test="">
         <div class="d-grid gap-2 col-12 mx-auto d-flex justify-content-center">
             <a class="btn btn-success btn-lg" href="/turismo/productos/comprar.do?id=${atraccion.id}" type="button">Comprar atracción</a>
-          </div>
+          </div></c:if>
       <!-- Fin de botÃ³n comprar -->
       <br><br><br><br>
 
@@ -131,7 +132,7 @@
                     </ul>
                 </div> <!-- end of col -->
                 <div class="col-lg-6">
-                    <p class="p-small statement"  style="background-color: rgb(55, 68, 66);">Copyright © <a href="#your-link">FreakisTeam</a></p>
+                    <p class="p-small statement"  style="background-color: rgb(55, 68, 66);">Copyright © 2022 <a href="https://github.com/AlanFarias97/TierraMediaFinal">AlanFarias</a></p>
                 </div> <!-- end of col -->
             </div> <!-- enf of row -->
         </div> <!-- end of container -->

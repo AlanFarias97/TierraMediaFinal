@@ -9,6 +9,7 @@ import api.Frases;
 import api.InfoLOTR;
 import model.Atraccion;
 import model.Promocion;
+import model.Tipo;
 import persistence.commons.DAOFactory;
 
 public class InicioService {
@@ -35,6 +36,11 @@ public class InicioService {
 		List<Atraccion> atracciones = DAOFactory.getAtraccionDAO().obtenerTodos();
 		Collections.sort(atracciones);
 		return atracciones;
+	}
+	
+	public List<Tipo> getTipos(){
+		List<Tipo> tipos = DAOFactory.getTipoDAO().obtenerTodos();
+		return tipos;
 	}
 	
 }

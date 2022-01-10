@@ -108,7 +108,7 @@
 	</div>
 
 	<footer class="float-right px-5 py-5">
-		<span>Copyright © 2021 <a href="#">FreakisTeam</a></span>
+		<span>Copyright © 2022 <a href="https://github.com/AlanFarias97/TierraMediaFinal">AlanFarias</a></span>
 	</footer>
 	<!-- ================= MODAL ELIMINACION ================== -->
 

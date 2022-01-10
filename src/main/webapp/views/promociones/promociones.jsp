@@ -14,7 +14,11 @@
 	<br>
 	<br>
 
-
+	<c:if test="${usuario.esAdmin()}">
+				<div class="alert alert-danger text-center" role="alert">Página no
+					accesible para usuarios administradores</div>
+			</c:if>
+			<c:if test="${!usuario.esAdmin()}">
 	<!-- Comienzan las cards y sus botones -->
 	<div class="container pt-5">
 		<br>
@@ -48,6 +52,7 @@
 		</div>
 
 	</div>
+	</c:if>
 
 	<jsp:include page="../../partials/footer.jsp"></jsp:include>
 

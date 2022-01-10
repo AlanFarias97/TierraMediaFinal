@@ -3,6 +3,8 @@ package controller.session;
 import java.io.IOException;
 import java.util.List;
 
+import javax.swing.Renderer;
+
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -11,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Atraccion;
 import model.Promocion;
+import model.Tipo;
 import persistence.commons.DAOFactory;
 import services.InicioService;
 
@@ -38,11 +41,13 @@ public class InicioServlet extends HttpServlet{
 		
 		List<Promocion> promociones = inicioService.getPromociones();
 		List<Atraccion> atracciones = inicioService.getAtracciones();
+		List<Tipo> tipos = inicioService.getTipos();
 		
 		
 		
 		req.getSession().setAttribute("promociones", promociones);
 		req.getSession().setAttribute("atracciones", atracciones);
+		req.getSession().setAttribute("tipos", tipos);
 		
 		RequestDispatcher dispatcher = getServletContext()
   		      .getRequestDispatcher("/index.jsp");

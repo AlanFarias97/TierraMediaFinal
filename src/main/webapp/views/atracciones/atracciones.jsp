@@ -14,7 +14,11 @@
 	<br>
 	<br>
 
-
+	<c:if test="${usuario.esAdmin()}">
+				<div class="alert alert-danger text-center" role="alert">Página no
+					accesible para usuarios administradores</div>
+			</c:if>
+			<c:if test="${!usuario.esAdmin()}">
 	<!-- Comienzan las cards y sus botones -->
 	<div class="container pt-5">
 		<br>
@@ -48,6 +52,7 @@
 		</div>
 
 	</div>
+	</c:if>
 
 	<div>
 		<img src="assets/img/footer-bg-fellowship.svg" id="footerimg" />
@@ -94,31 +99,7 @@
 	<!-- end of footer -->
 
 
-	<!-- Copyright -->
-	<div class="copyright">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6">
-					<ul class="list-unstyled li-space-lg p-small">
-						<li><a href="article.html">Article Details</a></li>
-						<li><a href="terms.html">Terms & Conditions</a></li>
-						<li><a href="privacy.html">Privacy Policy</a></li>
-					</ul>
-				</div>
-				<!-- end of col -->
-				<div class="col-lg-6">
-					<p class="p-small statement"
-						style="background-color: rgb(55, 68, 66);">
-						Copyright Â© <a href="#your-link">Your name</a>
-					</p>
-				</div>
-				<!-- end of col -->
-			</div>
-			<!-- enf of row -->
-		</div>
-		<!-- end of container -->
-	</div>
-	<!-- end of copyright -->
+	<jsp:include page="../../partials/footer.jsp"></jsp:include>
 
 </body>
 </html>

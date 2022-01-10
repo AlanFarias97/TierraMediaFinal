@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-	<jsp:include page="partials/head.jsp"></jsp:include>
+<jsp:include page="partials/head.jsp"></jsp:include>
 </head>
 
 <body data-spy="scroll" data-target=".fixed-top">
@@ -53,8 +53,10 @@
 		<div id="carouselExampleCaptions" class="carousel slide"
 			data-bs-ride="carousel">
 			<div class="carousel-inner">
-				<c:forEach items="${promociones}" var="promocion" begin="0" end="2" varStatus="status">
-					<div class="carousel-item <c:if test='${status.first}'>active</c:if>">
+				<c:forEach items="${promociones}" var="promocion" begin="0" end="2"
+					varStatus="status">
+					<div
+						class="carousel-item <c:if test='${status.first}'>active</c:if>">
 						<img src="assets/img/${promocion.imagen}" class="d-block w-100"
 							alt="Imagen promocion">
 						<div class="carousel-caption d-none d-md-block">
@@ -79,7 +81,8 @@
 
 	<!-- Bot贸n Ver M谩s -->
 	<div class="text-center pt-2 mt-3">
-		<button type="button" class="boton">Ver M醩</button>
+		<a href="/turismo/promociones"
+			class="boton" aria-current="page" role="button">Ver M醩</a>
 	</div>
 	<!-- end of Bot贸n -->
 
@@ -117,8 +120,10 @@
 		<div id="carouselExampleCaptions2" class="carousel slide"
 			data-bs-ride="carousel">
 			<div class="carousel-inner">
-				<c:forEach items="${atracciones}" var="atraccion" begin="0" end="2" varStatus="status">
-					<div class="carousel-item <c:if test='${status.first}'>active</c:if>">
+				<c:forEach items="${atracciones}" var="atraccion" begin="0" end="2"
+					varStatus="status">
+					<div
+						class="carousel-item <c:if test='${status.first}'>active</c:if>">
 						<img src="assets/img/${atraccion.imagen}" class="d-block w-100"
 							alt="Imagen atraccion">
 						<div class="carousel-caption d-none d-md-block">
@@ -143,7 +148,8 @@
 
 	<!-- Bot贸n Ver M谩s -->
 	<div class="text-center pt-2 mt-3 mb-5">
-		<button type="button" class="boton">Ver M醩</button>
+		<a href="/turismo/atracciones"
+			class="boton" aria-current="page" role="button">Ver M醩</a>
 	</div>
 	<!-- end of Bot贸n -->
 
@@ -152,32 +158,17 @@
 		id="#tipos-atracciones">
 		<h1>Tipos de Atracciones</h1>
 		<div class="row py-5">
-			<div class="col-lg-4">
-				<img src="assets/img/bilbo1.png" class="img-fluid" width="275px"></img>
-				<h2>Aventura</h2>
+			<c:forEach items="${tipos}" var="tipo">
+				<div class="col-lg-4">
+					<img src="assets/img/${tipo.imagen }" class="img-fluid"
+						width="275px"></img>
+					<h2>${tipo.nombre }</h2>
 
-				<p class="py-3">
-					<!--  <a class="boton" href="#">View details &raquo;</a>-->
-				</p>
-			</div>
-			<!-- /.col-lg-4 -->
-			<div class="col-lg-4">
-				<img src="assets/img/gandalf1.png" class="img-fluid" width="275px"></img>
-				<h2>Paisaje</h2>
-
-				<p class="py-3">
-					<!--  <a class="boton" href="#">View details &raquo;</a>-->
-				</p>
-			</div>
-			<!-- /.col-lg-4 -->
-			<div class="col-lg-4">
-				<img src="assets/img/Sam1.png" class="img-fluid" width="275px"></img>
-				<h2>Degustaci髇</h2>
-
-				<p class="py-3">
-					<!--  <a class="boton" href="#">View details &raquo;</a>-->
-				</p>
-			</div>
+					<p class="py-3">
+						<!-- <a class="boton" href="#">Ver Detalles</a> -->
+					</p>
+				</div>
+			</c:forEach>
 		</div>
 	</div>
 
@@ -316,7 +307,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- Footer -->
 	<jsp:include page="/partials/footer.jsp"></jsp:include>
 

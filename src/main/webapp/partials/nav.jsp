@@ -17,7 +17,7 @@
 				id="navbarsExampleDefault">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a class="nav-link page-scroll"
-						href="#header">Inicio <span class="sr-only">(current)</span></a></li>
+						href="inicio">Inicio <span class="sr-only">(current)</span></a></li>
 					<c:if test="${usuario != null}">
 						<li class="nav-item"><a class="nav-link page-scroll"
 							href="/turismo/productos.do">Mi sugerencia</a></li>

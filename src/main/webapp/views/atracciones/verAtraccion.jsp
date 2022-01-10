@@ -77,6 +77,9 @@
 				<c:otherwise>
 				<div class="alert alert-danger text-center">
 				<c:choose>
+						<c:when test="${usuario.esAdmin()}">
+						No podes comprar esta promoción, ingresa como un usuario normal
+						</c:when>
 						<c:when test="${!usuario.noSeVisito(atraccion)}">
 							Ya compraste esta atracción.<br>
 						</c:when>
@@ -175,7 +178,7 @@
 				<div class="col-lg-6">
 					<p class="p-small statement"
 						style="background-color: rgb(55, 68, 66);">
-						Copyright © <a href="#your-link">FreakisTeam</a>
+						Copyright ©2022 <a href="https://github.com/AlanFarias97/TierraMediaFinal">AlanFarias</a>
 					</p>
 				</div>
 				<!-- end of col -->

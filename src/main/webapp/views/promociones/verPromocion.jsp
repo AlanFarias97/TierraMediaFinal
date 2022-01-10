@@ -88,6 +88,9 @@
 				<c:otherwise>
 				<div class="alert alert-danger text-center">
 				<c:choose>
+						<c:when test="${usuario.esAdmin()}">
+						No podes comprar esta promoción, ingresa como un usuario normal
+						</c:when>
 						<c:when test="${!usuario.noSeVisito(promocion)}">
 							Ya compraste esta promoción o alguna de sus atracciones.<br>
 						</c:when>

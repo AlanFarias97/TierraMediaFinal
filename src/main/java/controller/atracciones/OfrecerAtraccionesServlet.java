@@ -15,7 +15,7 @@ import persistence.AtraccionDAO;
 import persistence.commons.DAOFactory;
 import services.AtraccionService;
 
-@WebServlet("/atracciones")
+@WebServlet("/atracciones.do")
 public class OfrecerAtraccionesServlet extends HttpServlet implements Servlet{
 
 	private static final long serialVersionUID = 636287873703578448L;

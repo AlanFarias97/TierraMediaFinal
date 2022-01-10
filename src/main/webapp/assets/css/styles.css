@@ -1262,7 +1262,7 @@ a.back-to-top {
 	width: 42px;
 	height: 42px;
 	border-radius: 30px;
-	background: var(--color-primary) url("../images/up-arrow.png") no-repeat center 47%;
+	background: var(--color-accent2) url("../img/up-arrow.png") no-repeat center 47%;
 	background-size: 18px 18px;
 	text-indent: -9999px;
 }

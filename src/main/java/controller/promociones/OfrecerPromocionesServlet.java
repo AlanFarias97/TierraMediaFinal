@@ -15,7 +15,7 @@ import persistence.PromocionDAO;
 import persistence.commons.DAOFactory;
 import services.PromocionService;
 
-@WebServlet("/promociones")
+@WebServlet("/promociones.do")
 public class OfrecerPromocionesServlet extends HttpServlet implements Servlet{
 
 	private static final long serialVersionUID = 439724935719328094L;
